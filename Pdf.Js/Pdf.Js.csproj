@@ -1,0 +1,1528 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PdfJs\build\pdf.mjs" />
+    <None Remove="PdfJs\build\pdf.mjs.map" />
+    <None Remove="PdfJs\build\pdf.sandbox.mjs" />
+    <None Remove="PdfJs\build\pdf.sandbox.mjs.map" />
+    <None Remove="PdfJs\build\pdf.worker.mjs" />
+    <None Remove="PdfJs\build\pdf.worker.mjs.map" />
+    <None Remove="PdfJs\LICENSE" />
+    <None Remove="PdfJs\web\cmaps\78-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78ms-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\78ms-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\83pv-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90ms-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90ms-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90msp-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90msp-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90pv-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\90pv-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Add-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Add-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Add-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Add-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-0.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-1.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-3.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-4.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-5.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-6.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-CNS1-UCS2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-0.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-1.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-3.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-4.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-5.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-GB1-UCS2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-0.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-1.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-3.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-4.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-5.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-6.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Japan1-UCS2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Korea1-0.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Korea1-1.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Korea1-2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Adobe-Korea1-UCS2.bcmap" />
+    <None Remove="PdfJs\web\cmaps\B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\B5pc-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\B5pc-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS1-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS1-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS2-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\CNS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETen-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETen-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETenms-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETenms-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETHK-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\ETHK-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Ext-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Ext-RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Ext-RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Ext-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GB-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GB-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GB-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GB-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBK-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBK-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBK2K-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBK2K-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBKp-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBKp-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBpc-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBpc-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBT-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBT-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBT-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBT-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBTpc-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\GBTpc-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Hankaku.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Hiragana.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKdla-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKdla-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKdlb-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKdlb-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKgccs-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKgccs-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKm314-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKm314-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKm471-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKm471-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKscs-B5-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\HKscs-B5-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Katakana.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-Johab-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-Johab-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCms-UHC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCms-UHC-HW-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCms-UHC-HW-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCms-UHC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCpc-EUC-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\KSCpc-EUC-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\LICENSE" />
+    <None Remove="PdfJs\web\cmaps\NWP-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\NWP-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\RKSJ-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\RKSJ-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\Roman.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UCS2-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UCS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF16-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF16-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF8-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniCNS-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UCS2-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UCS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF16-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF16-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF8-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniGB-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UCS2-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UCS2-HW-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UCS2-HW-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UCS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF16-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF16-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF8-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF16-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF16-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF8-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJIS2004-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISPro-UCS2-HW-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISPro-UCS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISPro-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISX0213-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISX0213-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISX02132004-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniJISX02132004-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UCS2-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UCS2-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF16-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF16-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF32-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF32-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF8-H.bcmap" />
+    <None Remove="PdfJs\web\cmaps\UniKS-UTF8-V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\V.bcmap" />
+    <None Remove="PdfJs\web\cmaps\WP-Symbol.bcmap" />
+    <None Remove="PdfJs\web\compressed.tracemonkey-pldi-09.pdf" />
+    <None Remove="PdfJs\web\debugger.css" />
+    <None Remove="PdfJs\web\debugger.mjs" />
+    <None Remove="PdfJs\web\images\altText_add.svg" />
+    <None Remove="PdfJs\web\images\altText_disclaimer.svg" />
+    <None Remove="PdfJs\web\images\altText_done.svg" />
+    <None Remove="PdfJs\web\images\altText_spinner.svg" />
+    <None Remove="PdfJs\web\images\altText_warning.svg" />
+    <None Remove="PdfJs\web\images\annotation-check.svg" />
+    <None Remove="PdfJs\web\images\annotation-comment.svg" />
+    <None Remove="PdfJs\web\images\annotation-help.svg" />
+    <None Remove="PdfJs\web\images\annotation-insert.svg" />
+    <None Remove="PdfJs\web\images\annotation-key.svg" />
+    <None Remove="PdfJs\web\images\annotation-newparagraph.svg" />
+    <None Remove="PdfJs\web\images\annotation-noicon.svg" />
+    <None Remove="PdfJs\web\images\annotation-note.svg" />
+    <None Remove="PdfJs\web\images\annotation-paperclip.svg" />
+    <None Remove="PdfJs\web\images\annotation-paragraph.svg" />
+    <None Remove="PdfJs\web\images\annotation-pushpin.svg" />
+    <None Remove="PdfJs\web\images\cursor-editorFreeHighlight.svg" />
+    <None Remove="PdfJs\web\images\cursor-editorFreeText.svg" />
+    <None Remove="PdfJs\web\images\cursor-editorInk.svg" />
+    <None Remove="PdfJs\web\images\cursor-editorTextHighlight.svg" />
+    <None Remove="PdfJs\web\images\editor-toolbar-delete.svg" />
+    <None Remove="PdfJs\web\images\findbarButton-next.svg" />
+    <None Remove="PdfJs\web\images\findbarButton-previous.svg" />
+    <None Remove="PdfJs\web\images\gv-toolbarButton-download.svg" />
+    <None Remove="PdfJs\web\images\loading-icon.gif" />
+    <None Remove="PdfJs\web\images\loading.svg" />
+    <None Remove="PdfJs\web\images\messageBar_closingButton.svg" />
+    <None Remove="PdfJs\web\images\messageBar_warning.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-documentProperties.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-firstPage.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-handTool.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-lastPage.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-rotateCcw.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-rotateCw.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-scrollHorizontal.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-scrollPage.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-scrollVertical.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-scrollWrapped.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-selectTool.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-spreadEven.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-spreadNone.svg" />
+    <None Remove="PdfJs\web\images\secondaryToolbarButton-spreadOdd.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-bookmark.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-currentOutlineItem.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-download.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-editorFreeText.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-editorHighlight.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-editorInk.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-editorStamp.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-menuArrow.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-openFile.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-pageDown.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-pageUp.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-presentationMode.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-print.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-search.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-secondaryToolbarToggle.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-sidebarToggle.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-viewAttachments.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-viewLayers.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-viewOutline.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-viewThumbnail.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-zoomIn.svg" />
+    <None Remove="PdfJs\web\images\toolbarButton-zoomOut.svg" />
+    <None Remove="PdfJs\web\images\treeitem-collapsed.svg" />
+    <None Remove="PdfJs\web\images\treeitem-expanded.svg" />
+    <None Remove="PdfJs\web\Instructions.pdf" />
+    <None Remove="PdfJs\web\locale\ach\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\af\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\an\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ar\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ast\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\az\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\be\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\bg\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\bn\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\bo\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\brx\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\br\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\bs\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\cak\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ca\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ckb\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\cs\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\cy\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\da\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\de\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\dsb\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\el\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\en-CA\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\en-GB\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\en-US\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\eo\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\es-AR\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\es-CL\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\es-ES\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\es-MX\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\et\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\eu\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\fa\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ff\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\fi\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\fr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\fur\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\fy-NL\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ga-IE\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\gd\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\gl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\gn\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\gu-IN\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\he\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hi-IN\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hsb\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hu\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hy-AM\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\hye\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ia\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\id\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\is\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\it\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ja\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\kab\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ka\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\kk\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\km\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\kn\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ko\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\lij\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\locale.json" />
+    <None Remove="PdfJs\web\locale\lo\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ltg\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\lt\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\lv\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\meh\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\mk\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\mr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ms\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\my\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\nb-NO\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ne-NP\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\nl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\nn-NO\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\oc\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\pa-IN\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\pl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\pt-BR\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\pt-PT\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\rm\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ro\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ru\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sat\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\scn\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sco\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sc\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\si\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\skr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sk\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\son\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sq\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\sv-SE\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\szl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ta\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\te\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\tg\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\th\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\tl\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\trs\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\tr\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\uk\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\ur\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\uz\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\vi\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\wo\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\xh\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\zh-CN\viewer.ftl" />
+    <None Remove="PdfJs\web\locale\zh-TW\viewer.ftl" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitDingbats.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitFixed.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitFixedBold.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitFixedBoldItalic.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitFixedItalic.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitSerif.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitSerifBold.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitSerifBoldItalic.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitSerifItalic.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\FoxitSymbol.pfb" />
+    <None Remove="PdfJs\web\standard_fonts\LiberationSans-Bold.ttf" />
+    <None Remove="PdfJs\web\standard_fonts\LiberationSans-BoldItalic.ttf" />
+    <None Remove="PdfJs\web\standard_fonts\LiberationSans-Italic.ttf" />
+    <None Remove="PdfJs\web\standard_fonts\LiberationSans-Regular.ttf" />
+    <None Remove="PdfJs\web\standard_fonts\LICENSE_FOXIT" />
+    <None Remove="PdfJs\web\standard_fonts\LICENSE_LIBERATION" />
+    <None Remove="PdfJs\web\viewer.css" />
+    <None Remove="PdfJs\web\viewer.html" />
+    <None Remove="PdfJs\web\viewer.mjs" />
+    <None Remove="PdfJs\web\viewer.mjs.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="PdfJs\build\pdf.mjs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\build\pdf.mjs.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\build\pdf.sandbox.mjs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\build\pdf.sandbox.mjs.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\build\pdf.worker.mjs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\build\pdf.worker.mjs.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78ms-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\78ms-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\83pv-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90ms-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90ms-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90msp-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90msp-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90pv-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\90pv-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Add-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Add-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Add-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Add-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-0.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-1.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-3.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-4.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-5.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-6.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-CNS1-UCS2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-0.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-1.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-3.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-4.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-5.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-GB1-UCS2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-0.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-1.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-3.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-4.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-5.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-6.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Japan1-UCS2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Korea1-0.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Korea1-1.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Korea1-2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Adobe-Korea1-UCS2.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\B5pc-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\B5pc-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS1-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS1-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS2-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\CNS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETen-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETen-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETenms-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETenms-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETHK-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\ETHK-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Ext-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Ext-RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Ext-RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Ext-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GB-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GB-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GB-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GB-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBK-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBK-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBK2K-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBK2K-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBKp-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBKp-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBpc-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBpc-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBT-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBT-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBT-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBT-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBTpc-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\GBTpc-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Hankaku.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Hiragana.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKdla-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKdla-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKdlb-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKdlb-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKgccs-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKgccs-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKm314-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKm314-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKm471-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKm471-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKscs-B5-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\HKscs-B5-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Katakana.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-Johab-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-Johab-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCms-UHC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCms-UHC-HW-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCms-UHC-HW-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCms-UHC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCpc-EUC-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\KSCpc-EUC-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\NWP-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\NWP-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\RKSJ-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\RKSJ-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\Roman.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UCS2-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UCS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF16-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF16-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF8-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniCNS-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UCS2-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UCS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF16-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF16-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF8-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniGB-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UCS2-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UCS2-HW-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UCS2-HW-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UCS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF16-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF16-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF8-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF16-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF16-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF8-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJIS2004-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISPro-UCS2-HW-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISPro-UCS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISPro-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISX0213-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISX0213-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISX02132004-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniJISX02132004-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UCS2-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UCS2-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF16-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF16-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF32-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF32-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF8-H.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\UniKS-UTF8-V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\V.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\cmaps\WP-Symbol.bcmap">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\compressed.tracemonkey-pldi-09.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\debugger.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\debugger.mjs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\altText_add.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\altText_disclaimer.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\altText_done.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\altText_spinner.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\altText_warning.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-check.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-comment.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-help.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-insert.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-key.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-newparagraph.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-noicon.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-note.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-paperclip.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-paragraph.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\annotation-pushpin.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\cursor-editorFreeHighlight.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\cursor-editorFreeText.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\cursor-editorInk.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\cursor-editorTextHighlight.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\editor-toolbar-delete.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\findbarButton-next.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\findbarButton-previous.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\gv-toolbarButton-download.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\loading-icon.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\loading.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\messageBar_closingButton.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\messageBar_warning.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-documentProperties.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-firstPage.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-handTool.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-lastPage.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-rotateCcw.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-rotateCw.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-scrollHorizontal.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-scrollPage.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-scrollVertical.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-scrollWrapped.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-selectTool.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-spreadEven.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-spreadNone.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\secondaryToolbarButton-spreadOdd.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-bookmark.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-currentOutlineItem.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-download.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-editorFreeText.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-editorHighlight.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-editorInk.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-editorStamp.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-menuArrow.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-openFile.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-pageDown.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-pageUp.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-presentationMode.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-print.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-search.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-secondaryToolbarToggle.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-sidebarToggle.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-viewAttachments.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-viewLayers.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-viewOutline.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-viewThumbnail.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-zoomIn.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\toolbarButton-zoomOut.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\treeitem-collapsed.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\images\treeitem-expanded.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\Instructions.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ach\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\af\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\an\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ar\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ast\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\az\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\be\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\bg\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\bn\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\bo\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\brx\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\br\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\bs\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\cak\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ca\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ckb\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\cs\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\cy\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\da\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\de\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\dsb\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\el\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\en-CA\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\en-GB\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\en-US\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\eo\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\es-AR\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\es-CL\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\es-ES\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\es-MX\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\et\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\eu\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\fa\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ff\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\fi\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\fr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\fur\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\fy-NL\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ga-IE\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\gd\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\gl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\gn\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\gu-IN\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\he\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hi-IN\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hsb\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hu\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hy-AM\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\hye\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ia\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\id\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\is\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\it\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ja\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\kab\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ka\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\kk\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\km\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\kn\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ko\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\lij\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\locale.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\lo\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ltg\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\lt\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\lv\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\meh\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\mk\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\mr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ms\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\my\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\nb-NO\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ne-NP\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\nl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\nn-NO\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\oc\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\pa-IN\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\pl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\pt-BR\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\pt-PT\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\rm\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ro\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ru\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sat\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\scn\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sco\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sc\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\si\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\skr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sk\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\son\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sq\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\sv-SE\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\szl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ta\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\te\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\tg\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\th\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\tl\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\trs\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\tr\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\uk\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\ur\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\uz\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\vi\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\wo\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\xh\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\zh-CN\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\locale\zh-TW\viewer.ftl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitDingbats.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitFixed.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitFixedBold.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitFixedBoldItalic.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitFixedItalic.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitSerif.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitSerifBold.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitSerifBoldItalic.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitSerifItalic.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\FoxitSymbol.pfb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LiberationSans-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LiberationSans-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LiberationSans-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LiberationSans-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LICENSE_FOXIT">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\standard_fonts\LICENSE_LIBERATION">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\viewer.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\viewer.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\viewer.mjs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PdfJs\web\viewer.mjs.map">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
