@@ -28,7 +28,7 @@ namespace MyPdf.Helpers
             window.ChromeTabControl.Items.Add(new TabItem
             {
                 Content = webView2,
-                Header = "🏠" // Added a header for the tab
+                Header = "🛈" // Added a header for the tab
             });
 
         }
