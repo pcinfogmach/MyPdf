@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ChromeTabs\ChromeTabs\ChromeTabs.csproj" />
+    <ProjectReference Include="..\ChromeTabs\ChromeTabs.csproj" />
     <ProjectReference Include="..\Pdf.Js\Pdf.Js.csproj" />
   </ItemGroup>
 
