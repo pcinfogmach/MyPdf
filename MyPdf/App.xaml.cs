@@ -16,9 +16,7 @@ namespace MyPdf
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            ChromeTabs.ChromeTabsWindow window = new ChromeTabs.ChromeTabsWindow();
-            window.Show();
-            Test.Launch(window);
+            Launcher.LaunchApp();
         }
     }
 }

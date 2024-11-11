@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Pdf.Js
 {
-    public class PdfJsHost :WebView2
+    public class PdfJsHost : WebView2
     {
         public string _sourceFilePath;
         public string _pdfPath;
@@ -25,6 +25,7 @@ namespace Pdf.Js
 
             CopyFile();
             InitializeWebView();
+            Application.Current.Exit += (s, e) => Release();
         }
 
         void CopyFile()
@@ -44,9 +45,15 @@ namespace Pdf.Js
             ApplySettings();
             LoadPdf();
 
+            this.CoreWebView2.DOMContentLoaded += CoreWebView2_DOMContentLoaded;
             this.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting; // Add a handler to restrict navigation
             this.CoreWebView2.DownloadStarting += CoreWebView2_DownloadStarting;
             this.CoreWebView2.WebMessageReceived += Viewer_WebMessageReceived;
+        }
+
+        private void CoreWebView2_DOMContentLoaded(object? sender, CoreWebView2DOMContentLoadedEventArgs e)
+        {
+            this.ExecuteScriptAsync(Scripts.EditButtonsScript());
         }
 
         void ApplySettings()
@@ -135,7 +142,20 @@ namespace Pdf.Js
             }
         }
 
-        public void Close()
+        void SaveAs()
+        {
+            try
+            {
+                isSaveAs = true;
+                this.ExecuteScriptAsync("PDFViewerApplication.download();");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void Release()
         {
             base.Dispose();
             File.Delete(_pdfPath);

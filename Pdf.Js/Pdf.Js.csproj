@@ -253,7 +253,6 @@
     <None Remove="PdfJs\web\images\toolbarButton-zoomOut.svg" />
     <None Remove="PdfJs\web\images\treeitem-collapsed.svg" />
     <None Remove="PdfJs\web\images\treeitem-expanded.svg" />
-    <None Remove="PdfJs\web\Instructions.pdf" />
     <None Remove="PdfJs\web\locale\ach\viewer.ftl" />
     <None Remove="PdfJs\web\locale\af\viewer.ftl" />
     <None Remove="PdfJs\web\locale\an\viewer.ftl" />
@@ -1122,9 +1121,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="PdfJs\web\images\treeitem-expanded.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PdfJs\web\Instructions.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="PdfJs\web\locale\ach\viewer.ftl">
