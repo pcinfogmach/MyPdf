@@ -13,7 +13,7 @@ namespace MyPdf.Helpers
             window.Show();
             window.ChromeTabControl.SelectionChanged += (s, e) => 
             {
-                if (window.ChromeTabControl.Items.Count <= 0) ShowInstructions(window.ChromeTabControl);
+                if (window.ChromeTabControl.Items.Count < 1) ShowInstructions(window.ChromeTabControl);
             };
             ShowInstructions(window.ChromeTabControl);
         }

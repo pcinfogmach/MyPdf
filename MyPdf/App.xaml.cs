@@ -16,6 +16,7 @@ namespace MyPdf
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            ErrorLog.Initialize();
             Launcher.LaunchApp();
         }
     }

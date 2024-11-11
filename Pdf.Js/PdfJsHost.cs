@@ -42,7 +42,7 @@ namespace Pdf.Js
 
         private void PdfJsHost_CoreWebView2InitializationCompleted(object? sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
         {
-            ApplySettings();
+            //ApplySettings();
             LoadPdf();
 
             this.CoreWebView2.DOMContentLoaded += CoreWebView2_DOMContentLoaded;
@@ -112,13 +112,13 @@ namespace Pdf.Js
                     {
                         string downloadPath = saveFileDialog.FileName;
                         if (!downloadPath.EndsWith(".pdf")) downloadPath += ".pdf";
-                        if (File.Exists(downloadPath))
-                        {
-                            var result = MessageBox.Show(
-                            "File already exists. Do you want to overwrite it?", "Confirm Overwrite",
-                            MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                            if (result == MessageBoxResult.No) { e.Cancel = true; }
-                        }
+                        //if (File.Exists(downloadPath))
+                        //{
+                        //    var result = MessageBox.Show(
+                        //    "File already exists. Do you want to overwrite it?", "Confirm Overwrite",
+                        //    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        //    if (result == MessageBoxResult.No) { e.Cancel = true; }
+                        //}
                         e.ResultFilePath = downloadPath; // Set the download location
                     }
                     else

@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2849.39" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\ChromeTabs\ChromeTabs\ChromeTabs.csproj" />
     <ProjectReference Include="..\ChromeTabs\ChromeTabs.csproj" />
     <ProjectReference Include="..\Pdf.Js\Pdf.Js.csproj" />
