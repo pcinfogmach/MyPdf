@@ -3,7 +3,9 @@ using Microsoft.Web.WebView2.Wpf;
 using MyPdf.Helpers;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,6 +20,9 @@ namespace MyPdf
         {
             ErrorLog.Initialize();
             Launcher.LaunchApp();
+            Task.Run(() => {UpdateChecker.CheckForUpdates();});
         }
+
+       
     }
 }

@@ -1,15 +1,66 @@
-﻿using System.Net.Http;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.Net.Http;
+using System.Reflection;
 using System.Text.Json;
+using System.Windows;
 
 namespace MyPdf.Helpers
-{
-    string result = await updateChecker.CheckForUpdates(repoOwner, repoName, currentVersion);
-    public class UpdateChecker
+{   
+    public static class UpdateChecker
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public async Task<string> CheckForUpdates(string repoOwner, string repoName, string currentVersion)
+        public static void CheckForUpdates()
         {
+            string updateUrl = CheckForUpdatesTask().Result;
+            if (!string.IsNullOrEmpty(updateUrl))
+            {
+                // Check the current culture
+                if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he")
+                {
+                    // Show a MessageBox with Hebrew message (RTL support)
+                    MessageBoxResult result = MessageBox.Show("האם ברצונך להוריד את הגרסה החדשה?", "עדכון גרסה",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes,
+                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+
+                    // Check user's response
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Open the URL in the default browser
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = updateUrl,
+                            UseShellExecute = true
+                        });
+                    }
+                }
+                else
+                {
+                    // Show a MessageBox in default language
+                    MessageBoxResult result = MessageBox.Show("Do you want to download the new version?", "Update Available",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+
+                    // Check user's response
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Open the URL in the default browser
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = updateUrl,
+                            UseShellExecute = true
+                        });
+                    }
+                }
+            }
+        }
+
+        async static Task<string> CheckForUpdatesTask()
+        {
+            string repoOwner = "pcinfogmach";
+            string repoName = "MyPdf";
+            string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
             try
             {
                 // GitHub API URL for the latest release
@@ -34,16 +85,13 @@ namespace MyPdf.Helpers
                 if (string.Compare(latestVersion, currentVersion, StringComparison.OrdinalIgnoreCase) > 0)
                 {
                     string downloadUrl = root.GetProperty("html_url").GetString();
-                    return $"New version available: {latestVersion}. Download it here: {downloadUrl}";
+                    return downloadUrl;
                 }
-                else
-                {
-                    return "You are using the latest version.";
-                }
+                else { return string.Empty; }
             }
             catch (Exception ex)
             {
-                return $"Error checking for updates: {ex.Message}";
+                return string.Empty;
             }
         }
     }
