@@ -43,7 +43,7 @@ namespace MyPdf
             if (args.Length > 0)
             {
                 string filePath = args[0];
-                window.ChromeTabControl.Add(new PdfHostTabItem(filePath, Path.GetFileNameWithoutExtension(filePath)));
+                window.ChromeTabControl.Add(new PdfHostTabItem(filePath));
             }
 
             Task.Run(() => { UpdateChecker.CheckForUpdates(); });
@@ -69,7 +69,7 @@ namespace MyPdf
                                     // Use the dispatcher to interact with the UI thread
                                     Application.Current.Dispatcher.Invoke(() =>
                                     {
-                                        window.ChromeTabControl.Add(new PdfHostTabItem(filePath, Path.GetFileNameWithoutExtension(filePath)));
+                                        window.ChromeTabControl.Add(new PdfHostTabItem(filePath));
                                         window.Activate();
 
                                         if (window.WindowState == WindowState.Minimized)

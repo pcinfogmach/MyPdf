@@ -15,11 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\MyPdfInstructions.pdf" />
+    <None Remove="Assets\🛈.pdf" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\MyPdfInstructions.pdf">
+    <Content Include="Assets\🛈.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MyPdfIcon.ico" />

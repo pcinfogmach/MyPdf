@@ -12,7 +12,7 @@ namespace MyPdf.Controls
     {
         PdfJsHost pdfViewer;
         public string _filePath;
-        public PdfHostTabItem(string filePath, object header) 
+        public PdfHostTabItem(string filePath) 
         {
             _filePath = filePath;
             pdfViewer = new PdfJsHost(filePath);
@@ -21,7 +21,7 @@ namespace MyPdf.Controls
                 pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
             };
             Content = pdfViewer;
-            Header = header; 
+            Header = Path.GetFileNameWithoutExtension(filePath); 
         }
 
         private void PdfViewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
@@ -66,7 +66,7 @@ namespace MyPdf.Controls
         {
             try
             {
-                PdfHostTabItem newTabItem = new PdfHostTabItem(filePath, Path.GetFileNameWithoutExtension(filePath));
+                PdfHostTabItem newTabItem = new PdfHostTabItem(filePath);
                 if (this.Parent is ChromeTabControl tabControl) tabControl.Add(newTabItem);
             }
             catch (Exception ex)

@@ -34,7 +34,7 @@ namespace MyPdf.Helpers
 
                 foreach (var filePath in saveData.Tabs)
                 {
-                    window.ChromeTabControl.Items.Add(new PdfHostTabItem(filePath, Path.GetFileNameWithoutExtension(filePath)));
+                    window.ChromeTabControl.Items.Add(new PdfHostTabItem(filePath));
                 }
 
                 if (saveData.SelectedIndex >= 0 && saveData.SelectedIndex < window.ChromeTabControl.Items.Count)
@@ -56,8 +56,8 @@ namespace MyPdf.Helpers
         {
             if (window.ChromeTabControl.Items.Count < 1)
             {
-                string instructionsPdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "MyPdfInstructions.pdf");
-                window.ChromeTabControl.Add(new PdfHostTabItem(instructionsPdfPath, "🛈"));
+                string instructionsPdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "🛈.pdf");
+                window.ChromeTabControl.Add(new PdfHostTabItem(instructionsPdfPath));
             }
         }
 
