@@ -21,7 +21,7 @@ namespace MyPdf.Controls
                 pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
             };
             Content = pdfViewer;
-            Header = Path.GetFileNameWithoutExtension(filePath); 
+            try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { }; 
         }
 
         private void PdfViewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
