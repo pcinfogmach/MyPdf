@@ -11,33 +11,36 @@ namespace MyPdf.Helpers
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public static void CheckForUpdates()
+        public async static void CheckForUpdates()
         {
-            string updateUrl = CheckForUpdatesTask().Result;
-            if (!string.IsNullOrEmpty(updateUrl))
+            string updateUrl = await CheckForUpdatesTask();
+            await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                MessageBoxResult result;
-                if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he")
+                if (!string.IsNullOrEmpty(updateUrl))
                 {
-                    result = MessageBox.Show("האם ברצונך להוריד את הגרסה החדשה?", "עדכון גרסה",
-                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes,
-                        MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
-                }
-                else
-                {
-                    result = MessageBox.Show("Do you want to download the new version?", "Update Available",
-                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-                }
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    Process.Start(new ProcessStartInfo // Open the URL in the default browser
+                    MessageBoxResult result;
+                    if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he")
                     {
-                        FileName = updateUrl,
-                        UseShellExecute = true
-                    });
+                        result = MessageBox.Show("האם ברצונך להוריד את הגרסה החדשה?", "עדכון גרסה",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes,
+                            MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                    }
+                    else
+                    {
+                        result = MessageBox.Show("Do you want to download the new version?", "Update Available",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                    }
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Process.Start(new ProcessStartInfo // Open the URL in the default browser
+                        {
+                            FileName = updateUrl,
+                            UseShellExecute = true
+                        });
+                    }
                 }
-            }
+            });
         }
 
 
@@ -65,7 +68,7 @@ namespace MyPdf.Helpers
                 JsonElement root = jsonDocument.RootElement;
 
                 // Get latest version tag
-                string latestVersion = root.GetProperty("tag_name").GetString();
+                string latestVersion = root.GetProperty("tag_name").GetString().Substring(1);
 
                 // Compare with the current version
                 if (string.Compare(latestVersion, currentVersion, StringComparison.OrdinalIgnoreCase) > 0)
