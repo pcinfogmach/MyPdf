@@ -28,11 +28,7 @@ namespace Pdf.Js
             Application.Current.Exit += (s, e) => Release();
         }
 
-        void CopyFile()
-        {           
-            try { File.Copy(_sourceFilePath, _pdfPath, true); }
-            catch (Exception ex) {Console.WriteLine(ex.Message); }
-        }
+        async void CopyFile() => await Task.Run(() => File.Copy(_sourceFilePath, _pdfPath, true));
 
         void InitializeWebView()
         {
@@ -64,15 +60,21 @@ namespace Pdf.Js
             this.CoreWebView2.Settings.IsScriptEnabled = true;
             this.CoreWebView2.Settings.AreHostObjectsAllowed = true;
         }
+
         void LoadPdf()
         {
-            this.CoreWebView2.SetVirtualHostNameToFolderMapping("pdfjs", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdfjs"), CoreWebView2HostResourceAccessKind.DenyCors);
-            this.Source = new Uri(_allowedUrl);
+            Dispatcher.InvokeAsync(new Action(() =>
+            {
+                this.CoreWebView2.SetVirtualHostNameToFolderMapping("pdfjs", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pdfjs"), CoreWebView2HostResourceAccessKind.DenyCors);
+                this.Source = new Uri(_allowedUrl);
+            }));
         }
+
         private void CoreWebView2_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
         {
             if (e.Uri != _allowedUrl)  e.Cancel = true;     
         }
+
         private void Viewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
             try
@@ -95,6 +97,7 @@ namespace Pdf.Js
                 Console.WriteLine(ex.Message);
             }
         }
+
         private void CoreWebView2_DownloadStarting(object sender, CoreWebView2DownloadStartingEventArgs e)
         {
             try

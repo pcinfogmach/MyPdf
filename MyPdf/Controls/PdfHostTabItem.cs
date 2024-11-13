@@ -12,14 +12,15 @@ namespace MyPdf.Controls
     {
         PdfJsHost pdfViewer;
         public string _filePath;
+        
         public PdfHostTabItem(string filePath) 
         {
             _filePath = filePath;
             pdfViewer = new PdfJsHost(filePath);
+
             pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
-            {
                 pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
-            };
+
             Content = pdfViewer;
             try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { }; 
         }
@@ -64,6 +65,7 @@ namespace MyPdf.Controls
 
         public void OpenPdfFile(string filePath)
         {
+            if (!File.Exists(filePath)) return;
             try
             {
                 PdfHostTabItem newTabItem = new PdfHostTabItem(filePath);
