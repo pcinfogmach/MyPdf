@@ -11,6 +11,7 @@ namespace MyPdf.Helpers
         {
             // Ensure the log directory exists
             Directory.CreateDirectory(Path.GetDirectoryName(logFilePath));
+            if (File.Exists(logFilePath)) {File.Delete(logFilePath);}
 
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
             {

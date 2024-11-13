@@ -46,8 +46,6 @@ if (saveButton && secondaryToolbar) {
       window.chrome.webview.postMessage({ action: ""SaveAs"" }); 
    });
 }
-
-
 ";
         }
     }

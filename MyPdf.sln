@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pdf.Js", "Pdf.Js\Pdf.Js.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChromeTabs", "..\ChromeTabs\ChromeTabs\ChromeTabs.csproj", "{697C6B8E-B1CF-4F88-A09C-87BCB8FC0852}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCapture", "..\ScreenCapture\ScreenCapture\ScreenCapture.csproj", "{2B4E406F-2D05-4EE2-8227-6A4DC2BF40BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScreenCaptureLib", "..\ScreenCapture\ScreenCaptureLib\ScreenCaptureLib.csproj", "{3DA9D055-894A-4FF7-8BB2-0B0C7BABDA0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{697C6B8E-B1CF-4F88-A09C-87BCB8FC0852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{697C6B8E-B1CF-4F88-A09C-87BCB8FC0852}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{697C6B8E-B1CF-4F88-A09C-87BCB8FC0852}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B4E406F-2D05-4EE2-8227-6A4DC2BF40BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B4E406F-2D05-4EE2-8227-6A4DC2BF40BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B4E406F-2D05-4EE2-8227-6A4DC2BF40BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B4E406F-2D05-4EE2-8227-6A4DC2BF40BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA9D055-894A-4FF7-8BB2-0B0C7BABDA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA9D055-894A-4FF7-8BB2-0B0C7BABDA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA9D055-894A-4FF7-8BB2-0B0C7BABDA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA9D055-894A-4FF7-8BB2-0B0C7BABDA0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,8 +11,10 @@ namespace MyPdf.Controls
     internal class PdfHostTabItem : ChromeTabItem
     {
         PdfJsHost pdfViewer;
+        public string _filePath;
         public PdfHostTabItem(string filePath, object header) 
         {
+            _filePath = filePath;
             pdfViewer = new PdfJsHost(filePath);
             pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
             {
