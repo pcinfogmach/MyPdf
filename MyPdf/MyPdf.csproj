@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup Label="Globals">
+    <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
+  </PropertyGroup>
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>MyPdfIcon.ico</ApplicationIcon>
+    <StartupObject>MyPdf.App</StartupObject>
+    <TargetFramework>net8.0-windows</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ChromeTabs\ChromeTabs\ChromeTabs.csproj" />
-    <ProjectReference Include="..\ChromeTabs\ChromeTabs.csproj" />
     <ProjectReference Include="..\Pdf.Js\Pdf.Js.csproj" />
   </ItemGroup>
 

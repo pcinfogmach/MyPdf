@@ -16,44 +16,30 @@ namespace MyPdf.Helpers
             string updateUrl = CheckForUpdatesTask().Result;
             if (!string.IsNullOrEmpty(updateUrl))
             {
-                // Check the current culture
+                MessageBoxResult result;
                 if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he")
                 {
-                    // Show a MessageBox with Hebrew message (RTL support)
-                    MessageBoxResult result = MessageBox.Show("האם ברצונך להוריד את הגרסה החדשה?", "עדכון גרסה",
+                    result = MessageBox.Show("האם ברצונך להוריד את הגרסה החדשה?", "עדכון גרסה",
                         MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes,
                         MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
-
-                    // Check user's response
-                    if (result == MessageBoxResult.Yes)
-                    {
-                        // Open the URL in the default browser
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = updateUrl,
-                            UseShellExecute = true
-                        });
-                    }
                 }
                 else
                 {
-                    // Show a MessageBox in default language
-                    MessageBoxResult result = MessageBox.Show("Do you want to download the new version?", "Update Available",
+                    result = MessageBox.Show("Do you want to download the new version?", "Update Available",
                         MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                }
 
-                    // Check user's response
-                    if (result == MessageBoxResult.Yes)
+                if (result == MessageBoxResult.Yes)
+                {
+                    Process.Start(new ProcessStartInfo // Open the URL in the default browser
                     {
-                        // Open the URL in the default browser
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = updateUrl,
-                            UseShellExecute = true
-                        });
-                    }
+                        FileName = updateUrl,
+                        UseShellExecute = true
+                    });
                 }
             }
         }
+
 
         async static Task<string> CheckForUpdatesTask()
         {

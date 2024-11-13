@@ -7,7 +7,7 @@ using MyPdf.Controls;
 
 namespace MyPdf.Helpers
 {
-    public class Launcher
+    public class Initializer
     {
         ChromeTabsWindow window;
         private readonly string savedTabsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "savedTabs.json");
@@ -19,7 +19,7 @@ namespace MyPdf.Helpers
 
             LoadSavedTabs();
 
-            //window.ChromeTabControl.SelectionChanged += ChromeTabControl_SelectionChanged;
+            window.ChromeTabControl.SelectionChanged += (s, e) => OpenInstructionsPdf();
 
             window.Closing += Window_Closing;
             return window;
@@ -51,8 +51,6 @@ namespace MyPdf.Helpers
             public List<string> Tabs { get; set; } = new();
             public int SelectedIndex { get; set; }
         }
-
-        private void ChromeTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e) => OpenInstructionsPdf();
 
         void OpenInstructionsPdf()
         {

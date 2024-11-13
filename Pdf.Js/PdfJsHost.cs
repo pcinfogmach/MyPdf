@@ -101,31 +101,34 @@ namespace Pdf.Js
             {
                 if (isSaveAs)
                 {
-                    SaveFileDialog saveFileDialog = new SaveFileDialog
+                    Dispatcher.InvokeAsync(new Action(() =>
                     {
-                        Title = "Save PDF As",
-                        Filter = "PDF Files (*.pdf)|*.pdf",
-                        FileName = _fileName // Suggest the current file name
-                    };
+                        SaveFileDialog saveFileDialog = new SaveFileDialog
+                        {
+                            Title = "Save PDF As",
+                            Filter = "PDF Files (*.pdf)|*.pdf",
+                            FileName = _fileName // Suggest the current file name
+                        };
 
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        string downloadPath = saveFileDialog.FileName;
-                        if (!downloadPath.EndsWith(".pdf")) downloadPath += ".pdf";
-                        //if (File.Exists(downloadPath))
-                        //{
-                        //    var result = MessageBox.Show(
-                        //    "File already exists. Do you want to overwrite it?", "Confirm Overwrite",
-                        //    MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                        //    if (result == MessageBoxResult.No) { e.Cancel = true; }
-                        //}
-                        e.ResultFilePath = downloadPath; // Set the download location
-                    }
-                    else
-                    {
-                        e.Cancel = true;// Cancel download if user cancels the Save As dialog
-                    }
-                    isSaveAs = false;
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            string downloadPath = saveFileDialog.FileName;
+                            if (!downloadPath.EndsWith(".pdf")) downloadPath += ".pdf";
+                            //if (File.Exists(downloadPath))
+                            //{
+                            //    var result = MessageBox.Show(
+                            //    "File already exists. Do you want to overwrite it?", "Confirm Overwrite",
+                            //    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                            //    if (result == MessageBoxResult.No) { e.Cancel = true; }
+                            //}
+                            e.ResultFilePath = downloadPath; // Set the download location
+                        }
+                        else
+                        {
+                            e.Cancel = true;// Cancel download if user cancels the Save As dialog
+                        }
+                        isSaveAs = false;
+                    }));
                 }
                 else
                 {

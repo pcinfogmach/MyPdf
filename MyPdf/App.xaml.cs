@@ -19,40 +19,34 @@ namespace MyPdf
         protected override void OnStartup(StartupEventArgs e)
         {
             ErrorLog.Initialize();
-            Task.Run(() => { UpdateChecker.CheckForUpdates(); });
 
-            try
+            bool isFirstInstance;
+            appMutex = new Mutex(true, "MyPdfAppMutex", out isFirstInstance);
+
+            if (isFirstInstance)
             {
-                bool isFirstInstance;
-                appMutex = new Mutex(true, "MyPdfAppMutex", out isFirstInstance);
-
-                if (isFirstInstance)
-                {
-                    StartPipeServer(); // Start the named pipe server
-                    InitializeWindow(e.Args); // Initialize the main window
-                }
-                else
-                {
-                    SendFilePathToRunningInstance(e.Args); // Send path to the existing instance
-                    Shutdown(); // Close this instance
-                }
+                StartPipeServer(); // Start the named pipe server
+                InitializeWindow(e.Args); // Initialize the main window
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
+                SendFilePathToRunningInstance(e.Args); // Send path to the existing instance
+                Shutdown(); // Close this instance
             }
             base.OnStartup(e);
         }
 
         private void InitializeWindow(string[] args)
         {
-            var window = new Launcher().LaunchApp();
+            window = new Initializer().LaunchApp();
 
             if (args.Length > 0)
             {
                 string filePath = args[0];
                 window.ChromeTabControl.Add(new PdfHostTabItem(filePath, Path.GetFileNameWithoutExtension(filePath)));
             }
+
+            Task.Run(() => { UpdateChecker.CheckForUpdates(); });
         }
 
         private void StartPipeServer()

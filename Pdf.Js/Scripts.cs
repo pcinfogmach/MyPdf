@@ -10,18 +10,6 @@ const openFileButton = document.getElementById('secondaryOpenFile');
 const saveButton = document.getElementById('downloadButton');
 const saveButtonParent = saveButton?.parentElement;
 
-if (openFileButton) {
-   // Clone and replace the original open file button
-   const newOpenFileButton = openFileButton.cloneNode(true);
-   openFileButton.remove();
-   newOpenFileButton.className = ""toolbarButton""; 
-   saveButtonParent?.appendChild(newOpenFileButton);
-   
-   // Add event listener for OpenFile action
-   newOpenFileButton.addEventListener('click', function () {
-      window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
-   });
-}
 
 if (saveButton && secondaryToolbar) {
    // Clone the save button and customize it
@@ -38,13 +26,36 @@ if (saveButton && secondaryToolbar) {
 
    newSaveAsButton.className = ""toolbarButton labeled""; 
 
-   // Insert newSaveAsButton as the first child of secondaryToolbar
+   // Insert newSaveAsButton as the first child of secondaryToolbar   
    secondaryToolbar.insertBefore(newSaveAsButton, secondaryToolbar.firstChild);
 
-   // Add event listener for SaveAs action
+    // Add event listener for SaveAs action
    newSaveAsButton.addEventListener('click', function () {
       window.chrome.webview.postMessage({ action: ""SaveAs"" }); 
    });
+}
+
+if (openFileButton && secondaryToolbar) {
+   // Clone and replace the original open file button
+   const newOpenFileButton = openFileButton.cloneNode(true);
+   newOpenFileButton.className = ""toolbarButton""; 
+    
+    // Add event listener for OpenFile action
+    newOpenFileButton.addEventListener('click', function () {
+      window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
+   });
+
+   saveButtonParent?.appendChild(newOpenFileButton);
+   
+   const secondaryOpenFileButton = openFileButton.cloneNode(true)
+
+   // Add event listener for OpenFile action
+    secondaryOpenFileButton.addEventListener('click', function () {
+      window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
+   });
+
+   secondaryToolbar.insertBefore(secondaryOpenFileButton, secondaryToolbar.firstChild);
+   openFileButton.remove();
 }
 ";
         }

@@ -26,45 +26,42 @@ namespace MyPdf.Controls
 
         private void PdfViewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
-            try
-            {
-                var message = JsonSerializer.Deserialize<Dictionary<string, string>>(e.WebMessageAsJson);
+            var message = JsonSerializer.Deserialize<Dictionary<string, string>>(e.WebMessageAsJson);
 
-                if (message != null && message.TryGetValue("action", out var actionName))
-                {
-                    // Use reflection to find and invoke the method by name
-                    var method = this.GetType().GetMethod(actionName, BindingFlags.NonPublic | BindingFlags.Instance);
-                    method?.Invoke(this, null); // Calls the method if it exists, passing no parameters
-                }
-                else
-                {
-                    Console.WriteLine("No action defined!");
-                }
-            }
-            catch (Exception ex)
+            if (message != null && message.TryGetValue("action", out var actionName))
             {
-                Console.WriteLine(ex.Message);
+                // Use reflection to find and invoke the method by name
+                var method = this.GetType().GetMethod(actionName, BindingFlags.NonPublic | BindingFlags.Instance);
+                method?.Invoke(this, null); // Calls the method if it exists, passing no parameters
+            }
+            else
+            {
+                Console.WriteLine("No action defined!");
             }
         }
 
         void OpenFile()
         {
-            try
+            Dispatcher.InvokeAsync(new Action(() =>
             {
-                var openFileDialog = new Microsoft.Win32.OpenFileDialog
+                try
                 {
-                    Filter = "PDF Files (*.pdf)|*.pdf",
-                    //Title = "בחר קובץ"
-                };
+                    var openFileDialog = new Microsoft.Win32.OpenFileDialog
+                    {
+                        Filter = "PDF Files (*.pdf)|*.pdf",
+                        //Title = "בחר קובץ"
+                    };
 
-                if (openFileDialog.ShowDialog() == true)
-                    OpenPdfFile(openFileDialog.FileName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                    if (openFileDialog.ShowDialog() == true)
+                        OpenPdfFile(openFileDialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }));
         }
+
         public void OpenPdfFile(string filePath)
         {
             try
