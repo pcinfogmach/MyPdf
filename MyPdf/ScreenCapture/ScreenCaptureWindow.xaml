@@ -1,0 +1,16 @@
+﻿<Window x:Class="ScreenCaptureLib.ScreenCaptureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Screen Capture" Height="800" Width="1660"
+        WindowState="Maximized"
+        AllowsTransparency="True" WindowStyle="None"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Window.Background>
+        <SolidColorBrush Opacity="0"/>
+    </Window.Background>
+    <Canvas x:Name="canvas" Background="Transparent"
+            MouseDown="canvas_MouseDown" 
+            MouseUp="canvas_MouseUp">
+        <Rectangle Name="Overlay" Fill="#7F7F7F" Opacity="0.3"/>
+    </Canvas>
+</Window>

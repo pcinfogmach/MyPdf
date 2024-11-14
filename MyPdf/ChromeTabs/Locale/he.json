@@ -1,0 +1,13 @@
+{
+  "MinimizeButtonTooltip": "מזער",
+  "FullScreenButtonTooltip": "מסך מלא",
+  "MaximizeButtonTooltip": "מקסם \\ שחזר",
+  "XButtonTooltip": "סגור",
+  "ScreenCaptureButtonTooltip": "לכידת תמונה \\ לכידת טקסט",
+  "Top": null,
+  "Left": null,
+  "Width": 750,
+  "Height": 500,
+  "WindowState": "Normal",
+  "SelectedTabIndex": 0
+}

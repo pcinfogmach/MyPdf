@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MyPdf"
              xmlns:controls="clr-namespace:MyPdf.Controls"
-             xmlns:ct="clr-namespace:ChromeTabs;assembly=ChromeTabs">
+             xmlns:ct="clr-namespace:ChromeTabs">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/ChromeTabs;component/ChromeTabsDictionary.xaml" />
+                <ResourceDictionary Source="ChromeTabs/ChromeTabsDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="controls:PdfHostTabItem" BasedOn="{StaticResource {x:Type ct:ChromeTabItem}}"/>
