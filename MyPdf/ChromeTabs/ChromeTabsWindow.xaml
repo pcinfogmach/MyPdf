@@ -9,17 +9,9 @@
         Padding="1"
         ResizeMode="CanResize"
         x:Name="window"
-        Top="{Binding WindowTop, Mode=TwoWay}"
-        Left="{Binding windowLeft, Mode=TwoWay}"
-        Height="{Binding WindowHeight, Mode=TwoWay}"
-        Width="{Binding WindowWidth,Mode=TwoWay}"
-        WindowState="{Binding WindowState, Mode=TwoWay}"
-        Background="{Binding WindowBackground}"
-        Foreground="{Binding WindowForeground}"
-        FlowDirection="{Binding WindowFlowDirection}"
         MinHeight="210"
         MinWidth="450"
-        KeyDown="window_KeyDown">
+        PreviewKeyDown="window_KeyDown">
 
     <Window.DataContext>
         <local:LocaleViewModel x:Name="localeViewModel"/>

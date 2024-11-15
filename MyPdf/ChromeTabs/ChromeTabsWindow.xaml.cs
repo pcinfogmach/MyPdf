@@ -19,7 +19,6 @@ namespace ChromeTabs
             this.Closing += (s, e) =>
             {
                 WindowStateData.SaveState(this);
-                localeViewModel.SaveState();
             };
         }
 
@@ -164,18 +163,15 @@ namespace ChromeTabs
                     ChromeTabControl.SelectedIndex = ChromeTabControl.SelectedIndex >= ChromeTabControl.Items.Count - 1 ? 0 : ChromeTabControl.SelectedIndex + 1;
                     e.Handled = true;
                 }
+                //else if (e.Key == Key.S && Keyboard.Modifiers == (ModifierKeys.Shift))
+                //{
+                //    CaptureScreen();
+                //    e.Handled = true;
+                //}
             }
             else if (e.Key == Key.F11 || (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Alt))
             {
                 ApplyFullScreen();
-            }
-            else if (e.Key == Key.F11 || (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Alt))
-            {
-                ApplyFullScreen();
-            }
-            else if (e.Key == Key.S && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
-            {
-                CaptureScreen();
             }
             else if (e.Key == Key.Escape)
             {
@@ -184,7 +180,6 @@ namespace ChromeTabs
                 TitleBarGrid.Visibility = Visibility.Visible;
                 e.Handled = true;
             }
-        }
-            
+        }         
     }
 }

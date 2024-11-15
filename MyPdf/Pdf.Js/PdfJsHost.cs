@@ -63,13 +63,10 @@ namespace Pdf.Js
 
         void LoadPdf()
         {
-            Dispatcher.InvokeAsync(new Action(() =>
-            {
                 string pdfjsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pdf.Js", "pdfjs");
                 this.CoreWebView2.SetVirtualHostNameToFolderMapping("pdfjs", pdfjsFolder,
                         CoreWebView2HostResourceAccessKind.DenyCors);
                 this.Source = new Uri(_allowedUrl);
-            }));
         }
 
         private void CoreWebView2_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)

@@ -31,14 +31,14 @@ namespace ChromeTabs
         #endregion
 
         #region Serialization
-        public async void SaveState()
-        {
-            await Task.Run(() =>
-            {
-                string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(StateFilePath(), json);
-            });
-        }
+        //public async void SaveState()
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        string json = JsonSerializer.Serialize(this, new JsonSerializerOptions { WriteIndented = true });
+        //        File.WriteAllText(StateFilePath(), json);
+        //    });
+        //}
 
         public void LoadState()
         {
@@ -97,7 +97,7 @@ namespace ChromeTabs
 
         #region Commands
         public ICommand LoadStateCommand { get => new RelayCommand(LoadState); }
-        public ICommand SaveStateCommand { get => new RelayCommand(SaveState); }
+        //public ICommand SaveStateCommand { get => new RelayCommand(SaveState); }
         #endregion
     }
 }

@@ -16,12 +16,16 @@ namespace MyPdf.Controls
         public PdfHostTabItem(string filePath) 
         {
             _filePath = filePath;
-            pdfViewer = new PdfJsHost(filePath);
 
-            pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
-                pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
+            Dispatcher.InvokeAsync(new Action(() =>
+            {
+                pdfViewer = new PdfJsHost(filePath);
 
-            Content = pdfViewer;
+                pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
+                    pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
+
+                Content = pdfViewer;
+            }));
             try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { }; 
         }
 

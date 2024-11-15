@@ -36,7 +36,7 @@ namespace MyPdf
             base.OnStartup(e);
         }
 
-        private void InitializeWindow(string[] args)
+        private async void InitializeWindow(string[] args)
         {
             window = new Initializer().LaunchApp();
 
@@ -46,12 +46,12 @@ namespace MyPdf
                 window.ChromeTabControl.Add(new PdfHostTabItem(filePath));
             }
 
-            Task.Run(() => { UpdateChecker.CheckForUpdates(); });
+            await Task.Run(() => { UpdateChecker.CheckForUpdates(); });
         }
 
-        private void StartPipeServer()
+        private async void StartPipeServer()
         {
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
                 while (true) // Keep the server running to handle multiple connections
                 {

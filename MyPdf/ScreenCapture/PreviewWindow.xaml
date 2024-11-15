@@ -9,63 +9,86 @@
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="Padding" Value="3"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Width" Value="80"/>
             <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+        </Style>
+        <Style TargetType="Path">
+            <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"/>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Opacity" Value="0.9"/>
         </Style>
     </Window.Resources>
     <Grid  Height="400" Width="450" x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
-            <Image Grid.Row="0"
-            Margin="5" Name="PreviewImage" Stretch="Uniform"/>
-            <Button x:Name="EditImageButton"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                    Width="auto" BorderThickness="0"
-                    ToolTip="Edit Image"
-                    Click="EditImageButton_Click"
-                    FlowDirection="LeftToRight">
-                <Path Data="M22.7 14.3L21.7 15.3L19.7 13.3L20.7 12.3C20.8 12.2 20.9 12.1 21.1 12.1C21.2 12.1 21.4 12.2 21.5 12.3L22.8 13.6C22.9 13.8 22.9 14.1 22.7 14.3M13 19.9V22H15.1L21.2 15.9L19.2 13.9L13 19.9M11.21 15.83L9.25 13.47L6.5 17H13.12L15.66 14.55L13.96 12.29L11.21 15.83M11 19.9V19.05L11.05 19H5V5H19V11.31L21 9.38V5C21 3.9 20.11 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H11V19.9Z"
-                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"/>
-            </Button>
-        </Grid>
-        
-        <Grid Grid.Row="1" x:Name="TextPreviewGrid">
-            <TextBox Name="ExtractedTextBox"
-                     Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}"
-                     BorderBrush="LightGray"
-                     Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"
-                     Text="Extracting text. Please wait..."
-                     Margin="5,0,5,0" Padding="3"
-                     TextWrapping="Wrap" TextAlignment="Center"
-                     VerticalScrollBarVisibility="Auto"/>
-            <Button x:Name="GoogleTranslateButton" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                    Width="auto" BorderThickness="0"
-                    Click="GoogleTranslateButton_Click"
-                    ToolTip="Google Translate"
-                    FlowDirection="LeftToRight">
-                <Path Data="M20,5H10.88L10,2H4A2,2 0 0,0 2,4V17A2,2 0 0,0 4,19H11L12,22H20A2,2 0 0,0 22,20V7A2,2 0 0,0 20,5M7.17,14.59A4.09,4.09 0 0,1 3.08,10.5A4.09,4.09 0 0,1 7.17,6.41C8.21,6.41 9.16,6.78 9.91,7.5L10,7.54L8.75,8.72L8.69,8.67C8.4,8.4 7.91,8.08 7.17,8.08C5.86,8.08 4.79,9.17 4.79,10.5C4.79,11.83 5.86,12.92 7.17,12.92C8.54,12.92 9.13,12.05 9.29,11.46H7.08V9.91H11.03L11.04,10C11.08,10.19 11.09,10.38 11.09,10.59C11.09,12.94 9.5,14.59 7.17,14.59M13.2,12.88C13.53,13.5 13.94,14.06 14.39,14.58L13.85,15.11L13.2,12.88M13.97,12.12H13L12.67,11.08H16.66C16.66,11.08 16.32,12.39 15.1,13.82C14.58,13.2 14.21,12.59 13.97,12.12M21,20A1,1 0 0,1 20,21H13L15,19L14.19,16.23L15.11,15.31L17.79,18L18.5,17.27L15.81,14.59C16.71,13.56 17.41,12.34 17.73,11.08H19V10.04H15.36V9H14.32V10.04H12.36L11.18,6H20A1,1 0 0,1 21,7V20Z"
-                      Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"/>
-            </Button>
-        </Grid>
-        
-        <StackPanel Grid.Row="2"
-                    Orientation="Horizontal" HorizontalAlignment="Center"
-                    Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Button x:Name="SaveImageButton" Content="Save Image" Click="SaveImageButton_Click"/>
-            <Button x:Name="SaveTextButton" Content="Save Text" Click="SaveTextButton_Click"/>
-            <Button x:Name="CopyImageButton" Content="Copy Image" Click="CopyImageButton_Click"/>
-            <Button x:Name="CopyTextButton" Content="Copy Text" Click="CopyTextButton_Click"/>
-            <Button x:Name="RestartButton" Content="New Capture" Click="RestartButton_Click"/>
+        <StackPanel Grid.Column="0" Grid.Row="0">
+            <Button x:Name="EditImageButton"
+                    ToolTip="Edit Image"
+                    Click="EditImageButton_Click">
+                <Path Data="M22.7 14.3L21.7 15.3L19.7 13.3L20.7 12.3C20.8 12.2 20.9 12.1 21.1 12.1C21.2 12.1 21.4 12.2 21.5 12.3L22.8 13.6C22.9 13.8 22.9 14.1 22.7 14.3M13 19.9V22H15.1L21.2 15.9L19.2 13.9L13 19.9M11.21 15.83L9.25 13.47L6.5 17H13.12L15.66 14.55L13.96 12.29L11.21 15.83M11 19.9V19.05L11.05 19H5V5H19V11.31L21 9.38V5C21 3.9 20.11 3 19 3H5C3.9 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H11V19.9Z"/>
+            </Button>
+
+            <Button x:Name="SaveImageButton" ToolTip="Save Image" Click="SaveImageButton_Click">
+                <Path Data="M13 19C13 19.7 13.13 20.37 13.35 21H5C3.9 21 3 20.11 3 19V5C3 3.9 3.9 3 5 3H19C20.11 3 21 3.9 21 5V13.35C20.37 13.13 19.7 13 19 13V5H5V19H13M13.96 12.29L11.21 15.83L9.25 13.47L6.5 17H13.35C13.75 15.88 14.47 14.91 15.4 14.21L13.96 12.29M20 18V15H18V18H15V20H18V23H20V20H23V18H20Z"/>
+            </Button>
+
+            <Button x:Name="CopyImageButton" ToolTip="Copy Image" Click="CopyImageButton_Click">
+                <Path Data="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3M15.96,10.29L13.21,13.83L11.25,11.47L8.5,15H19.5L15.96,10.29Z"/>
+            </Button>
 
         </StackPanel>
+
+        <Button Grid.Row="2" x:Name="RestartButton" ToolTip="New Capture" 
+                VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Click="RestartButton_Click">
+                <Path Data="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/>
+         </Button>
+
+
+        <StackPanel Grid.Column="0" Grid.Row="2">
+            <Button x:Name="GoogleTranslateButton"  
+                     Click="GoogleTranslateButton_Click"
+                     ToolTip="Google Translate">
+                <Path Data="M20,5H10.88L10,2H4A2,2 0 0,0 2,4V17A2,2 0 0,0 4,19H11L12,22H20A2,2 0 0,0 22,20V7A2,2 0 0,0 20,5M7.17,14.59A4.09,4.09 0 0,1 3.08,10.5A4.09,4.09 0 0,1 7.17,6.41C8.21,6.41 9.16,6.78 9.91,7.5L10,7.54L8.75,8.72L8.69,8.67C8.4,8.4 7.91,8.08 7.17,8.08C5.86,8.08 4.79,9.17 4.79,10.5C4.79,11.83 5.86,12.92 7.17,12.92C8.54,12.92 9.13,12.05 9.29,11.46H7.08V9.91H11.03L11.04,10C11.08,10.19 11.09,10.38 11.09,10.59C11.09,12.94 9.5,14.59 7.17,14.59M13.2,12.88C13.53,13.5 13.94,14.06 14.39,14.58L13.85,15.11L13.2,12.88M13.97,12.12H13L12.67,11.08H16.66C16.66,11.08 16.32,12.39 15.1,13.82C14.58,13.2 14.21,12.59 13.97,12.12M21,20A1,1 0 0,1 20,21H13L15,19L14.19,16.23L15.11,15.31L17.79,18L18.5,17.27L15.81,14.59C16.71,13.56 17.41,12.34 17.73,11.08H19V10.04H15.36V9H14.32V10.04H12.36L11.18,6H20A1,1 0 0,1 21,7V20Z"/>
+            </Button>
+
+            <Button x:Name="SaveTextButton" ToolTip="Save Text" Click="SaveTextButton_Click">
+                <Path Data="M17,14H19V17H22V19H19V22H17V19H14V17H17V14M5,3H19C20.11,3 21,3.89 21,5V12.8C20.39,12.45 19.72,12.2 19,12.08V5H5V19H12.08C12.2,19.72 12.45,20.39 12.8,21H5C3.89,21 3,20.11 3,19V5C3,3.89 3.89,3 5,3M7,7H17V9H7V7M7,11H17V12.08C16.15,12.22 15.37,12.54 14.68,13H7V11M7,15H12V17H7V15Z"/>
+            </Button>
+
+            <Button x:Name="CopyTextButton" ToolTip="Copy Text" Click="CopyTextButton_Click">
+                <Path Data="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3V5Z"/>
+            </Button>
+        </StackPanel>
+
+
+        <Image  Name="PreviewImage" Grid.Column="1" Grid.Row="0"
+            Margin="5"  Stretch="Uniform"/>
+
+        <Separator Grid.Row="1" Grid.ColumnSpan="2"
+                   Height="0.5" Margin="0.5"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        
+        <TextBox Name="ExtractedTextBox" Grid.Column="1" Grid.Row="2"
+                     Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}"
+                     BorderThickness="0"
+                     Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"
+                     Text="Extracting text. Please wait..."
+                     Padding="3"
+                     TextWrapping="Wrap" TextAlignment="Center"
+                     VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

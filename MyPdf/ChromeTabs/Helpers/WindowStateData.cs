@@ -34,14 +34,17 @@ namespace ChromeTabs.Helpers
         {
             var windowState = new WindowStateModel
             {
-                WindowTop = window.Top,
-                WindowLeft = window.Left,
                 WindowWidth = window.Width,
                 WindowHeight = window.Height,
                 WindowState = window.WindowState
             };
 
-            await Task.Run(() =>
+            if (window.WindowState == WindowState.Normal)
+            {
+                windowState.WindowTop = window.Top; windowState.WindowLeft = window.Left;
+            }
+
+                await Task.Run(() =>
             {
                 string json = JsonSerializer.Serialize(windowState, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText(windowStatePath, json);
@@ -65,8 +68,8 @@ namespace ChromeTabs.Helpers
                 }
             }
 
-            bool isDarkTheme = ThemeHelper.IsDarkThemeEnabled();
-            window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(30, 30, 30) : Color.FromRgb(200, 200, 200));
+            bool isDarkTheme = !ThemeHelper.IsDarkThemeEnabled();
+            window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(34, 34, 34) : Color.FromRgb(200, 200, 200));
             window.Foreground = new SolidColorBrush(isDarkTheme ? Color.FromRgb(200, 200, 200) : Color.FromRgb(30, 30, 30));
             window.FlowDirection = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }

@@ -1,13 +1,7 @@
 {
   "MinimizeButtonTooltip": "מזער",
-  "FullScreenButtonTooltip": "מסך מלא",
-  "MaximizeButtonTooltip": "מקסם \\ שחזר",
+  "FullScreenButtonTooltip": "מסך מלא (F11 / Alt + Enter, Esc ליציאה)",
+  "MaximizeButtonTooltip": "הגדל / שחזר",
   "XButtonTooltip": "סגור",
-  "ScreenCaptureButtonTooltip": "לכידת תמונה \\ לכידת טקסט",
-  "Top": null,
-  "Left": null,
-  "Width": 750,
-  "Height": 500,
-  "WindowState": "Normal",
-  "SelectedTabIndex": 0
+  "ScreenCaptureButtonTooltip": "צילום מסך / זיהוי תווים"
 }

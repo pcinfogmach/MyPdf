@@ -10,7 +10,6 @@ const openFileButton = document.getElementById('secondaryOpenFile');
 const saveButton = document.getElementById('downloadButton');
 const saveButtonParent = saveButton?.parentElement;
 
-
 if (saveButton && secondaryToolbar) {
    // Clone the save button and customize it
    const newSaveAsButton = saveButton.cloneNode(true);
@@ -29,7 +28,7 @@ if (saveButton && secondaryToolbar) {
    // Insert newSaveAsButton as the first child of secondaryToolbar   
    secondaryToolbar.insertBefore(newSaveAsButton, secondaryToolbar.firstChild);
 
-    // Add event listener for SaveAs action
+   // Add event listener for SaveAs action
    newSaveAsButton.addEventListener('click', function () {
       window.chrome.webview.postMessage({ action: ""SaveAs"" }); 
    });
@@ -40,23 +39,38 @@ if (openFileButton && secondaryToolbar) {
    const newOpenFileButton = openFileButton.cloneNode(true);
    newOpenFileButton.className = ""toolbarButton""; 
     
-    // Add event listener for OpenFile action
-    newOpenFileButton.addEventListener('click', function () {
+   // Add event listener for OpenFile action
+   newOpenFileButton.addEventListener('click', function () {
       window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
    });
 
    saveButtonParent?.appendChild(newOpenFileButton);
    
-   const secondaryOpenFileButton = openFileButton.cloneNode(true)
+   const secondaryOpenFileButton = openFileButton.cloneNode(true);
 
    // Add event listener for OpenFile action
-    secondaryOpenFileButton.addEventListener('click', function () {
+   secondaryOpenFileButton.addEventListener('click', function () {
       window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
    });
 
    secondaryToolbar.insertBefore(secondaryOpenFileButton, secondaryToolbar.firstChild);
    openFileButton.remove();
 }
+
+const createBookmarkButton = document.createElement('button');
+createBookmarkButton.className = ""toolbarButton labeled"";
+createBookmarkButton.textContent = ""Bookmark""; // Set any label you want for the button
+createBookmarkButton.addEventListener('click', function () {
+    alert('button clicked'); 
+});
+secondaryToolbar.insertBefore(createBookmarkButton, secondaryToolbar.firstChild);
+ 
+ 
+ document.addEventListener('contextmenu', function(e) {
+            if (!window.getSelection().toString()) {
+                e.preventDefault(); // Cancel the context menu if no text is selected
+            }
+        });
 ";
         }
     }

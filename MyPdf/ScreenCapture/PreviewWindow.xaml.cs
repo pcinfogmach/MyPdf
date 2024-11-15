@@ -62,11 +62,11 @@ namespace ScreenCaptureLib
                 this.FlowDirection = FlowDirection.RightToLeft;
                 ExtractedTextBox.Text = "מחלץ טקסט. אנא המתן...";
                 // Change button content to Hebrew
-                SaveImageButton.Content = "שמור תמונה";
-                SaveTextButton.Content = "שמור טקסט";
-                CopyImageButton.Content = "העתק תמונה";
-                CopyTextButton.Content = "העתק טקסט";
-                RestartButton.Content = "לכידה חדשה";
+                SaveImageButton.ToolTip = "שמור תמונה";
+                SaveTextButton.ToolTip = "שמור טקסט";
+                CopyImageButton.ToolTip = "העתק תמונה";
+                CopyTextButton.ToolTip = "העתק טקסט";
+                RestartButton.ToolTip = "לכידה חדשה";
                 GoogleTranslateButton.ToolTip = "תרגום גוגל";
                 EditImageButton.ToolTip = "ערוך תמונה";
             }
@@ -140,8 +140,13 @@ namespace ScreenCaptureLib
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 FileName = $"ExtractedText_{DateTime.Now:yyyyMMdd_HHmmss}.txt",
-                Filter = "Text File|*.txt"
+                Filter = "Text File (*.txt)|*.txt|" +
+              "Word Documents (*.docx;*.doc;*.rtf;)|*.docx;*.doc;*.rtf;|" +
+              "Html (*.html)|*.html|" +
+              "OpenDocument Formats (*.odt;*.ods)|*.odt;*.ods|" +
+              "All Files (*.*)|*.*"
             };
+
 
             if (saveFileDialog.ShowDialog() == true)
             {
@@ -200,6 +205,7 @@ namespace ScreenCaptureLib
             string targetLanguage = Regex.Match(textToTranslate, @"\p{IsHebrew}").Success ? "en" : "he";
             string translateUrl = $"https://translate.google.com/?sl=auto&tl={targetLanguage}&text={Uri.EscapeDataString(textToTranslate)}&op=translate";
             Process.Start(new ProcessStartInfo(translateUrl) { UseShellExecute = true });
+            this.Close();
         }
 
         private void EditImageButton_Click(object sender, RoutedEventArgs e)
