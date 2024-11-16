@@ -8,10 +8,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Tesseract;
+using ThemedWindow.Controls;
 
 namespace ScreenCaptureLib
 {
-    public partial class PreviewWindow : Window
+    public partial class PreviewWindow : TWindow
     {
         private readonly BitmapImage _bitmapImage;
         private readonly MemoryStream _imageStream;
@@ -19,37 +20,11 @@ namespace ScreenCaptureLib
         public PreviewWindow(BitmapImage bitmapImage, MemoryStream imageStream)
         {
             InitializeComponent();
-            ApplyTheme();
             SetButtonContentBasedOnLanguage();
             _bitmapImage = bitmapImage;
             _imageStream = imageStream;
             PreviewImage.Source = _bitmapImage;
             ExtractTextFromImage();
-        }
-
-        private void ApplyTheme()
-        {
-            bool isDarkTheme = IsDarkThemeEnabled();
-            if (!isDarkTheme)
-            {
-                this.Background = Brushes.WhiteSmoke;
-                this.Foreground = Brushes.Black;
-            }
-        }
-
-        private bool IsDarkThemeEnabled()
-        {
-            const string registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
-            const string registryValueName = "AppsUseLightTheme";
-
-            using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(registryKeyPath))
-            {
-                if (key?.GetValue(registryValueName) is int value)
-                {
-                    return value == 0; // 0 means Dark Theme is enabled, 1 means Light Theme
-                }
-            }
-            return false; // Default to light theme if the registry value is not found
         }
 
         private void SetButtonContentBasedOnLanguage()

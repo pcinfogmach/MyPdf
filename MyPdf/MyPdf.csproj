@@ -1597,4 +1597,8 @@
     <None Remove="C:\Users\Admin\.nuget\packages\tesseract\5.2.0\build\\..\x86\tesseract50.dll" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ThemedWindow\ThemedWindow\ThemedWindow.csproj" />
+  </ItemGroup>
+
 </Project>
