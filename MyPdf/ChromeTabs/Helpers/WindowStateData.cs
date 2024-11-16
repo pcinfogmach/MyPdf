@@ -68,8 +68,8 @@ namespace ChromeTabs.Helpers
                 }
             }
 
-            bool isDarkTheme = !ThemeHelper.IsDarkThemeEnabled();
-            window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(34, 34, 34) : Color.FromRgb(200, 200, 200));
+            bool isDarkTheme = ThemeHelper.IsDarkThemeEnabled();
+            window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(34, 34, 34) : Colors.White);
             window.Foreground = new SolidColorBrush(isDarkTheme ? Color.FromRgb(200, 200, 200) : Color.FromRgb(30, 30, 30));
             window.FlowDirection = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }

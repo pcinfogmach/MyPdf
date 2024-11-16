@@ -61,7 +61,7 @@ const createBookmarkButton = document.createElement('button');
 createBookmarkButton.className = ""toolbarButton labeled"";
 createBookmarkButton.textContent = ""Bookmark""; // Set any label you want for the button
 createBookmarkButton.addEventListener('click', function () {
-    alert('button clicked'); 
+    window.chrome.webview.postMessage({ action: ""CreateBookMark"" }); 
 });
 secondaryToolbar.insertBefore(createBookmarkButton, secondaryToolbar.firstChild);
  
