@@ -29,11 +29,9 @@
 
     <WindowChrome.WindowChrome>
         <WindowChrome
-     CornerRadius="{x:Static SystemParameters.WindowCornerRadius}"
-     GlassFrameThickness="1,0,1,1"
-     NonClientFrameEdges="Left,Right,Bottom"
-     ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}"
-     UseAeroCaptionButtons="False"
+             CornerRadius="{x:Static SystemParameters.WindowCornerRadius}"
+             ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}"
+             UseAeroCaptionButtons="False"
              CaptionHeight="{Binding ElementName=TitleBarGrid, Path=ActualHeight}"/>
     </WindowChrome.WindowChrome>
 
@@ -54,33 +52,43 @@
             <StackPanel x:Name="TitleBarButtonsPanel"  Grid.Column="3"
                         Orientation="Horizontal">
                 <!--  standard system buttons (minimize, maximize/restore, close)  -->
-                <Button x:Name="MinimizeButton"
-                Click="MinimizeButton_Click"
-                Style="{StaticResource TitleBarButtonStyle}"
-                ToolTip="{Binding MinimizeButtonTooltip}">
-                    <Path Data="M 13,15 H 23"/>
-                </Button>
+                <Grid Background="{Binding Background, ElementName=MinimizeButton}">
+                    <Button x:Name="MinimizeButton"
+                        Click="MinimizeButton_Click"
+                        Style="{StaticResource TitleBarButtonStyle}"
+                        ToolTip="{Binding MinimizeButtonTooltip}">
+                        <Path Data="M 13,15 H 23"/>
+                    </Button>
+                </Grid>
 
-                <Button x:Name="FullScreenButton"
+                <Grid Background="{Binding Background, ElementName=FullScreenButton}">
+                    <Button x:Name="FullScreenButton"
                         Click="FullScreenButton_Click"
                         Style="{StaticResource TitleBarButtonStyle}"
                         ToolTip="{Binding FullScreenButtonTooltip}">
-                    <TextBlock Text="⇱" FontSize="14" LineHeight="{Binding FontSize, RelativeSource={RelativeSource Mode=Self}}" LineStackingStrategy="BlockLineHeight"/>
-                </Button>
+                        <TextBlock Text="⇱" FontSize="14" LineHeight="{Binding FontSize, RelativeSource={RelativeSource Mode=Self}}" LineStackingStrategy="BlockLineHeight"/>
+                    </Button>
+                </Grid>
 
-                <Button x:Name="maximizeRestoreButton"  
+                <Grid Background="{Binding Background, ElementName=MaximizeRestoreButton}">
+                    <Button x:Name="MaximizeRestoreButton"  
                 Style="{StaticResource TitleBarMaximizeButtonStyle}"
                 Click="maximizeRestoreButton_Click"
                 ToolTip="{Binding MaximizeButtonTooltip}">
-                    <Path x:Name="maximizeIcon"/>
-                </Button>
+                        <Path x:Name="maximizeIcon"/>
+                    </Button>
+                </Grid>
 
-                <Button x:Name="CloseButton" Style="{StaticResource TitleBarXButtonStyle}"
+                <Grid Background="{Binding Background, ElementName=CloseButton}">
+                    <Button x:Name="CloseButton" Style="{StaticResource TitleBarXButtonStyle}"
                 Click="CloseButton_Click"
                 ToolTip="{Binding XButtonTooltip}">
-                    <Path Data="M 13,11 22,20 M 13,20 22,11"/>
-                </Button>
+                        <Path Data="M 13,11 22,20 M 13,20 22,11"/>
+                    </Button>
+                </Grid>
+                
             </StackPanel>
+                
 
             <StackPanel x:Name="TabStripNavigationPanel" Grid.Column="1"
                Orientation="Horizontal" >
@@ -97,6 +105,7 @@ Text="≡" FontSize="18" LineHeight="18" LineStackingStrategy="BlockLineHeight"/
                     <Path Data="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
                 </RepeatButton>
 
+                <Grid Background="{Binding Background, ElementName=ScreenCaptureButton}">
                 <Button x:Name="ScreenCaptureButton" Style="{StaticResource TitleBarButtonStyle}"
                             ToolTip="{Binding ScreenCaptureButtonTooltip}"
                             Click="ScreenCaptureButton_Click">
@@ -105,6 +114,7 @@ Text="≡" FontSize="18" LineHeight="18" LineStackingStrategy="BlockLineHeight"/
           M4,20 L4,16 M4,20 L8,20
           M20,20 L16,20 M20,20 L20,16" />
                 </Button>
+                </Grid>
 
                 <!-- Popup for TabListBox dropdown -->
                 <Popup x:Name="DropDown"
@@ -132,7 +142,7 @@ SelectionChanged="DropDownListBox_SelectionChanged"/>
                         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         <Setter Property="Padding" Value="0"/>
                         <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Margin" Value="1"/>
+                        <Setter Property="Margin" Value="0"/>
                         <Setter Property="AllowDrop" Value="True"/>
                         <EventSetter Event="PreviewMouseMove" Handler="ListBoxItem_PreviewMouseMove"/>
                         <EventSetter Event="Drop" Handler="ListBoxItem_Drop"/>

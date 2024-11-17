@@ -106,7 +106,9 @@ namespace ScreenCaptureLib
                     encoder.Save(fileStream);
                 }
                 Close();
-                MessageBox.Show("Screenshot saved successfully!", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
+                var info = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                if (info == "he") MessageBox.Show("הצילום מסך נשמר בהצלחה", "שמור", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                else MessageBox.Show("Screenshot saved successfully", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -127,7 +129,9 @@ namespace ScreenCaptureLib
             {
                 File.WriteAllText(saveFileDialog.FileName, ExtractedTextBox.Text);
                 Close();
-                MessageBox.Show("Text saved successfully!", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
+                var info = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                if (info == "he") MessageBox.Show("הטקסט נשמר בהצלחה", "שמור", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+                else MessageBox.Show("Text saved successfully", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -135,14 +139,18 @@ namespace ScreenCaptureLib
         {
             Clipboard.SetImage(_bitmapImage);
             Close();
-            MessageBox.Show("Image copied to clipboard!", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
+            var info = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            if (info == "he") MessageBox.Show("התמונה הועתקה בהצלחה", "העתק", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+            else MessageBox.Show("Image copied to clipboard", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void CopyTextButton_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(ExtractedTextBox.Text);
             Close();
-            MessageBox.Show("Text copied to clipboard!", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
+            var info = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            if (info == "he") MessageBox.Show("הטקסט הועתק בהצלחה", "העתק", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+            else MessageBox.Show("Text copied to clipboard", "Copy", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

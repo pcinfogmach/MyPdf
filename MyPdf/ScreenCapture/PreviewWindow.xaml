@@ -19,6 +19,7 @@
         <Style TargetType="Path">
             <Setter Property="Fill" Value="{Binding ThemedForeGround, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"/>
         </Style>
+        
         <Style TargetType="ScrollBar">
             <Setter Property="Opacity" Value="0.9"/>
         </Style>
@@ -87,7 +88,7 @@
 
         <TextBox Name="ExtractedTextBox" Grid.Column="1" Grid.Row="2"
                      Margin="5"
-                     Background="{Binding ThemedBackground, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"
+                     Background="Transparent"
                      BorderThickness="0"
                      Foreground="{Binding ThemedForeGround, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"
                      Text="Extracting text. Please wait..."

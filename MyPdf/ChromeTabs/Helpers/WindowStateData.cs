@@ -67,10 +67,25 @@ namespace ChromeTabs.Helpers
                 }
             }
 
-            bool isDarkTheme = ThemeHelper.IsDarkThemeEnabled();
+            bool isDarkTheme = IsDarkThemeEnabled();
             window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(34, 34, 34) : Colors.White);
             window.Foreground = new SolidColorBrush(isDarkTheme ? Color.FromRgb(200, 200, 200) : Color.FromRgb(30, 30, 30));
             window.FlowDirection = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }
+
+        public static bool IsDarkThemeEnabled()
+        {
+            const string registryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
+            const string registryValueName = "AppsUseLightTheme";
+
+            using (var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(registryKeyPath))
+            {
+                if (key?.GetValue(registryValueName) is int value)
+                {
+                    return value == 0; // 0 means Dark Theme is enabled, 1 means Light Theme
+                }
+            }
+            return false; // Default to light theme if the registry value is not found
         }
     }
 }
