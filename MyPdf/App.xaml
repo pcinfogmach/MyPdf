@@ -9,11 +9,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ChromeTabs/ChromeTabsDictionary.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ThemedWindow;component/Themes/ThemedWindowDictionary.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/ThemedWindow;component/Themes/ThemedScrollBarDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style TargetType="controls:PdfHostTabItem" BasedOn="{StaticResource {x:Type ct:ChromeTabItem}}"/>
-            <Style TargetType="ScrollBar" BasedOn="{StaticResource ThemedScrollBar}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

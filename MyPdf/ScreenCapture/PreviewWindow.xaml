@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:tw="clr-namespace:ThemedWindow.Controls;assembly=ThemedWindow"
         Title="Screenshot"
-             Height="400" Width="450"
+        Height="400" Width="450"
         PreviewKeyDown="Window_PreviewKeyDown">
 
     <tw:TWindow.Resources>
@@ -84,7 +84,7 @@
         <Separator Grid.Row="1" Grid.ColumnSpan="2"
                    Height="0.5" Margin="0.5"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        
+
         <TextBox Name="ExtractedTextBox" Grid.Column="1" Grid.Row="2"
                      Margin="5"
                      Background="{Binding ThemedBackground, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"
@@ -93,6 +93,10 @@
                      Text="Extracting text. Please wait..."
                      Padding="3"
                      TextWrapping="Wrap" TextAlignment="Center"
-                     VerticalScrollBarVisibility="Auto"/>
+                     VerticalScrollBarVisibility="Auto">
+            <TextBox.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource ThemedScrollBar}"/>
+            </TextBox.Resources>
+        </TextBox>
     </Grid>
 </tw:TWindow>
