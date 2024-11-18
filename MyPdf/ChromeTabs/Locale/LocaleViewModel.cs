@@ -101,7 +101,7 @@ namespace ChromeTabs
         public string FullScreenButtonTooltip { get => _fullScreenButtonToolTip; set => SetProperty(ref _fullScreenButtonToolTip, value); }
         public string MaximizeButtonTooltip { get => _maximizeButtonToolTip; set => SetProperty(ref _maximizeButtonToolTip, value); }
         public string XButtonTooltip { get => _xButtonToolTip; set => SetProperty(ref _xButtonToolTip, value); }
-        public string ToggleSideBarButtonToolTip { get => _toggleSideBarButtonToolTip; set => SetProperty(ref _toggleSideBarButtonToolTip, value); }
+        public string ToggleSideBarButtonTooltip { get => _toggleSideBarButtonToolTip; set => SetProperty(ref _toggleSideBarButtonToolTip, value); }
         public string ScreenCaptureButtonTooltip { get => _screenCaptureButtonToolTip; set => SetProperty(ref _screenCaptureButtonToolTip, value); }
         public string OpenFilePanelButtonTooltip { get => _openFilePanelButtonTooltip; set => SetProperty(ref _openFilePanelButtonTooltip, value); }
         public string HistoryPanelButtonTooltip { get => _historyPanelButtonTooltip; set => SetProperty(ref _historyPanelButtonTooltip, value); }
