@@ -210,7 +210,7 @@ namespace ChromeTabs
         }
         #endregion
 
-        #region virtual methods
+        #region methods
         public virtual void OpenFile() { OpenFile_PanelButton.IsSelected = false; }
         public virtual void SaveFile() { }
         public virtual void SaveFileAS() { }
@@ -231,7 +231,7 @@ namespace ChromeTabs
         }
         void ToggleFullScreen()
         {
-            if (this.WindowState == WindowState.Maximized) { ExitFullScreen();  return; }
+            if (this.WindowStyle == WindowStyle.None) { ExitFullScreen();  return; }
             this.WindowStyle = WindowStyle.None;
             this.WindowState = WindowState.Normal;
             this.WindowState = WindowState.Maximized;
