@@ -189,7 +189,7 @@
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter  Property="Background" Value="{StaticResource TitleBarButton.MouseOverColor}" />
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
+                        <Trigger Property="IsChecked" Value="true">
                             <Setter  Property="Background" Value="{StaticResource TitleBarButton.MouseOverColor}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

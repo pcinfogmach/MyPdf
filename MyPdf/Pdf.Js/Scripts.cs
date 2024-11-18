@@ -11,66 +11,61 @@ const saveButton = document.getElementById('downloadButton');
 const saveButtonParent = saveButton?.parentElement;
 
 if (saveButton && secondaryToolbar) {
-   // Clone the save button and customize it
-   const newSaveAsButton = saveButton.cloneNode(true);
+    // Clone the save button and customize it
+    const newSaveAsButton = saveButton.cloneNode(true);
+    newSaveAsButton.className = ""toolbarButton labeled"";
 
-   // Check for Hebrew text to set button label and title accordingly
-   if (newSaveAsButton.textContent?.startsWith('ש')) {
-      newSaveAsButton.textContent = ""שמור בשם""; // Hebrew text
-      newSaveAsButton.title = ""שמור בשם""; 
-   } else {
-      newSaveAsButton.textContent = ""Save As""; // English text
-      newSaveAsButton.title = ""Save As""; 
-   }
+    // Insert newSaveAsButton as the first child of secondaryToolbar
+    secondaryToolbar.insertBefore(newSaveAsButton, secondaryToolbar.firstChild);
 
-   newSaveAsButton.className = ""toolbarButton labeled""; 
+    // Add event listener for SaveAs action
+    newSaveAsButton.addEventListener('click', function () {
+        window.chrome.webview.postMessage({ action: ""SaveAs"" });
+    });
 
-   // Insert newSaveAsButton as the first child of secondaryToolbar   
-   secondaryToolbar.insertBefore(newSaveAsButton, secondaryToolbar.firstChild);
+      // Determine if the system locale is Hebrew
+const isSystemLocaleHebrew = navigator.language.startsWith(""he"");
 
-   // Add event listener for SaveAs action
-   newSaveAsButton.addEventListener('click', function () {
-      window.chrome.webview.postMessage({ action: ""SaveAs"" }); 
-   });
+// Set button label and title based on the system locale
+if (isSystemLocaleHebrew) {
+    newSaveAsButton.textContent = ""שמור בשם""; // Hebrew text
+    newSaveAsButton.title = ""שמור בשם"";
+} else {
+    newSaveAsButton.textContent = ""Save As""; // English text
+    newSaveAsButton.title = ""Save As"";
+}
+
 }
 
 if (openFileButton && secondaryToolbar) {
-   // Clone and replace the original open file button
-   const newOpenFileButton = openFileButton.cloneNode(true);
-   newOpenFileButton.className = ""toolbarButton""; 
-    
-   // Add event listener for OpenFile action
-   newOpenFileButton.addEventListener('click', function () {
-      window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
-   });
+    // Clone and replace the original open file button
+    const newOpenFileButton = openFileButton.cloneNode(true);
+    newOpenFileButton.className = ""toolbarButton"";
 
-   saveButtonParent?.appendChild(newOpenFileButton);
-   
-   const secondaryOpenFileButton = openFileButton.cloneNode(true);
+    // Add event listener for OpenFile action
+    newOpenFileButton.addEventListener('click', function () {
+        window.chrome.webview.postMessage({ action: ""OpenFile"" });
+    });
 
-   // Add event listener for OpenFile action
-   secondaryOpenFileButton.addEventListener('click', function () {
-      window.chrome.webview.postMessage({ action: ""OpenFile"" }); 
-   });
+    saveButtonParent?.appendChild(newOpenFileButton);
 
-   secondaryToolbar.insertBefore(secondaryOpenFileButton, secondaryToolbar.firstChild);
-   openFileButton.remove();
+    // Create and add a secondary OpenFile button to the toolbar
+    const secondaryOpenFileButton = openFileButton.cloneNode(true);
+    secondaryOpenFileButton.addEventListener('click', function () {
+        window.chrome.webview.postMessage({ action: ""OpenFile"" });
+    });
+
+    secondaryToolbar.insertBefore(secondaryOpenFileButton, secondaryToolbar.firstChild);
+    openFileButton.remove(); // Remove the original open file button
 }
 
-const createBookmarkButton = document.createElement('button');
-createBookmarkButton.className = ""toolbarButton labeled"";
-createBookmarkButton.textContent = ""Bookmark""; // Set any label you want for the button
-createBookmarkButton.addEventListener('click', function () {
-    window.chrome.webview.postMessage({ action: ""CreateBookMark"" }); 
+// Prevent context menu when no text is selected
+document.addEventListener('contextmenu', function (e) {
+    if (!window.getSelection().toString()) {
+        e.preventDefault(); // Cancel the context menu if no text is selected
+    }
 });
-secondaryToolbar.insertBefore(createBookmarkButton, secondaryToolbar.firstChild);
- 
- 
- document.addEventListener('contextmenu', function(e) {
-            if (!window.getSelection().toString()) {
-                e.preventDefault(); // Cancel the context menu if no text is selected
-            }
-        });
+
 ";
         }
     }

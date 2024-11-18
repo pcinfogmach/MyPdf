@@ -1,8 +1,11 @@
 ﻿using ChromeTabs.Helpers;
-using System.Diagnostics.SymbolStore;
+using MyPdf.HistoryAndUserTags;
+using System.Diagnostics;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shell;
 
 namespace ChromeTabs
 {
@@ -11,32 +14,27 @@ namespace ChromeTabs
     /// </summary>
     public partial class ChromeTabsWindow : Window
     {
+        public HistoryLogger HistoryLogger { get; } = new HistoryLogger();
+
         public ChromeTabsWindow()
         {
             InitializeComponent();
+
             localeViewModel.LoadState();
             WindowStateData.LoadState(this);
-            this.Closing += (s, e) =>
-            {
-                WindowStateData.SaveState(this);
-            };
+            this.Closing += (s, e) => WindowStateData.SaveState(this);
         }
 
-        private void ScreenCaptureButton_Click(object sender, RoutedEventArgs e) => CaptureScreen();
+        private void TitleBarGrid_TouchDown(object sender, TouchEventArgs e) => DragMove();
 
-        void CaptureScreen()
+        private void TitleBarGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var captureWindow = new ScreenCaptureLib.ScreenCaptureWindow(false)
-            {
-                WindowState = this.WindowState,
-                Height = this.ActualHeight,
-                Width = this.ActualWidth,
-                Left = this.Left,
-                Top = this.Top,
-                Owner = this,
-            };
-            captureWindow.Show();
+            if (e.ClickCount == 2)
+                this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            else if (e.LeftButton == MouseButtonState.Pressed)  
+                DragMove();
         }
+
 
         private void ScrollLeft_Click(object sender, RoutedEventArgs e)
         {
@@ -121,26 +119,20 @@ namespace ChromeTabs
 
         private void FullScreenButton_Click(object sender, RoutedEventArgs e)
         {
-            ApplyFullScreen();
+            ToggleFullScreen();
         }
 
-        void ApplyFullScreen()
-        {
-            this.WindowStyle = WindowStyle.None;
-            this.WindowState = WindowState.Normal;
-            this.WindowState = WindowState.Maximized;
-            TitleBarGrid.Visibility = Visibility.Collapsed;
-        }
+       
 
         private void ChromeTabStrip_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
                 this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            else
+            else if (e.LeftButton == MouseButtonState.Pressed)
                 DragMove();
         }
 
-        private void window_KeyDown(object sender, KeyEventArgs e)
+        private void window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
             {
@@ -163,23 +155,110 @@ namespace ChromeTabs
                     ChromeTabControl.SelectedIndex = ChromeTabControl.SelectedIndex >= ChromeTabControl.Items.Count - 1 ? 0 : ChromeTabControl.SelectedIndex + 1;
                     e.Handled = true;
                 }
-                //else if (e.Key == Key.S && Keyboard.Modifiers == (ModifierKeys.Shift))
-                //{
-                //    CaptureScreen();
-                //    e.Handled = true;
-                //}
+                else if (e.Key == Key.O)
+                {
+                    OpenFile();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.S)
+                {
+                    SaveFile();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.S && Keyboard.Modifiers == (ModifierKeys.Shift))
+                {
+                    SaveFileAS();
+                    e.Handled = true;
+                }
+                else if (e.Key == Key.S && Keyboard.Modifiers == (ModifierKeys.Alt))
+                {
+                    CaptureScreen();
+                    e.Handled = true;
+                }
             }
-            else if (e.Key == Key.F11 || (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Alt))
+            else if (e.Key == Key.F10 || e.Device is KeyboardDevice keyboardDeviceF10 && keyboardDeviceF10.IsKeyDown(Key.F10))
             {
-                ApplyFullScreen();
+                ToggleSideBar();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.F12 || e.Device is KeyboardDevice keyboardDeviceF12 && keyboardDeviceF12.IsKeyDown(Key.F12))
+            {
+                SaveFileAS();
+                e.Handled = true;
+            }
+            else if (e.Key == Key.F11 || (e.Key == Key.Enter && Keyboard.Modifiers == ModifierKeys.Alt) || e.Device is KeyboardDevice keyboardDeviceF11 && keyboardDeviceF11.IsKeyDown(Key.F11))
+            {
+                ToggleFullScreen();
+                e.Handled = true;
             }
             else if (e.Key == Key.Escape)
             {
-                this.WindowStyle = WindowStyle.SingleBorderWindow;
-                this.WindowState = WindowState.Normal;
-                TitleBarGrid.Visibility = Visibility.Visible;
+                ExitFullScreen();
                 e.Handled = true;
             }
-        }         
+        }
+
+        #region SideBar
+        private void ToggleSideBarButton_Click(object sender, RoutedEventArgs e) => ToggleSideBar();
+
+        private void SidePanel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SidePanel.SelectedItem == OpenFile_PanelButton) OpenFile();
+            else if (SidePanel.SelectedItem == ScreenCapture_PanelButton) CaptureScreen();
+            else if (SidePanel.SelectedItem == Help_PanelButton) ShowHelp();
+            else if (SidePanel.SelectedItem == WebSite_PanelButton) { Process.Start(new ProcessStartInfo { FileName = "https://mitmachim.top/post/869071", UseShellExecute = true });}
+        }
+        #endregion
+
+        #region virtual methods
+        public virtual void OpenFile() { OpenFile_PanelButton.IsSelected = false; }
+        public virtual void SaveFile() { }
+        public virtual void SaveFileAS() { }
+        public virtual void ShowHelp() { Help_PanelButton.IsSelected = false; }
+        void CaptureScreen()
+        {
+            var captureWindow = new ScreenCaptureLib.ScreenCaptureWindow(false)
+            {
+                WindowState = this.WindowState,
+                Height = this.ActualHeight,
+                Width = this.ActualWidth,
+                Left = this.Left,
+                Top = this.Top,
+                Owner = this,
+            };
+            captureWindow.Show();
+            ScreenCapture_PanelButton.IsSelected = false;
+        }
+        void ToggleFullScreen()
+        {
+            if (this.WindowState == WindowState.Maximized) { ExitFullScreen();  return; }
+            this.WindowStyle = WindowStyle.None;
+            this.WindowState = WindowState.Normal;
+            this.WindowState = WindowState.Maximized;
+            WindowChrome.SetWindowChrome(this, new WindowChrome { CaptionHeight = 0});
+            TitleBarGrid.Visibility = Visibility.Collapsed;
+        }
+        void ExitFullScreen()
+        {
+            this.WindowStyle = WindowStyle.SingleBorderWindow;
+            this.WindowState = WindowState.Normal;
+
+            var windowChrome = new WindowChrome
+            {
+                CornerRadius = SystemParameters.WindowCornerRadius, // Setting the CornerRadius
+                ResizeBorderThickness = SystemParameters.WindowResizeBorderThickness, // Setting the Resize Border Thickness
+                UseAeroCaptionButtons = false, 
+                CaptionHeight = TitleBarGrid.ActualHeight
+            };
+            WindowChrome.SetWindowChrome(this, windowChrome);
+
+            TitleBarGrid.Visibility = Visibility.Visible;
+        }
+        void ToggleSideBar()
+        {
+            SidePanel.Visibility = (SidePanel.Visibility == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed;
+            SidePanelHostTabControl.Visibility = (SidePanelHostTabControl.Visibility == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed;
+        }
+        #endregion
     }
 }

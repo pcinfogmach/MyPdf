@@ -16,6 +16,8 @@ namespace ScreenCaptureLib
     {
         private readonly BitmapImage _bitmapImage;
         private readonly MemoryStream _imageStream;
+        string tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenCapture", "tessdata");
+        string savedLangFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selectedLang.txt");
 
         public PreviewWindow(BitmapImage bitmapImage, MemoryStream imageStream)
         {
@@ -44,6 +46,7 @@ namespace ScreenCaptureLib
                 RestartButton.ToolTip = "לכידה חדשה";
                 GoogleTranslateButton.ToolTip = "תרגום גוגל";
                 EditImageButton.ToolTip = "ערוך תמונה";
+                ChooseOcrLanguageButton.ToolTip = "בחר שפות עבור חילוץ טקסט (ברירת המחדל הינה עברית + אנגלית) לקבלת תוצאות משופרות בחר שפה אחת בלבד";
             }
         }
 
@@ -58,13 +61,8 @@ namespace ScreenCaptureLib
             {
                 try
                 {
-                    string tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenCapture", "tessdata");
-                    List<string> files = Directory.GetFiles(tessDataFolder, "*.traineddata").ToList();
-                    string tessLang = Path.GetFileNameWithoutExtension(files[0]);
-                    if (files.Count > 1)
-                    {
-                        for (int i = 1; i < files.Count; i++) { tessLang += "+" + Path.GetFileNameWithoutExtension(files[i]); }
-                    }
+                    string tessLang = "heb+eng";
+                    if (File.Exists(savedLangFile)) tessLang = File.ReadAllText(savedLangFile).Trim();
 
                     // Use the existing MemoryStream with Tesseract
                     _imageStream.Seek(0, SeekOrigin.Begin); // Reset position
@@ -161,7 +159,7 @@ namespace ScreenCaptureLib
         private void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             Window captureWindow;
-            if (this.Owner != null) 
+            if (this.Owner != null)
             {
                 captureWindow = new ScreenCaptureWindow(false)
                 {
@@ -178,13 +176,13 @@ namespace ScreenCaptureLib
                 captureWindow = new ScreenCaptureWindow();
             }
 
-            captureWindow.Loaded += (s, e) => {  this.Close(); }; 
+            captureWindow.Loaded += (s, e) => { this.Close(); };
             captureWindow.Show();
         }
 
         private void GoogleTranslateButton_Click(object sender, RoutedEventArgs e)
         {
-            string textToTranslate = ExtractedTextBox.Text;          
+            string textToTranslate = ExtractedTextBox.Text;
             string targetLanguage = Regex.Match(textToTranslate, @"\p{IsHebrew}").Success ? "en" : "he";
             string translateUrl = $"https://translate.google.com/?sl=auto&tl={targetLanguage}&text={Uri.EscapeDataString(textToTranslate)}&op=translate";
             Process.Start(new ProcessStartInfo(translateUrl) { UseShellExecute = true });
@@ -207,6 +205,28 @@ namespace ScreenCaptureLib
             process.StartInfo.FileName = "mspaint";
             process.StartInfo.ArgumentList.Add(tempFilePath);
             process.Start();
+        }
+
+        private void ChooseOcrLanguageButton_Click(object sender, RoutedEventArgs e) =>  ChooseTessLang();
+
+        void ChooseTessLang()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Multiselect = true,
+                Filter = "Tesseract Trained Data Files (*.traineddata)|*.traineddata",
+                InitialDirectory = tessDataFolder
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                List<string> selectedLanguages = dialog.FileNames
+                                                      .Select(file => Path.GetFileNameWithoutExtension(file))
+                                                      .ToList();
+
+                // Save the selected languages to disk (for future use)
+                File.WriteAllText(savedLangFile, string.Join("+", selectedLanguages));
+            }
         }
     }
 }

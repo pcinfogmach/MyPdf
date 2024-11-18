@@ -28,7 +28,11 @@ namespace Pdf.Js
             Application.Current.Exit += (s, e) => Release();
         }
 
-        async void CopyFile() => await Task.Run(() => File.Copy(_sourceFilePath, _pdfPath, true));
+        async void CopyFile() => await Task.Run(() =>
+        {
+            try { File.Copy(_sourceFilePath, _pdfPath, true);   }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }); 
 
         void InitializeWebView()
         {
@@ -137,18 +141,13 @@ namespace Pdf.Js
             }
         }
 
-        void SaveAs()
+        public void SaveAs()
         {
-            try
-            {
-                isSaveAs = true;
-                this.ExecuteScriptAsync("PDFViewerApplication.download();");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            isSaveAs = true;
+            SaveFile();
         }
+
+        public void SaveFile() => this.ExecuteScriptAsync("PDFViewerApplication.download();");
 
         public void Release()
         {

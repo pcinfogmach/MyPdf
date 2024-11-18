@@ -7,7 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ChromeTabs/ChromeTabsDictionary.xaml" />
+                <ResourceDictionary Source="ChromeTabs/Themes/ChromeTabsDictionary.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ThemedWindow;component/Themes/ThemedWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 

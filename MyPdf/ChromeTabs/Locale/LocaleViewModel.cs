@@ -86,13 +86,30 @@ namespace ChromeTabs
         private string _fullScreenButtonToolTip;
         private string _minimizeButtonToolTip;
         private string _xButtonToolTip;
+        private string _toggleSideBarButtonToolTip;
         private string _screenCaptureButtonToolTip;
+        private string _openFilePanelButtonTooltip;
+        private string _historyPanelButtonTooltip;
+        private string _tagsPanelButtonTooltip;
+        private string _searchDataPanelButtonTooltip;
+        private string _screenCapturePanelButtonTooltip;
+        private string _helpPanelButtonTooltip;
+        private string _webSitePanelButtonTooltip;
+
 
         public string MinimizeButtonTooltip { get => _minimizeButtonToolTip;  set => SetProperty(ref _minimizeButtonToolTip, value); }
         public string FullScreenButtonTooltip { get => _fullScreenButtonToolTip; set => SetProperty(ref _fullScreenButtonToolTip, value); }
         public string MaximizeButtonTooltip { get => _maximizeButtonToolTip; set => SetProperty(ref _maximizeButtonToolTip, value); }
         public string XButtonTooltip { get => _xButtonToolTip; set => SetProperty(ref _xButtonToolTip, value); }
+        public string ToggleSideBarButtonToolTip { get => _toggleSideBarButtonToolTip; set => SetProperty(ref _toggleSideBarButtonToolTip, value); }
         public string ScreenCaptureButtonTooltip { get => _screenCaptureButtonToolTip; set => SetProperty(ref _screenCaptureButtonToolTip, value); }
+        public string OpenFilePanelButtonTooltip { get => _openFilePanelButtonTooltip; set => SetProperty(ref _openFilePanelButtonTooltip, value); }
+        public string HistoryPanelButtonTooltip { get => _historyPanelButtonTooltip; set => SetProperty(ref _historyPanelButtonTooltip, value); }
+        public string TagsPanelButtonTooltip { get => _tagsPanelButtonTooltip; set => SetProperty(ref _tagsPanelButtonTooltip, value); }
+        public string SearchDataPanelButtonTooltip { get => _searchDataPanelButtonTooltip; set => SetProperty(ref _searchDataPanelButtonTooltip, value); }
+        public string ScreenCapturePanelButtonTooltip { get => _screenCapturePanelButtonTooltip; set => SetProperty(ref _screenCapturePanelButtonTooltip, value); }
+        public string HelpPanelButtonTooltip { get => _helpPanelButtonTooltip; set => SetProperty(ref _helpPanelButtonTooltip, value); }
+        public string WebSitePanelButtonTooltip { get => _webSitePanelButtonTooltip; set => SetProperty(ref _webSitePanelButtonTooltip, value); }
         #endregion
 
         #region Commands

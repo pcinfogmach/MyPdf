@@ -14,17 +14,16 @@ namespace MyPdf
     {
         private const string PipeName = "MyPdfPipe";
         private Mutex appMutex;
-        private ChromeTabsWindow window;
+        private MainWindow window;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ErrorLog.Initialize();
-
             bool isFirstInstance;
             appMutex = new Mutex(true, "MyPdfAppMutex", out isFirstInstance);
 
             if (isFirstInstance)
             {
+                ErrorLog.Initialize();
                 StartPipeServer(); // Start the named pipe server
                 InitializeWindow(e.Args); // Initialize the main window
             }
@@ -38,7 +37,9 @@ namespace MyPdf
 
         private async void InitializeWindow(string[] args)
         {
-            window = new Initializer().LaunchApp();
+            window = new MainWindow();
+            window.Show();
+            window.LoadSavedTabs();
 
             if (args.Length > 0)
             {

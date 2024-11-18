@@ -3,5 +3,13 @@
   "FullScreenButtonTooltip": "מסך מלא (F11 / Alt + Enter, Esc ליציאה)",
   "MaximizeButtonTooltip": "הגדל / שחזר",
   "XButtonTooltip": "סגור",
-  "ScreenCaptureButtonTooltip": "צילום מסך / זיהוי תווים"
+  "ScreenCaptureButtonTooltip": "צילום מסך / זיהוי תווים",
+  "ToggleSideBarButtonTooltip": "הצג / הסתר סרגל צידי (F10)",
+  "OpenFilePanelButtonTooltip": "פתח קובץ (Ctrl + O)",
+  "HistoryPanelButtonTooltip": "הצג / הסתר היסטוריה",
+  "TagsPanelButtonTooltip": "ניהול תגים",
+  "SearchDataPanelButtonTooltip": "חיפוש נתונים",
+  "ScreenCapturePanelButtonTooltip": "צילום מסך (Ctrl + Alt + S)",
+  "HelpPanelButtonTooltip": "מדריך",
+  "WebSitePanelButtonTooltip": "עזרה"
 }
