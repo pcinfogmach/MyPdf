@@ -16,11 +16,14 @@ namespace ScreenCaptureLib
     {
         private readonly BitmapImage _bitmapImage;
         private readonly MemoryStream _imageStream;
-        string tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenCapture", "tessdata");
-        string savedLangFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selectedLang.txt");
+        string tessDataFolder;
+        string savedLangFile;
 
         public PreviewWindow(BitmapImage bitmapImage, MemoryStream imageStream)
         {
+            tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenCapture", "tessdata");
+            savedLangFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selectedLang.txt");
+
             InitializeComponent();
             SetButtonContentBasedOnLanguage();
             _bitmapImage = bitmapImage;

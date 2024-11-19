@@ -114,45 +114,60 @@ namespace ScreenCaptureLib
         bool isBusy;
         private void CaptureScreen()
         {
-            if (isBusy) return;
-            isBusy = true;
-
-            this.Hide();
-            if (this.Owner != null) { this.Owner.Activate(); }
-
-            var screenStart = PointToScreen(StartPoint);
-            var screenEnd = PointToScreen(LastPoint);
-
-            int x = (int)Math.Min(screenStart.X, screenEnd.X);
-            int y = (int)Math.Min(screenStart.Y, screenEnd.Y);
-            int width = (int)Math.Abs(screenEnd.X - screenStart.X);
-            int height = (int)Math.Abs(screenEnd.Y - screenStart.Y);
-
-            if (width > 0 && height > 0)
+            try
             {
-                using (Bitmap bitmap = new Bitmap(width, height))
+                if (isBusy) return;
+                isBusy = true;
+
+                this.Hide();
+                if (this.Owner != null) { this.Owner.Activate(); }
+
+                var screenStart = PointToScreen(StartPoint);
+                var screenEnd = PointToScreen(LastPoint);
+
+                int x = (int)Math.Min(screenStart.X, screenEnd.X);
+                int y = (int)Math.Min(screenStart.Y, screenEnd.Y);
+                int width = (int)Math.Abs(screenEnd.X - screenStart.X);
+                int height = (int)Math.Abs(screenEnd.Y - screenStart.Y);
+
+                if (width > 0 && height > 0)
                 {
-                    using (Graphics g = Graphics.FromImage(bitmap))
+                    using (Bitmap bitmap = new Bitmap(width, height))
                     {
-                        g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
+                        using (Graphics g = Graphics.FromImage(bitmap))
+                        {
+                            g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
+                        }
+
+                        MemoryStream memory = new MemoryStream();
+                        bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                        memory.Position = 0;
+
+                        BitmapImage bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = memory;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
+
+                        PreviewWindow previewWindow = new PreviewWindow(bitmapImage, memory);
+                        if (this.Owner != null) { previewWindow.Owner = this.Owner; }
+                        previewWindow.Loaded += (s, e) => { this.Close(); };
+                        previewWindow.Show();
                     }
-
-                    MemoryStream memory = new MemoryStream();
-                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                    memory.Position = 0;
-
-                    BitmapImage bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = memory;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.EndInit();
-
-                    PreviewWindow previewWindow = new PreviewWindow(bitmapImage, memory);
-                    if (this.Owner != null) { previewWindow.Owner = this.Owner; }
-                    previewWindow.Loaded += (s, e) => { this.Close(); };
-                    previewWindow.Show();
                 }
             }
+            catch (Exception ex)
+            {
+                var message = $"An error occurred:\n\n" +
+                              $"Message: {ex.Message}\n" +
+                              $"Source: {ex.Source}\n" +
+                              $"Stack Trace: {ex.StackTrace}\n" +
+                              $"Inner Exception: {ex.InnerException?.Message ?? "None"}\n" +
+                              $"Target Site: {ex.TargetSite}";
+
+                MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

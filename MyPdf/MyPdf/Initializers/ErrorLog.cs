@@ -11,7 +11,7 @@ namespace MyPdf.Helpers
         {
             // Ensure the log directory exists
             Directory.CreateDirectory(Path.GetDirectoryName(logFilePath));
-            if (File.Exists(logFilePath)) {File.Delete(logFilePath);}
+            if (File.Exists(logFilePath)) { File.Delete(logFilePath); }
             File.Create(logFilePath);
 
             AppDomain.CurrentDomain.FirstChanceException += (sender, e) =>
@@ -21,31 +21,56 @@ namespace MyPdf.Helpers
                     return;
                 }
 
-                LogException(e.Exception.ToString());
+                LogException(e.Exception);
             };
 
             AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
             {
                 if (e?.ExceptionObject is Exception exception)
                 {
-                    LogException(exception.ToString());
+                    LogException(exception);
                 }
             };
+
+            // Capture unobserved task exceptions
+            TaskScheduler.UnobservedTaskException += (sender, e) =>
+            {
+                LogException(e.Exception);
+                e.SetObserved(); // Prevent process termination.
+            };
+
+            // Capture WPF Dispatcher exceptions (if using WPF)
+            if (System.Windows.Application.Current != null)
+            {
+                System.Windows.Application.Current.DispatcherUnhandledException += (sender, e) =>
+                {
+                    LogException(e.Exception);
+                    e.Handled = true; // Prevent default shutdown.
+                };
+            }
         }
 
-        private static void LogException(string message)
+        private static void LogException(Exception ex)
         {
             try
             {
                 using (var sw = File.AppendText(logFilePath))
                 {
-                    sw.WriteLine($"[{DateTime.Now}] {message}");
+                    string message = $"[{DateTime.Now}] An error occurred:\n" +
+                                     $"Message: {ex.Message}\n" +
+                                     $"Source: {ex.Source}\n" +
+                                     $"Stack Trace: {ex.StackTrace}\n" +
+                                     $"Inner Exception: {ex.InnerException?.Message ?? "None"}\n" +
+                                     $"Target Site: {ex.TargetSite}\n";
+
+                    sw.WriteLine(message);
                 }
             }
             catch
             {
-                // Consider handling logging errors if necessary.
+                // Optionally log errors related to logging or leave it empty.
             }
         }
+
     }
 }
