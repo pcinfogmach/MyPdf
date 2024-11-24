@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using MyPdf.Assets;
+using ScreenCapture;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -17,12 +19,11 @@ namespace ScreenCaptureLib
         private readonly BitmapImage _bitmapImage;
         private readonly MemoryStream _imageStream;
         string tessDataFolder;
-        string savedLangFile;
+        string savedLangFile = "selectedTessLang.txt";
 
         public PreviewWindow(BitmapImage bitmapImage, MemoryStream imageStream)
         {
-            tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ScreenCapture", "tessdata");
-            savedLangFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "selectedLang.txt");
+            tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
 
             InitializeComponent();
             SetButtonContentBasedOnLanguage();
@@ -60,12 +61,12 @@ namespace ScreenCaptureLib
 
         private async void ExtractTextFromImage()
         {
-            ExtractedTextBox.Text = await Task.Run(() =>
+            ExtractedTextBox.Text = await Task.Run(async () =>
             {
                 try
                 {
-                    string tessLang = "heb+eng";
-                    if (File.Exists(savedLangFile)) tessLang = File.ReadAllText(savedLangFile).Trim();
+                    string tessLang = await AssetsManager.GetAssetAsync(savedLangFile);
+                    if (string.IsNullOrEmpty(tessLang)) tessLang = "heb+eng";                   
 
                     // Use the existing MemoryStream with Tesseract
                     _imageStream.Seek(0, SeekOrigin.Begin); // Reset position
@@ -84,7 +85,14 @@ namespace ScreenCaptureLib
                 }
                 catch (Exception ex)
                 {
-                    return $"Failed to extract text: {ex.Message}";
+                    string message = $"[{DateTime.Now}] An error occurred:\n" +
+                                  $"Message: {ex.Message}\n" +
+                                  $"Source: {ex.Source}\n" +
+                                  $"Stack Trace: {ex.StackTrace}\n" +
+                                  $"Inner Exception: {ex.InnerException?.Message ?? "None"}\n" +
+                                  $"Target Site: {ex.TargetSite}\n";
+
+                    return $"Failed to extract text: {message}";
                 }
             });
         }
@@ -115,25 +123,8 @@ namespace ScreenCaptureLib
 
         private void SaveTextButton_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
-            {
-                FileName = $"ExtractedText_{DateTime.Now:yyyyMMdd_HHmmss}.txt",
-                Filter = "Text File (*.txt)|*.txt|" +
-              "Word Documents (*.docx;*.doc;*.rtf;)|*.docx;*.doc;*.rtf;|" +
-              "Html (*.html)|*.html|" +
-              "OpenDocument Formats (*.odt;*.ods)|*.odt;*.ods|" +
-              "All Files (*.*)|*.*"
-            };
-
-
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                File.WriteAllText(saveFileDialog.FileName, ExtractedTextBox.Text);
-                Close();
-                var info = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-                if (info == "he") MessageBox.Show("הטקסט נשמר בהצלחה", "שמור", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
-                else MessageBox.Show("Text saved successfully", "Save", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            Helpers.SaveStringAs(ExtractedTextBox.Text);
+            Close();
         }
 
         private void CopyImageButton_Click(object sender, RoutedEventArgs e)
@@ -212,7 +203,7 @@ namespace ScreenCaptureLib
 
         private void ChooseOcrLanguageButton_Click(object sender, RoutedEventArgs e) =>  ChooseTessLang();
 
-        void ChooseTessLang()
+        async void ChooseTessLang()
         {
             var dialog = new OpenFileDialog
             {
@@ -228,7 +219,7 @@ namespace ScreenCaptureLib
                                                       .ToList();
 
                 // Save the selected languages to disk (for future use)
-                File.WriteAllText(savedLangFile, string.Join("+", selectedLanguages));
+                await AssetsManager.WriteAssetAsync(savedLangFile, string.Join("+", selectedLanguages));
             }
         }
     }

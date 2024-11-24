@@ -1,0 +1,166 @@
+﻿Core Methods
+
+    initialize
+
+PDFViewerApplication.initialize();
+
+open
+
+PDFViewerApplication.open('path/to/file.pdf', { password: 'myPassword' });
+
+close
+
+PDFViewerApplication.close();
+
+load
+
+    PDFViewerApplication.load();
+
+Navigation Methods
+
+    firstPage
+
+PDFViewerApplication.firstPage();
+
+lastPage
+
+PDFViewerApplication.lastPage();
+
+previousPage
+
+PDFViewerApplication.previousPage();
+
+nextPage
+
+PDFViewerApplication.nextPage();
+
+goToPage
+
+    PDFViewerApplication.goToPage(3);
+
+Zoom and View
+
+    zoomIn
+
+PDFViewerApplication.zoomIn();
+
+zoomOut
+
+PDFViewerApplication.zoomOut();
+
+setZoom
+
+PDFViewerApplication.setZoom(1.5);
+
+rotatePages
+
+PDFViewerApplication.rotatePages(90);
+
+scrollPageIntoView
+
+PDFViewerApplication.scrollPageIntoView({ pageNumber: 5 });
+
+updateViewarea
+
+    PDFViewerApplication.updateViewarea();
+
+Properties
+
+    pdfDocument
+
+console.log(PDFViewerApplication.pdfDocument);
+
+pdfViewer
+
+console.log(PDFViewerApplication.pdfViewer);
+
+eventBus
+
+console.log(PDFViewerApplication.eventBus);
+
+loadingBar
+
+console.log(PDFViewerApplication.loadingBar);
+
+isViewerEmbedded
+
+console.log(PDFViewerApplication.isViewerEmbedded);
+
+appConfig
+
+console.log(PDFViewerApplication.appConfig);
+
+page
+
+console.log(PDFViewerApplication.page);
+
+pagesCount
+
+console.log(PDFViewerApplication.pagesCount);
+
+isInitialViewSet
+
+    console.log(PDFViewerApplication.isInitialViewSet);
+
+Search and Text Selection
+
+    findController
+
+console.log(PDFViewerApplication.findController);
+
+searchText
+
+PDFViewerApplication.searchText('searchTerm');
+
+toggleTextLayer
+
+    PDFViewerApplication.toggleTextLayer();
+
+Download and Printing
+
+    download
+
+PDFViewerApplication.download();
+
+print
+
+    PDFViewerApplication.print();
+
+Annotations and Rendering
+
+    renderAnnotations
+
+PDFViewerApplication.renderAnnotations();
+
+redraw
+
+    PDFViewerApplication.redraw();
+
+Event Handling
+
+    bindEvents
+
+PDFViewerApplication.bindEvents();
+
+unbindEvents
+
+PDFViewerApplication.unbindEvents();
+
+dispatchEvent
+
+    PDFViewerApplication.dispatchEvent('customEvent');
+
+Full-Screen and Accessibility
+
+    toggleFullscreen
+
+PDFViewerApplication.toggleFullscreen();
+
+setScale
+
+PDFViewerApplication.setScale(1.2);
+
+setPageLabels
+
+    PDFViewerApplication.setPageLabels(['Page 1', 'Page 2']);
+

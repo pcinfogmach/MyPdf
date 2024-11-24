@@ -1,0 +1,80 @@
+// 1. Set the current document.
+PDFViewerApplication.pdfViewer.setDocument(pdfDocument);
+
+// 2. Scroll to a specific page and location.
+PDFViewerApplication.pdfViewer.scrollPageIntoView(3, { top: 100, left: 50 });
+
+// 3. Update the viewer.
+PDFViewerApplication.pdfViewer.update();
+
+// 4. Reset the viewer to the initial state.
+PDFViewerApplication.pdfViewer.reset();
+
+// 5. Force rendering of visible pages.
+PDFViewerApplication.pdfViewer.forceRendering();
+
+// 6. Get the current page number.
+let currentPage = PDFViewerApplication.pdfViewer.currentPageNumber;
+
+// 7. Set the current page number.
+PDFViewerApplication.pdfViewer.currentPageNumber = 5;
+
+// 8. Get the current zoom level (scale).
+let currentScale = PDFViewerApplication.pdfViewer.currentScale;
+
+// 9. Set the current zoom level (scale).
+PDFViewerApplication.pdfViewer.currentScale = 1.5;
+
+// 10. Get the current zoom scale value.
+let scaleValue = PDFViewerApplication.pdfViewer.currentScaleValue;
+
+// 11. Set the current zoom scale value.
+PDFViewerApplication.pdfViewer.currentScaleValue = 'page-width';
+
+// 12. Get the total number of pages.
+let totalPages = PDFViewerApplication.pdfViewer.pagesCount;
+
+// 13. Get the page view object for a specific page index.
+let pageView = PDFViewerApplication.pdfViewer.getPageView(2);
+
+// 14. Check if a page is currently visible.
+let isVisible = PDFViewerApplication.pdfViewer.isPageVisible(2);
+
+// 15. Set custom labels for pages.
+PDFViewerApplication.pdfViewer.setPageLabels(['i', 'ii', 'iii', '1', '2', '3']);
+
+// 16. Zoom in by a specific number of ticks.
+PDFViewerApplication.pdfViewer.zoomIn(1);
+
+// 17. Zoom out by a specific number of ticks.
+PDFViewerApplication.pdfViewer.zoomOut(1);
+
+// 18. Rotate all pages by a specified degree.
+PDFViewerApplication.pdfViewer.rotatePages(90);
+
+// 19. Navigate to the first page.
+PDFViewerApplication.pdfViewer.firstPage();
+
+// 20. Navigate to the last page.
+PDFViewerApplication.pdfViewer.lastPage();
+
+// 21. Navigate to the next page.
+PDFViewerApplication.pdfViewer.nextPage();
+
+// 22. Navigate to the previous page.
+PDFViewerApplication.pdfViewer.previousPage();
+
+// 23. Clean up resources.
+PDFViewerApplication.pdfViewer.cleanup();
+
+// 24. (Deprecated) Find text in the document.
+PDFViewerApplication.findController.executeCommand('find', { query: 'text' });
+
+// 25. Toggle the sidebar view.
+PDFViewerApplication.pdfViewer.toggleSidebarView();
+
+// 26. Get the currently visible pages.
+let visiblePages = PDFViewerApplication.pdfViewer.getVisiblePages();
+
+// 27. Refresh the viewer content.
+PDFViewerApplication.pdfViewer.refresh();

@@ -1,8 +1,12 @@
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using Microsoft.Win32;
+using Pdf.Js;
+using System.Diagnostics;
 using System.IO;
+using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Windows;
 
@@ -16,12 +20,15 @@ namespace Pdf.Js
         string _allowedUrl;
         bool isSaveAs;
 
-        public PdfJsHost(string filePath)
+        public PdfJsHost(string filePath, int? pageNumber)
         {
             _sourceFilePath = filePath;
             _fileName = Path.GetFileName(_sourceFilePath);
             _pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pdf.Js", "PdfJs", "web", _fileName);
-            _allowedUrl = $"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}";
+
+            if (pageNumber != null) _allowedUrl = $"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}#page={pageNumber}";
+            else _allowedUrl = $"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}";
+
 
             CopyFile();
             InitializeWebView();
@@ -53,7 +60,7 @@ namespace Pdf.Js
 
         private void CoreWebView2_DOMContentLoaded(object? sender, CoreWebView2DOMContentLoadedEventArgs e)
         {
-            this.ExecuteScriptAsync(Scripts.EditButtonsScript());
+            this.ExecuteScriptAsync(Scripts.EditButtons());
         }
 
         void ApplySettings()
@@ -83,15 +90,18 @@ namespace Pdf.Js
             try
             {
                 var message = JsonSerializer.Deserialize<Dictionary<string, string>>(e.WebMessageAsJson);
-
                 if (message != null && message.TryGetValue("action", out var actionName))
                 {
                     // Use reflection to find and invoke the method by name
-                    var method = this.GetType().GetMethod(actionName, BindingFlags.NonPublic | BindingFlags.Instance);
+                    var method = this.GetType().GetMethod(actionName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
                     method?.Invoke(this, null); // Calls the method if it exists, passing no parameters
                 }
-                else
+                else if (message != null && message.TryGetValue("textExtraction", out var extractedText))
                 {
+                    ShowExtractedTextResults(extractedText);
+                }
+                else
+                { 
                     Console.WriteLine("No action defined!");
                 }
             }
@@ -101,8 +111,25 @@ namespace Pdf.Js
             }
         }
 
+        async void ShowExtractedTextResults(string extractedText)
+        {
+            if (!string.IsNullOrEmpty(extractedText))
+            {
+                string tempFilePath = Path.Combine(Path.GetTempPath(), $"{Path.GetRandomFileName()}.txt");
+                await File.WriteAllTextAsync(tempFilePath, extractedText, Encoding.UTF8);
+                Process.Start(new ProcessStartInfo  {   FileName = tempFilePath,  UseShellExecute = true  });
+            } else  {   MessageBox.Show("Page text result is empty."); }
+        }
+
+
         private void CoreWebView2_DownloadStarting(object sender, CoreWebView2DownloadStartingEventArgs e)
         {
+            if (!e.DownloadOperation.Uri.Contains("blob:https://pdfjs") )
+            {
+                e.Cancel = true;
+                return;
+            }
+
             try
             {
                 if (isSaveAs)
@@ -118,6 +145,7 @@ namespace Pdf.Js
                         {
                             string downloadPath = saveFileDialog.FileName;
                             if (!downloadPath.EndsWith(".pdf")) downloadPath += ".pdf";
+                            _sourceFilePath = downloadPath;
                             e.ResultFilePath = downloadPath; // Set the download location
                         }
                         else
@@ -149,6 +177,23 @@ namespace Pdf.Js
 
         public void SaveFile() => this.ExecuteScriptAsync("PDFViewerApplication.download();");
 
+        public async Task<int> GetCurrentPageNumber()
+        {
+            try
+            {
+                var pageNumberQuery = await this.ExecuteScriptAsync(Scripts.GetCurrentPageNumber());
+                if (int.TryParse(pageNumberQuery, out int currentPageNum))
+                {
+                    return currentPageNum;
+                }
+            } catch{ }
+            return 0;
+        }
+
+        public async void GetTextFromCurrentPageAsync() => await this.ExecuteScriptAsync(Scripts.ExtractTextFromCurrentPage());
+        public async void GetTextFromWholeDocAsync() => await this.ExecuteScriptAsync(Scripts.ExtractTextFromWholeDoc());
+      
+
         public void Release()
         {
             base.Dispose();
@@ -156,3 +201,6 @@ namespace Pdf.Js
         }
     }
 }
+
+
+

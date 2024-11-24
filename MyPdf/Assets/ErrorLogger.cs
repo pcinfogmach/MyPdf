@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace MyPdf.Helpers
+namespace MyPdf.Assets
 {
-    internal static class ErrorLog
+    internal static class ErrorLogger
     {
         private static readonly string logFilePath = @".\logs\exceptions.txt";
 

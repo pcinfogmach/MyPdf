@@ -4,16 +4,6 @@
 
     <SolidColorBrush x:Key="TitleBarButton.MouseOverColor" Color="#7F7F7F" Opacity="0.2"/>
 
-    <Style TargetType="Grid" x:Key="RootGridChromeStyle">
-        <Style.Triggers>
-            <!-- Add to avoid border disappearing when window is maximised -->
-            <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType=Window}}" 
-                      Value="Maximized">
-                <Setter Property="Margin" Value="7.5"/>
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="TitleBarButtonBase" TargetType="Button">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Width" Value="40"/>

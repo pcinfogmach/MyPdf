@@ -1,10 +1,13 @@
 ﻿using ChromeTabs.Helpers;
 using MyPdf.HistoryAndUserTags;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media;
 using System.Windows.Shell;
 
 namespace ChromeTabs
@@ -15,14 +18,15 @@ namespace ChromeTabs
     public partial class ChromeTabsWindow : Window
     {
         public HistoryLogger HistoryLogger { get; } = new HistoryLogger();
+        public UserTagManager UserTagManager { get; } = new UserTagManager();
 
         public ChromeTabsWindow()
         {
             InitializeComponent();
 
             localeViewModel.LoadState();
-            WindowStateData.LoadState(this);
-            this.Closing += (s, e) => WindowStateData.SaveState(this);
+            WindowStateManager.LoadState(this);
+            this.Closing += (s, e) => WindowStateManager.SaveState(this);
         }
 
         private void TitleBarGrid_TouchDown(object sender, TouchEventArgs e) => DragMove();
@@ -120,9 +124,7 @@ namespace ChromeTabs
         private void FullScreenButton_Click(object sender, RoutedEventArgs e)
         {
             ToggleFullScreen();
-        }
-
-       
+        }       
 
         private void ChromeTabStrip_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -207,14 +209,30 @@ namespace ChromeTabs
             else if (SidePanel.SelectedItem == ScreenCapture_PanelButton) CaptureScreen();
             else if (SidePanel.SelectedItem == Help_PanelButton) ShowHelp();
             else if (SidePanel.SelectedItem == WebSite_PanelButton) { Process.Start(new ProcessStartInfo { FileName = "https://mitmachim.top/post/869071", UseShellExecute = true });}
+            else if (SidePanel.SelectedItem == ExtractText_PanelButton) { ExtractText(); }
+            else { return; }
+            SidePanel.SelectedIndex = -1;
         }
+
+        private void AddUserTagButton_Click(object sender, RoutedEventArgs e) => CreateUserTag();
+        private void EditUserTagButton_Click(object sender, RoutedEventArgs e) => EditUserTag();
+        private void AddUserTagFolderButton_Click(object sender, RoutedEventArgs e) =>  UserTagManager.AddTag(new UserTagGroup { IsInitialView = true});
+        private void DeleteUserTagButtonToolTip_Click(object sender, RoutedEventArgs e) => DeleteUserTag();
+
+        private void UserTagTreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e) => OpenSelectedUserTag();
+        private void UserTagTreeView_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete) { DeleteUserTag(); } 
+            else if (e.Key == Key.Enter) { OpenSelectedUserTag(); }
+        }
+
         #endregion
 
         #region methods
-        public virtual void OpenFile() { OpenFile_PanelButton.IsSelected = false; }
+        public virtual void OpenFile() { }
         public virtual void SaveFile() { }
         public virtual void SaveFileAS() { }
-        public virtual void ShowHelp() { Help_PanelButton.IsSelected = false; }
+        public virtual void ShowHelp() { }
         void CaptureScreen()
         {
             var captureWindow = new ScreenCaptureLib.ScreenCaptureWindow(false)
@@ -229,6 +247,7 @@ namespace ChromeTabs
             captureWindow.Show();
             ScreenCapture_PanelButton.IsSelected = false;
         }
+        public virtual void ExtractText() { }
         void ToggleFullScreen()
         {
             if (this.WindowStyle == WindowStyle.None) { ExitFullScreen();  return; }
@@ -259,6 +278,12 @@ namespace ChromeTabs
             SidePanel.Visibility = (SidePanel.Visibility == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed;
             SidePanelHostTabControl.Visibility = (SidePanelHostTabControl.Visibility == Visibility.Collapsed) ? Visibility.Visible : Visibility.Collapsed;
         }
+        public virtual void CreateUserTag() { }
+        public virtual void EditUserTag() { }
+        public virtual void OpenSelectedUserTag() { }
+        void DeleteUserTag() { if (UserTagTreeView.SelectedItem is UserTagBase userTagBase) UserTagManager.RemoveTag(userTagBase); }
+
+
         #endregion
     }
 }

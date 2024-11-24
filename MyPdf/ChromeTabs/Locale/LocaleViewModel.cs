@@ -57,7 +57,7 @@ namespace ChromeTabs
                             property.SetValue(this, property.GetValue(loadedState));
                     }
                 }
-            }           
+            }
         }
 
         private string StateFilePath()
@@ -95,9 +95,13 @@ namespace ChromeTabs
         private string _screenCapturePanelButtonTooltip;
         private string _helpPanelButtonTooltip;
         private string _webSitePanelButtonTooltip;
+        private string _addUserTagButtonToolTip;
+        private string _editUserTagButtonToolTip;
+        private string _addUserTagGroupButtonToolTip;
+        private string _deleteUserTagButtonToolTip;
+        private string _extractTextPanelButtonTooltip;
 
-
-        public string MinimizeButtonTooltip { get => _minimizeButtonToolTip;  set => SetProperty(ref _minimizeButtonToolTip, value); }
+        public string MinimizeButtonTooltip { get => _minimizeButtonToolTip; set => SetProperty(ref _minimizeButtonToolTip, value); }
         public string FullScreenButtonTooltip { get => _fullScreenButtonToolTip; set => SetProperty(ref _fullScreenButtonToolTip, value); }
         public string MaximizeButtonTooltip { get => _maximizeButtonToolTip; set => SetProperty(ref _maximizeButtonToolTip, value); }
         public string XButtonTooltip { get => _xButtonToolTip; set => SetProperty(ref _xButtonToolTip, value); }
@@ -108,8 +112,16 @@ namespace ChromeTabs
         public string TagsPanelButtonTooltip { get => _tagsPanelButtonTooltip; set => SetProperty(ref _tagsPanelButtonTooltip, value); }
         public string SearchDataPanelButtonTooltip { get => _searchDataPanelButtonTooltip; set => SetProperty(ref _searchDataPanelButtonTooltip, value); }
         public string ScreenCapturePanelButtonTooltip { get => _screenCapturePanelButtonTooltip; set => SetProperty(ref _screenCapturePanelButtonTooltip, value); }
+        public string ExtractTextPanelButtonTooltip { get => _extractTextPanelButtonTooltip; set => SetProperty(ref _extractTextPanelButtonTooltip, value); }
         public string HelpPanelButtonTooltip { get => _helpPanelButtonTooltip; set => SetProperty(ref _helpPanelButtonTooltip, value); }
         public string WebSitePanelButtonTooltip { get => _webSitePanelButtonTooltip; set => SetProperty(ref _webSitePanelButtonTooltip, value); }
+        public string AddUserTagButtonToolTip { get => _addUserTagButtonToolTip; set => SetProperty(ref _addUserTagButtonToolTip, value); }
+        public string EditUserTagButtonToolTip { get => _editUserTagButtonToolTip; set => SetProperty(ref _editUserTagButtonToolTip, value); }
+        public string AddUserTagGroupButtonToolTip { get => _addUserTagGroupButtonToolTip; set => SetProperty(ref _addUserTagGroupButtonToolTip, value); }
+        public string DeleteUserTagButtonToolTip { get => _deleteUserTagButtonToolTip; set => SetProperty(ref _deleteUserTagButtonToolTip, value); }
+       
+        
+
         #endregion
 
         #region Commands

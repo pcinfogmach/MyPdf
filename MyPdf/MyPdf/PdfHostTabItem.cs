@@ -12,21 +12,21 @@ namespace MyPdf.Controls
     {
         PdfJsHost pdfViewer;
         public string _filePath;
-        
-        public PdfHostTabItem(string filePath) 
+
+        public PdfHostTabItem(string filePath, int? pageNumber)
         {
             _filePath = filePath;
 
             Dispatcher.InvokeAsync(new Action(() =>
             {
-                pdfViewer = new PdfJsHost(filePath);
+                pdfViewer = new PdfJsHost(filePath, pageNumber);
 
                 pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
                     pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
 
                 Content = pdfViewer;
             }));
-            try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { }; 
+            try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { };
         }
 
         private void PdfViewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
@@ -36,7 +36,7 @@ namespace MyPdf.Controls
             if (message != null && message.TryGetValue("action", out var actionName))
             {
                 // Use reflection to find and invoke the method by name
-                var method = this.GetType().GetMethod(actionName, BindingFlags.NonPublic | BindingFlags.Instance);
+                var method = this. GetType().GetMethod(actionName, BindingFlags.NonPublic | BindingFlags.Instance);
                 method?.Invoke(this, null); // Calls the method if it exists, passing no parameters
             }
             else
@@ -72,8 +72,8 @@ namespace MyPdf.Controls
             if (!File.Exists(filePath)) return;
             try
             {
-                PdfHostTabItem newTabItem = new PdfHostTabItem(filePath);
-                if (this.Parent is ChromeTabControl tabControl) tabControl.Add(newTabItem);
+                PdfHostTabItem newTabItem = new PdfHostTabItem(filePath, null);
+                if (Parent is ChromeTabControl tabControl) tabControl.Add(newTabItem);
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace MyPdf.Controls
         public override void Dispose()
         {
             base.Dispose();
-            if (this.Content is Pdf.Js.PdfJsHost pdfHost) pdfHost.Release();
+            if (Content is PdfJsHost pdfHost) pdfHost.Release();
         }
     }
 }

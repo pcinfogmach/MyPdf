@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MyPdf.Assets;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 
@@ -12,7 +12,7 @@ namespace MyPdf.HistoryAndUserTags
     public class HistoryLogger : INotifyPropertyChanged
     {
         private const int MaxHistoryRetentionDays = 14;
-        private readonly string _historyFilePath;
+        private readonly string _historyFilePath = "history.json";
 
         private ObservableCollection<HistoryGroup> _historyGroups = new ObservableCollection<HistoryGroup>();
         public ObservableCollection<HistoryGroup> HistoryGroups
@@ -29,15 +29,7 @@ namespace MyPdf.HistoryAndUserTags
 
         public HistoryLogger()
         {
-            var appDomainPath = AppDomain.CurrentDomain.BaseDirectory;
-            var assetsPath = Path.Combine(appDomainPath, "Assets");
-            if (!Directory.Exists(assetsPath)) Directory.CreateDirectory(assetsPath);
-            _historyFilePath = Path.Combine(assetsPath, "history.json");
-
-            if (File.Exists(_historyFilePath))
-                LoadHistory();
-            else
-                InitializeGroups();
+            LoadHistory();
         }
 
         public void AddHistoryItem(string title, string path)
@@ -70,10 +62,13 @@ namespace MyPdf.HistoryAndUserTags
                 }
             }
 
-            // Determine appropriate group
-            var groupName = now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday
-                ? "Weekend"
-                : CultureInfo.CurrentCulture.DateTimeFormat.DayNames[(int)now.DayOfWeek];
+            string groupName;
+            if (now.DayOfWeek == DayOfWeek.Saturday)
+                groupName = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he"
+                    ? "סוף שבוע"
+                    : "Weekend";
+            else groupName = CultureInfo.CurrentCulture.DateTimeFormat.DayNames[(int)now.DayOfWeek];
+
 
             var targetGroup = _historyGroups.FirstOrDefault(g => g.Name == groupName);
             if (targetGroup == null)
@@ -167,35 +162,27 @@ namespace MyPdf.HistoryAndUserTags
             return culture.TwoLetterISOLanguageName == "he" ? "שבוע שעבר" : "Last Week";
         }
 
-        private void SaveHistory()
+        private async void SaveHistory()
         {
-            try
-            {
-                var json = JsonSerializer.Serialize(_historyGroups, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_historyFilePath, json);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving history to file: {_historyFilePath}. Exception: {ex.Message}");
-            }
+            string json = JsonSerializer.Serialize(_historyGroups, new JsonSerializerOptions { WriteIndented = true });
+            await AssetsManager.WriteAssetAsync(_historyFilePath, json);
         }
 
-        private void LoadHistory()
+        private async void LoadHistory()
         {
-            try
+            string json = await AssetsManager.GetAssetAsync(_historyFilePath);
+            if (!string.IsNullOrEmpty(json))
             {
-                var json = File.ReadAllText(_historyFilePath);
                 var loadedHistoryGroups = JsonSerializer.Deserialize<ObservableCollection<HistoryGroup>>(json);
                 if (loadedHistoryGroups != null)
                 {
                     _historyGroups = loadedHistoryGroups;
                     OnPropertyChanged(nameof(HistoryGroups));
+                    return;
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading history from file: {_historyFilePath}. Exception: {ex.Message}");
-            }
+            
+            InitializeGroups();
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

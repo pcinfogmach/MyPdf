@@ -7,9 +7,14 @@
   "ToggleSideBarButtonTooltip": "Show / Hide Sidebar (F10)",
   "OpenFilePanelButtonTooltip": "Open File (Ctrl + O)",
   "HistoryPanelButtonTooltip": "Show / Hide History",
-  "TagsPanelButtonTooltip": "Manage Tags",
+  "TagsPanelButtonTooltip": "Manage personal Bookmarks",
   "SearchDataPanelButtonTooltip": "Search Data",
-  "ScreenCapturePanelButtonTooltip": "Screen Capture (Ctrl + Alt + S)",
+  "ScreenCapturePanelButtonTooltip": "Screen Capture  / OCR (Ctrl + Alt + S)",
+  "ExtractTextPanelButtonTooltip": "Extract embedded Text",
   "HelpPanelButtonTooltip": "Instructions",
   "WebSitePanelButtonTooltip": "Help",
+  "AddUserTagButtonToolTip": "Create new personal bookmark",
+  "EditUserTagButtonToolTip": "Edit bookmark",
+  "AddUserTagGroupButtonToolTip": "Create new folder",
+  "DeleteUserTagButtonToolTip": "Delete"
 }

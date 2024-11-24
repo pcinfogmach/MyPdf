@@ -7,9 +7,14 @@
   "ToggleSideBarButtonTooltip": "הצג / הסתר סרגל צידי (F10)",
   "OpenFilePanelButtonTooltip": "פתח קובץ (Ctrl + O)",
   "HistoryPanelButtonTooltip": "הצג / הסתר היסטוריה",
-  "TagsPanelButtonTooltip": "ניהול תגים",
+  "TagsPanelButtonTooltip": "ניהול סימניות אישיות",
   "SearchDataPanelButtonTooltip": "חיפוש נתונים",
-  "ScreenCapturePanelButtonTooltip": "צילום מסך (Ctrl + Alt + S)",
+  "ScreenCapturePanelButtonTooltip": "צילום מסך / זיהוי תווים (Ctrl + Alt + S)",
+  "ExtractTextPanelButtonTooltip": "חלץ טקסט מוטבע",
   "HelpPanelButtonTooltip": "מדריך",
-  "WebSitePanelButtonTooltip": "עזרה"
+  "WebSitePanelButtonTooltip": "עזרה",
+  "AddUserTagButtonToolTip": "צור סימניה אישית חדשה",
+  "EditUserTagButtonToolTip": "ערוך סימניה",
+  "AddUserTagGroupButtonToolTip": "צור תיקייה חדשה",
+  "DeleteUserTagButtonToolTip": "מחק"
 }

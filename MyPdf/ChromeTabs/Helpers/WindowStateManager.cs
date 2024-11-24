@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using MyPdf.Assets;
+using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -7,7 +8,7 @@ using System.Windows.Media;
 
 namespace ChromeTabs.Helpers
 {
-    public static class WindowStateData
+    public static class WindowStateManager
     {
         class WindowStateModel
         {
@@ -19,15 +20,7 @@ namespace ChromeTabs.Helpers
             public WindowState WindowState { get; set; }
         }
 
-        static string windowStatePath
-        {
-            get
-            {
-                string assetsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets");
-                if (!Directory.Exists(assetsPath)) Directory.CreateDirectory(assetsPath);
-                return Path.Combine(assetsPath, "windowState.json");
-            }           
-        }
+        static string windowStatePath = "chromeTabsWindowState.json";
 
         public async static void SaveState(Window window)
         {
@@ -43,18 +36,18 @@ namespace ChromeTabs.Helpers
                 windowState.WindowTop = window.Top; windowState.WindowLeft = window.Left;
             }
 
-                await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 string json = JsonSerializer.Serialize(windowState, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(windowStatePath, json);
+                await AssetsManager.WriteAssetAsync(windowStatePath, json);
             });
         }
 
-        public static void LoadState(Window window)
+        public async static void LoadState(Window window)
         {
-            if (File.Exists(windowStatePath))
+            string json = await AssetsManager.GetAssetAsync(windowStatePath);
+            if (!string.IsNullOrEmpty(json))
             {
-                string json = File.ReadAllText(windowStatePath);
                 var windowState = JsonSerializer.Deserialize<WindowStateModel>(json);
 
                 if (windowState != null)
@@ -67,9 +60,10 @@ namespace ChromeTabs.Helpers
                 }
             }
 
+
             bool isDarkTheme = IsDarkThemeEnabled();
-            window.Background = new SolidColorBrush(isDarkTheme ? Color.FromRgb(34, 34, 34) : Colors.White);
-            window.Foreground = new SolidColorBrush(isDarkTheme ? Color.FromRgb(200, 200, 200) : Color.FromRgb(30, 30, 30));
+            window.Background = isDarkTheme ? new SolidColorBrush(Color.FromRgb(34, 34, 34)) : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFF9F9FA"));
+            window.Foreground = new SolidColorBrush(isDarkTheme ? Color.FromRgb(200, 200, 200) : Colors.DarkSlateGray);
             window.FlowDirection = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "he" ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 

@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 
-namespace MyPdf.Helpers
-{   
+namespace MyPdf
+{
     public static class UpdateChecker
     {
         private static readonly HttpClient client = new HttpClient();

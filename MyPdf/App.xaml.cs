@@ -1,9 +1,9 @@
-﻿using ChromeTabs;
-using MyPdf.Controls;
-using MyPdf.Helpers;
+﻿using MyPdf;
 using System.IO;
 using System.IO.Pipes;
 using System.Windows;
+using MyPdf.Assets;
+using MyPdf.Controls;
 
 namespace MyPdf
 {
@@ -23,7 +23,7 @@ namespace MyPdf
 
             if (isFirstInstance)
             {
-                ErrorLog.Initialize();
+                ErrorLogger.Initialize();
                 StartPipeServer(); // Start the named pipe server
                 InitializeWindow(e.Args); // Initialize the main window
             }
@@ -44,7 +44,7 @@ namespace MyPdf
             if (args.Length > 0)
             {
                 string filePath = args[0];
-                window.ChromeTabControl.Add(new PdfHostTabItem(filePath));
+                window.ChromeTabControl.Add(new PdfHostTabItem(filePath, null));
             }
 
             await Task.Run(() => { UpdateChecker.CheckForUpdates(); });
@@ -70,7 +70,7 @@ namespace MyPdf
                                     // Use the dispatcher to interact with the UI thread
                                     Application.Current.Dispatcher.Invoke(() =>
                                     {
-                                        window.ChromeTabControl.Add(new PdfHostTabItem(filePath));
+                                        window.ChromeTabControl.Add(new PdfHostTabItem(filePath, null));
                                         window.Activate();
 
                                         if (window.WindowState == WindowState.Minimized)

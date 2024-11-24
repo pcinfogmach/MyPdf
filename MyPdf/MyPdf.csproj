@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-	 <Version>1.0.0.1</Version>
+	 <Version>1.0.0.2</Version>
     <OutputType>WinExe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="MyPdf\Assets\Instructions - MyPdf.pdf" />
-    <None Remove="MyPdf\Assets\הוראות - MyPdf.pdf" />
+    <None Remove="Assets\Instructions - MyPdf.pdf" />
+    <None Remove="Assets\הוראות - MyPdf.pdf" />
     <None Remove="ChromeTabs\Locale\en.json" />
     <None Remove="ChromeTabs\Locale\he.json" />
     <None Remove="Pdf.Js\PdfJs\build\pdf.mjs" />
@@ -397,16 +397,16 @@
     <None Remove="Pdf.Js\PdfJs\web\viewer.html" />
     <None Remove="Pdf.Js\PdfJs\web\viewer.mjs" />
     <None Remove="Pdf.Js\PdfJs\web\viewer.mjs.map" />
-    <None Remove="ScreenCapture\tessdata\eng.traineddata" />
-    <None Remove="ScreenCapture\tessdata\heb.traineddata" />
-    <None Remove="ScreenCapture\tessdata\yid.traineddata" />
+    <None Remove="tessdata\eng.traineddata" />
+    <None Remove="tessdata\heb.traineddata" />
+    <None Remove="tessdata\yid.traineddata" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="MyPdf\Assets\Instructions - MyPdf.pdf">
+    <Content Include="Assets\Instructions - MyPdf.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="MyPdf\Assets\הוראות - MyPdf.pdf">
+    <Content Include="Assets\הוראות - MyPdf.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ChromeTabs\Locale\en.json">
@@ -1547,19 +1547,22 @@
     <Content Include="Pdf.Js\PdfJs\web\viewer.mjs.map">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScreenCapture\tessdata\eng.traineddata">
+    <Content Include="tessdata\eng.traineddata">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScreenCapture\tessdata\heb.traineddata">
+    <Content Include="tessdata\heb.traineddata">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ScreenCapture\tessdata\yid.traineddata">
+    <Content Include="tessdata\yid.traineddata">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2849.39" />
+    <PackageReference Include="Docnet.Core" Version="2.6.0" />
+    <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="PdfiumViewer.Updated" Version="2.14.4" />
     <PackageReference Include="Tesseract" Version="5.2.0" />
     <PackageReference Include="Tesseract.Drawing" Version="5.2.0" />
   </ItemGroup>
@@ -1568,7 +1571,13 @@
     <Compile Update="ChromeTabs\ChromeTabsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="HistoryAndUserTags\UserTagInputBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ScreenCapture\PreviewWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="TextExtractor\TextExtractDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

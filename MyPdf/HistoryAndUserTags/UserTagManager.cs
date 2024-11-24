@@ -1,71 +1,62 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
+using System.Windows;
 
 namespace MyPdf.HistoryAndUserTags
 {
     public class UserTagManager : INotifyPropertyChanged
     {
-        private readonly string _saveFilePath;
-        private ObservableCollection<UserTagItem> _tags;
+        private readonly string _saveFilePath = "UserTags.json";
 
-        public ObservableCollection<UserTagItem> Tags
+        private ObservableCollection<UserTagBase> _userTags = new ObservableCollection<UserTagBase>();
+        public ObservableCollection<UserTagBase> UserTags
         {
-            get => _tags;
+            get => _userTags;
             private set
             {
-                if (_tags != value)
-                {
-                    _tags = value;
-                    OnPropertyChanged();
-                }
+                _userTags = value;
+                OnPropertyChanged();
             }
         }
 
-        public UserTagManager(string saveFilePath)
+        public UserTagManager()
         {
-            _saveFilePath = saveFilePath;
-            Tags = new ObservableCollection<UserTagItem>();
             LoadTags();
-            Tags.CollectionChanged += (_, __) => SaveTags(); // Auto-save on collection changes
         }
 
-        public void AddTag(string fileName, string filePath, int pageNumber)
+        private async void LoadTags()
         {
-            if (Tags.Any(tag => tag.Path == filePath && tag.PageNumber == pageNumber))
-                return;
+            UserTags = await Assets.AssetsManager.GetJsonAssetAsync<ObservableCollection<UserTagBase>>(_saveFilePath) ?? new ObservableCollection<UserTagBase>();
+            Application.Current.Exit += (s, e) => SaveTags();
+        }
 
-            Tags.Add(new UserTagItem
+        private async void SaveTags()
+        {
+            await Assets.AssetsManager.WriteJsonAssetAsync<ObservableCollection<UserTagBase>>(_saveFilePath, UserTags);
+        }
+
+        public void AddTag(UserTagBase newTag, UserTagGroup targetGroup)
+        {
+            if (targetGroup != null) targetGroup.Add(newTag);
+            else UserTags.Add(newTag);
+        }
+
+        public void AddTag(UserTagBase newTag)
+        {
+            UserTags.Add(newTag);
+        }
+
+        public void RemoveTag(UserTagBase tag)
+        {
+            if (!UserTags.Remove(tag))
             {
-                Name = $"Page {pageNumber}",
-                Path = filePath,
-                PageNumber = pageNumber
-            });
-        }
-
-        public void RemoveTag(UserTagItem tag)
-        {
-            Tags.Remove(tag);
-        }
-
-        private void SaveTags()
-        {
-            var json = JsonSerializer.Serialize(Tags);
-            File.WriteAllText(_saveFilePath, json);
-        }
-
-        private void LoadTags()
-        {
-            if (File.Exists(_saveFilePath))
-            {
-                var json = File.ReadAllText(_saveFilePath);
-                var loadedTags = JsonSerializer.Deserialize<ObservableCollection<UserTagItem>>(json);
-                if (loadedTags != null)
+                foreach (var group in UserTags)
                 {
-                    foreach (var tag in loadedTags)
-                        Tags.Add(tag);
+                    if (group is UserTagGroup userTagGroup && userTagGroup.Remove(tag))
+                    {
+                        break;
+                    }
                 }
             }
         }

@@ -4,19 +4,14 @@ using System.Runtime.CompilerServices;
 
 namespace MyPdf.HistoryAndUserTags
 {
-    public class UserTagItem : INotifyPropertyChanged
+    public class UserTagItem : UserTagBase
     {
-        private string _name;
         private string _path;
-        private int? _pageNumber;
+        private string _fileName;
+        private int? _position;
 
-        public string Name { get => _name; set { if (_name != value) { _name = value; OnPropertyChanged(); } } }
-        public string Path { get => _path; set { if (_path != value) { _path = value; OnPropertyChanged(); } } }
-        public int PageNumber {  get => _pageNumber ?? 0;  set { if (_pageNumber != value) { _pageNumber = value; OnPropertyChanged(); } } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public string Path { get => _path; set { if (_path != value) { _path = value; FileName = (System.IO.Path.GetFileName(value)); OnPropertyChanged(); } } }
+        public string FileName { get => _fileName; set { if (_fileName != value) { _fileName = value; OnPropertyChanged(); } } }
+        public int? Position {  get => _position ?? 0;  set { if (_position != value) { _position = value; OnPropertyChanged(); } } }
     }
 }

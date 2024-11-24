@@ -11,7 +11,14 @@
                 <ResourceDictionary Source="pack://application:,,,/ThemedWindow;component/Themes/ThemedWindowDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <SolidColorBrush x:Key="BorderColorBursh" Color="#7F7F7F" Opacity="0.3"/>
+            
             <Style TargetType="controls:PdfHostTabItem" BasedOn="{StaticResource {x:Type ct:ChromeTabItem}}"/>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource ThemedScrollBar}"/>
+            <Style TargetType="ToolTip">
+                <Setter Property="Background" Value="#FFF3F3F3"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

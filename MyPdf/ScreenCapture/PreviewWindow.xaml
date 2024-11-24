@@ -112,7 +112,7 @@
 
         <TextBox Name="ExtractedTextBox" Grid.Column="1" Grid.Row="2"
                      Margin="5"
-                     Background="Transparent"
+                     Background="{Binding ThemedBackGround, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"
                      BorderThickness="0"
                      Foreground="{Binding ThemedForeGround, RelativeSource={RelativeSource AncestorType=tw:TWindow}}"
                      Text="Extracting text. Please wait..."
