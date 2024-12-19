@@ -1,9 +1,10 @@
 using PdfiumViewer;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
 using PdfToolsLib.TextExtractor;
+using MyPdf.TextExtractor;
+using MyPdf.Assets.Locale;
 
 namespace PdfToolsLib
 {
@@ -23,7 +24,16 @@ namespace PdfToolsLib
                 }
             }
 
-            await TextSave.SaveAndShow(stb.ToString().Trim());
+            string result = stb.ToString().Trim();
+            if (string.IsNullOrEmpty(result))
+            {
+                if (LocaleHelper.LocalizedYesNoMessage("useOcr", MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                {
+                    await new OcrExtractor().ExtractTextFromWholeDocument(pdfPath);
+                    return;
+                }
+            }
+            await TextSave.SaveAndShow(result);
         }
 
         public async Task ExtractTextFromSpecificPage(string pdfPath, int pageNumber)
@@ -36,7 +46,16 @@ namespace PdfToolsLib
                 if (pageNumber < 1 || pageNumber > pdfDocument.PageCount)
                     return;
 
-                await TextSave.SaveAndShow(pdfDocument.GetPdfText(pageNumber - 1));
+                string result = pdfDocument.GetPdfText(pageNumber - 1);
+                if (string.IsNullOrEmpty(result))
+                {
+                    if (LocaleHelper.LocalizedYesNoMessage("useOcr", MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                    {
+                        await new OcrExtractor().ExtractTextFromSpecificPage(pdfPath, pageNumber);
+                        return;
+                    }
+                }
+                await TextSave.SaveAndShow(result);
             }
         }
 
@@ -48,18 +67,32 @@ namespace PdfToolsLib
                 return;
             }
 
-                using (var pdfDocument = PdfDocument.Load(pdfPath))
-                { 
-                    var pageCount = pdfDocument.PageCount;
-                    var rangeList = ParseRanges(ranges, pageCount);
+            using (var pdfDocument = PdfDocument.Load(pdfPath))
+            {
+                var pageCount = pdfDocument.PageCount;
+                List<(int start, int end)> rangeList = ParseRanges(ranges, pageCount);
 
-                var stringBuilder = new StringBuilder();
+                var stb = new StringBuilder();
                 foreach (var (start, end) in rangeList)
+                {
                     for (int i = start - 1; i < end; i++)
-                            stringBuilder.AppendLine((pdfDocument.GetPdfText(i - 1) + "\n\n"));
+                    {
+                        stb.AppendLine((pdfDocument.GetPdfText(i) + "\n\n"));
+                    }
 
-                await TextSave.SaveAndShow(stringBuilder.ToString());
                 }
+
+                string result = stb.ToString().Trim();
+                if (string.IsNullOrEmpty(result))
+                {
+                    if (LocaleHelper.LocalizedYesNoMessage("useOcr", MessageBoxResult.Yes) == MessageBoxResult.Yes)
+                    {
+                        await new OcrExtractor().ExtractTextFromPageRanges(pdfPath, ranges);
+                        return;
+                    }
+                }
+                await TextSave.SaveAndShow(stb.ToString());
+            }
         }
     }
 }

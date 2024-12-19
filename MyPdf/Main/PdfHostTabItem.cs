@@ -5,6 +5,10 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Data;
+using System.Diagnostics;
 
 namespace MyPdf.Controls
 {
@@ -17,15 +21,21 @@ namespace MyPdf.Controls
         {
             _filePath = filePath;
 
+            // add pdfjshost as content
             Dispatcher.InvokeAsync(new Action(() =>
             {
                 pdfViewer = new PdfJsHost(filePath, pageNumber);
+
+                pdfViewer.IsSelected = this.IsSelected;
+                pdfViewer.SetBinding(PdfJsHost.IsSelectedProperty, new Binding(nameof(IsSelected)) { Source = this, Mode = BindingMode.OneWay });
 
                 pdfViewer.CoreWebView2InitializationCompleted += (s, e) =>
                     pdfViewer.CoreWebView2.WebMessageReceived += PdfViewer_WebMessageReceived;
 
                 Content = pdfViewer;
             }));
+
+            //set the header
             try { Header = Path.GetFileNameWithoutExtension(filePath); } catch { };
         }
 
@@ -41,7 +51,7 @@ namespace MyPdf.Controls
             }
             else
             {
-                Console.WriteLine("No action defined!");
+                Debug.Print("No action defined!");
             }
         }
 

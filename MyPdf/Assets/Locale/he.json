@@ -1,0 +1,22 @@
+{
+  "Tooltip.MinimizeButton": "מזער",
+  "Tooltip.FullScreenButton": "מסך מלא (F11 / Alt + Enter, Esc ליציאה)",
+  "Tooltip.MaximizeRestoreButton": "הגדל / שחזר",
+  "Tooltip.CloseButton": "סגור",
+  "Tooltip.ScreenCaptureButton": "צילום מסך / זיהוי תווים",
+  "Tooltip.ToggleSideBarButton": "הצג / הסתר סרגל צידי (F10)",
+  "Tooltip.OpenFilePanelButton": "פתח קובץ (Ctrl + O)",
+  "Tooltip.HistoryPanelButton": "הצג / הסתר היסטוריה",
+  "Tooltip.TagsPanelButton": "ניהול סימניות אישיות",
+  "Tooltip.SearchDataPanelButton": "חיפוש נתונים",
+  "Tooltip.ScreenCapturePanelButton": "צילום מסך / זיהוי תווים (Ctrl + Alt + S)",
+  "Tooltip.ExtractTextPanelButton": "חלץ טקסט מוטבע",
+  "Tooltip.HelpPanelButton": "מדריך",
+  "Tooltip.WebSitePanelButton": "עזרה",
+  "Tooltip.AddUserTagButton": "צור סימניה אישית חדשה",
+  "Tooltip.EditUserTagButton": "ערוך סימניה",
+  "Tooltip.AddUserTagGroupButton": "צור תיקייה חדשה",
+  "Tooltip.DeleteUserTagButton": "מחק",
+  "Message.InvalidPath": "{\"Key\":\"שגיאה: נתיב לא חוקי\",\"Value\":\"הקובץ לא נמצא\"}",
+  "Message.useOcr": "{\"Key\":\"שגיאה: לא נמצא טקסט מוטבע\",\"Value\":\"האם תרצו להשתמש עם זיהוי תווים אופטי (ocr) לחילוץ הטקסט?\"}"
+}

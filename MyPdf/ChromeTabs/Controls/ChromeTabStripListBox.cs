@@ -13,7 +13,7 @@ namespace ChromeTabs
         public ChromeTabStripListBox() 
         {
             SelectionChanged += (s, e) =>  
-                ScrollIntoView(SelectedItem); ;
+                ScrollIntoView(SelectedItem); 
         }
     }
 }

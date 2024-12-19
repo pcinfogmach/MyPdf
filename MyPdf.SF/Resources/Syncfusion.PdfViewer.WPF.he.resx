@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accepted" xml:space="preserve">
+    <value>מְקוּבָּל</value>
+  </data>
+  <data name="AddLayer" xml:space="preserve">
+    <value>לחץ כדי להוסיף שכבה.</value>
+  </data>
+  <data name="AddReply" xml:space="preserve">
+    <value>הוסף תגובה</value>
+  </data>
+  <data name="AddSignatureLabel" xml:space="preserve">
+    <value>הוסף חתימה</value>
+  </data>
+  <data name="AddStampMessage" xml:space="preserve">
+    <value>לחץ כדי להוסיף חותמת</value>
+  </data>
+  <data name="AddStickyNote" xml:space="preserve">
+    <value>הוסף פתק דביק</value>
+  </data>
+  <data name="Annotations" xml:space="preserve">
+    <value>הצג הערות</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>הוֹפָעָה</value>
+  </data>
+  <data name="ApplyLabel" xml:space="preserve">
+    <value>לִפְנוֹת</value>
+  </data>
+  <data name="ApplyRedactionLabel" xml:space="preserve">
+    <value>לִפְנוֹת</value>
+  </data>
+  <data name="ApplyRedactionMessage" xml:space="preserve">
+    <value>לחץ כדי להסיר לצמיתות תוכן מסומן.</value>
+  </data>
+  <data name="Arrow" xml:space="preserve">
+    <value>חֵץ</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>מְחַבֵּר</value>
+  </data>
+  <data name="BackgroundColor" xml:space="preserve">
+    <value>צבע רקע</value>
+  </data>
+  <data name="BookmarkNotExists" xml:space="preserve">
+    <value>יעד הסימניות הזה לא קיים</value>
+  </data>
+  <data name="BookmarkTitle" xml:space="preserve">
+    <value>סימניות</value>
+  </data>
+  <data name="BorderColor" xml:space="preserve">
+    <value>צבע גבול</value>
+  </data>
+  <data name="BorderStyle" xml:space="preserve">
+    <value>סגנון גבול</value>
+  </data>
+  <data name="BorderThickness" xml:space="preserve">
+    <value>עובי גבול</value>
+  </data>
+  <data name="BrowseButtonHeaderText" xml:space="preserve">
+    <value>הוסף חותמת</value>
+  </data>
+  <data name="Butt" xml:space="preserve">
+    <value>קַת</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>לְבַטֵל</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>בּוּטלָה</value>
+  </data>
+  <data name="ClearLabel" xml:space="preserve">
+    <value>בָּרוּר</value>
+  </data>
+  <data name="CloseAnnotationsToolbarMessage" xml:space="preserve">
+    <value>לחץ כדי לסגור את סרגל הכלים של הערות.</value>
+  </data>
+  <data name="CloseBookmark" xml:space="preserve">
+    <value>לחץ כדי לסגור את חלונית הסימניות</value>
+  </data>
+  <data name="Closed" xml:space="preserve">
+    <value>סָגוּר</value>
+  </data>
+  <data name="CloseFontPopUp" xml:space="preserve">
+    <value>לחץ כדי לסגור את מאפייני הטקסט</value>
+  </data>
+  <data name="CloseFormOptionsMessage" xml:space="preserve">
+    <value>סגור את אפשרויות הטפסים</value>
+  </data>
+  <data name="CloseLayer" xml:space="preserve">
+    <value>לחץ כדי לסגור את חלונית השכבות</value>
+  </data>
+  <data name="ClosePageOrganizerMessage" xml:space="preserve">
+    <value>לחץ כדי לסגור את חלונית ארגון הדפים.</value>
+  </data>
+  <data name="CloseRedactionMessage" xml:space="preserve">
+    <value>סגור עריכה</value>
+  </data>
+  <data name="CloseSearchBar" xml:space="preserve">
+    <value>סגור את שורת החיפוש</value>
+  </data>
+  <data name="CloseThumbnail" xml:space="preserve">
+    <value>לחץ כדי לסגור את חלונית התמונות הממוזערות</value>
+  </data>
+  <data name="Cloud" xml:space="preserve">
+    <value>עָנָן</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>צֶבַע</value>
+  </data>
+  <data name="ColorPicker" xml:space="preserve">
+    <value>בוחר צבעים</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>הֶעָרָה</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>הערות</value>
+  </data>
+  <data name="CommentsPanel" xml:space="preserve">
+    <value>פאנל הערות</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>הושלם</value>
+  </data>
+  <data name="ConfirmationBeforeClose" xml:space="preserve">
+    <value>האם ברצונך לשמור שינויים לפני הסגירה?</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>לְהַעְתִיק</value>
+  </data>
+  <data name="CounterclockwiseMessage" xml:space="preserve">
+    <value>סובב נגד כיוון השעון</value>
+  </data>
+  <data name="CreateSignatureLabel" xml:space="preserve">
+    <value>צור חתימה</value>
+  </data>
+  <data name="CurrentPageNumber" xml:space="preserve">
+    <value>אינדקס העמודים הנוכחי</value>
+  </data>
+  <data name="CustomStampHeaderText" xml:space="preserve">
+    <value>חותמות מותאמות אישית</value>
+  </data>
+  <data name="CustomTextLabel" xml:space="preserve">
+    <value>טקסט מותאם אישית</value>
+  </data>
+  <data name="DecreaseMagnification" xml:space="preserve">
+    <value>לחץ כדי להקטין את ההגדלה של העמוד כולו.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>לִמְחוֹק</value>
+  </data>
+  <data name="DeleteLayer" xml:space="preserve">
+    <value>לחץ כדי למחוק שכבה</value>
+  </data>
+  <data name="DeletePagesConfirmation" xml:space="preserve">
+    <value>האם אתה בטוח שברצונך למחוק את הדפים מהמסמך?</value>
+  </data>
+  <data name="DeletePagesLimitation" xml:space="preserve">
+    <value>לא ניתן למחוק את כל הדפים. צריך להישאר לפחות עמוד אחד</value>
+  </data>
+  <data name="DeletePagesMesage" xml:space="preserve">
+    <value>מחק דפים</value>
+  </data>
+  <data name="Diamond" xml:space="preserve">
+    <value>יַהֲלוֹם</value>
+  </data>
+  <data name="DocumentProtected" xml:space="preserve">
+    <value>מסמך זה מוגן. נא להזין סיסמה לפתיחת מסמך.</value>
+  </data>
+  <data name="DrawCircle" xml:space="preserve">
+    <value>מַעְגָל</value>
+  </data>
+  <data name="DrawingTools" xml:space="preserve">
+    <value>כלי ציור</value>
+  </data>
+  <data name="DrawInk" xml:space="preserve">
+    <value>צייר צורה חופשית</value>
+  </data>
+  <data name="DrawLine" xml:space="preserve">
+    <value>קַו</value>
+  </data>
+  <data name="DrawPolygon" xml:space="preserve">
+    <value>מְצוּלָע</value>
+  </data>
+  <data name="DrawPolyline" xml:space="preserve">
+    <value>פוליליין</value>
+  </data>
+  <data name="DrawRectangle" xml:space="preserve">
+    <value>מַלבֵּן</value>
+  </data>
+  <data name="DrawTextCallout" xml:space="preserve">
+    <value>הסבר טקסט</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>לַעֲרוֹך</value>
+  </data>
+  <data name="EnableMultiplePageSelection" xml:space="preserve">
+    <value>אפשר בחירת עמודים מרובים</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>סוֹף</value>
+  </data>
+  <data name="EnlargePageThumbnails" xml:space="preserve">
+    <value>הגדל תמונות ממוזערות של עמודים</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>הזן סיסמה</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>שְׁגִיאָה</value>
+  </data>
+  <data name="EssentialPdfViewer" xml:space="preserve">
+    <value>מציג Pdf חיוני</value>
+  </data>
+  <data name="Export annotation to JSON file" xml:space="preserve">
+    <value>ייצא הערה לקובץ JSON</value>
+  </data>
+  <data name="Export annotation to XFDF file" xml:space="preserve">
+    <value>ייצוא הערה לקובץ XFDF</value>
+  </data>
+  <data name="ExportDataMessage" xml:space="preserve">
+    <value>ייצוא נתונים מקובץ טופס</value>
+  </data>
+  <data name="FileAlreadyOpenedInformation" xml:space="preserve">
+    <value>הקובץ הזה כבר נפתח. אנא סגור אותו לפני השמירה</value>
+  </data>
+  <data name="FilesViewMessage" xml:space="preserve">
+    <value>לחץ כדי לפתוח, לשמור ולהדפיס מסמך PDF</value>
+  </data>
+  <data name="FileText" xml:space="preserve">
+    <value>קוֹבֶץ</value>
+  </data>
+  <data name="FillColor" xml:space="preserve">
+    <value>צבע מילוי</value>
+  </data>
+  <data name="FillOpacityLabel" xml:space="preserve">
+    <value>מילוי אטימות</value>
+  </data>
+  <data name="FitPage" xml:space="preserve">
+    <value>התאמה לדף</value>
+  </data>
+  <data name="FitWidth" xml:space="preserve">
+    <value>התאמה לרוחב</value>
+  </data>
+  <data name="FontColorLabel" xml:space="preserve">
+    <value>צבע גופן</value>
+  </data>
+  <data name="FontLabel" xml:space="preserve">
+    <value>גוֹפָן</value>
+  </data>
+  <data name="FontSizeLabel" xml:space="preserve">
+    <value>גודל גופן</value>
+  </data>
+  <data name="FormDataLabel" xml:space="preserve">
+    <value>נתוני טופס</value>
+  </data>
+  <data name="FormDataMessage" xml:space="preserve">
+    <value>נתוני טופס</value>
+  </data>
+  <data name="FormExportLabel" xml:space="preserve">
+    <value>יְצוּא</value>
+  </data>
+  <data name="FormImportLabel" xml:space="preserve">
+    <value>יְבוּא</value>
+  </data>
+  <data name="FormNameRequestDialogTitle" xml:space="preserve">
+    <value>שם הקובץ</value>
+  </data>
+  <data name="FormNameRequestText" xml:space="preserve">
+    <value>הזן את השם של קובץ ה-PDF שנטען</value>
+  </data>
+  <data name="FreeText" xml:space="preserve">
+    <value>טקסט חופשי</value>
+  </data>
+  <data name="FreeTextBox" xml:space="preserve">
+    <value>הוסף תיבת טקסט</value>
+  </data>
+  <data name="FreeTextProperties" xml:space="preserve">
+    <value>מאפייני טקסט חופשי</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>כְּלָלִי</value>
+  </data>
+  <data name="GoToFirstPage" xml:space="preserve">
+    <value>לחץ כדי לעבור לעמוד הראשון במסמך.</value>
+  </data>
+  <data name="GoToLastPage" xml:space="preserve">
+    <value>לחץ כדי לעבור לעמוד האחרון במסמך.</value>
+  </data>
+  <data name="GoToNextPage" xml:space="preserve">
+    <value>לחץ כדי לעבור לעמוד הבא במסמך.</value>
+  </data>
+  <data name="GoToPreviousPage" xml:space="preserve">
+    <value>לחץ כדי לעבור לעמוד הקודם במסמך.</value>
+  </data>
+  <data name="HandwrittenSignatureMessage" xml:space="preserve">
+    <value>חתום על מסמך על ידי ציור חתימה.</value>
+  </data>
+  <data name="HandwrittenSignaturePropertiesLabel" xml:space="preserve">
+    <value>מאפייני חתימה בכתב יד</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>עֶזרָה</value>
+  </data>
+  <data name="Highlight" xml:space="preserve">
+    <value>שִׂיא</value>
+  </data>
+  <data name="HighlightProperties" xml:space="preserve">
+    <value>הדגש מאפיינים</value>
+  </data>
+  <data name="HighlightText" xml:space="preserve">
+    <value>הדגש טקסט</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>סמל</value>
+  </data>
+  <data name="Import annotation from JSON file" xml:space="preserve">
+    <value>ייבא הערה מקובץ JSON</value>
+  </data>
+  <data name="Import annotation from XFDF file" xml:space="preserve">
+    <value>יבא הערה מקובץ XFDF</value>
+  </data>
+  <data name="ImportDataMessage" xml:space="preserve">
+    <value>ייבא נתונים לקובץ טופס</value>
+  </data>
+  <data name="IncorrectNumericEntry" xml:space="preserve">
+    <value>ערך מספרי לא חוקי</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>סיסמה שגויה</value>
+  </data>
+  <data name="IncreaseMagnification" xml:space="preserve">
+    <value>לחץ כדי להגדיל את ההגדלה של העמוד כולו.</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>מֵידָע</value>
+  </data>
+  <data name="Ink" xml:space="preserve">
+    <value>דְיוֹ</value>
+  </data>
+  <data name="InkEraser" xml:space="preserve">
+    <value>לחץ כדי למחוק חלק מהערת הדיו (ציורים ביד חופשית)</value>
+  </data>
+  <data name="InkProperties" xml:space="preserve">
+    <value>מאפייני דיו</value>
+  </data>
+  <data name="InsertText" xml:space="preserve">
+    <value>הוסף טקסט</value>
+  </data>
+  <data name="InvalidPasswordError" xml:space="preserve">
+    <value>הסיסמה לא חוקית</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>מַפְתֵחַ</value>
+  </data>
+  <data name="LayerTitle" xml:space="preserve">
+    <value>שכבות</value>
+  </data>
+  <data name="LineEnding" xml:space="preserve">
+    <value>סיום שורה</value>
+  </data>
+  <data name="LineProperties" xml:space="preserve">
+    <value>מאפייני קו</value>
+  </data>
+  <data name="LoadingPage" xml:space="preserve">
+    <value>טוען דפים</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>נָעוּל</value>
+  </data>
+  <data name="MakeDefault" xml:space="preserve">
+    <value>הגדר כברירת מחדל</value>
+  </data>
+  <data name="MakePropertiesDefault" xml:space="preserve">
+    <value>הפוך את המאפיינים לברירת המחדל</value>
+  </data>
+  <data name="MarkForRedactionLabel" xml:space="preserve">
+    <value>סמן לעיבוד</value>
+  </data>
+  <data name="MarkForRedactionMessage" xml:space="preserve">
+    <value>לחץ כדי לסמן תוכן להסרה לצמיתות.</value>
+  </data>
+  <data name="MarqueeZoom" xml:space="preserve">
+    <value>זום בחר אזור</value>
+  </data>
+  <data name="MatchCase" xml:space="preserve">
+    <value>מארז התאמה</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>הוֹדָעָה</value>
+  </data>
+  <data name="Modified" xml:space="preserve">
+    <value>שונה</value>
+  </data>
+  <data name="MoreActions" xml:space="preserve">
+    <value>לחץ כדי להציג פעולות נוספות</value>
+  </data>
+  <data name="NewParagraph" xml:space="preserve">
+    <value>פסקה חדשה</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>הַבָּא</value>
+  </data>
+  <data name="NoMatchesFound" xml:space="preserve">
+    <value>הקורא סיים לחפש במסמך. לא נמצאו התאמות</value>
+  </data>
+  <data name="NoMoreMatchesFound" xml:space="preserve">
+    <value>הקורא סיים לחפש במסמך. לא נמצאו התאמות נוספות</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>אַף לֹא אֶחָד</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>פֶּתֶק</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>שֶׁל</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>בְּסֵדֶר</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>אֲטִימוּת</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>לִפְתוֹחַ</value>
+  </data>
+  <data name="OpenDocument" xml:space="preserve">
+    <value>לחץ כדי לפתוח מסמך PDF</value>
+  </data>
+  <data name="OpenHeaderText" xml:space="preserve">
+    <value>לִפְתוֹחַ</value>
+  </data>
+  <data name="OpenPopupNote" xml:space="preserve">
+    <value>פתח את הערה קופצת</value>
+  </data>
+  <data name="OutlineColorLabel" xml:space="preserve">
+    <value>צבע קווי מתאר</value>
+  </data>
+  <data name="Oval" xml:space="preserve">
+    <value>סְגַלגַל</value>
+  </data>
+  <data name="OvalProperties" xml:space="preserve">
+    <value>מאפיינים סגלגלים</value>
+  </data>
+  <data name="OverlayTextTitleLabel" xml:space="preserve">
+    <value>טקסט שכבת-על</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>עַמוּד</value>
+  </data>
+  <data name="PageCount" xml:space="preserve">
+    <value>סך כל ספירת הדפים</value>
+  </data>
+  <data name="PageNotExists" xml:space="preserve">
+    <value>אין עמוד שמספרו '{0}' במסמך זה</value>
+  </data>
+  <data name="PageOrganizerTitle" xml:space="preserve">
+    <value>ארגן דפים</value>
+  </data>
+  <data name="Panning" xml:space="preserve">
+    <value>לחץ כדי להזיז את המסמך</value>
+  </data>
+  <data name="Paragraph" xml:space="preserve">
+    <value>סָעִיף</value>
+  </data>
+  <data name="PasswordCancelButton" xml:space="preserve">
+    <value>לְבַטֵל</value>
+  </data>
+  <data name="PasswordOkButton" xml:space="preserve">
+    <value>בְּסֵדֶר</value>
+  </data>
+  <data name="PasswordRequestDialogTitle" xml:space="preserve">
+    <value>סִיסמָה</value>
+  </data>
+  <data name="PolygonalLine" xml:space="preserve">
+    <value>קו מצולע</value>
+  </data>
+  <data name="PolygonLineProperties" xml:space="preserve">
+    <value>מאפייני קו מצולע</value>
+  </data>
+  <data name="PolygonProperties" xml:space="preserve">
+    <value>מאפייני מצולע</value>
+  </data>
+  <data name="Post" xml:space="preserve">
+    <value>שֶׁלְאַחַר</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>קוֹדֵם</value>
+  </data>
+  <data name="PrintDocument" xml:space="preserve">
+    <value>לחץ כדי להדפיס קובץ PDF זה או דפים ממנו.</value>
+  </data>
+  <data name="PrintHeaderText" xml:space="preserve">
+    <value>הֶדפֵּס</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>נכסים</value>
+  </data>
+  <data name="RectangleProperties" xml:space="preserve">
+    <value>מאפייני מלבן</value>
+  </data>
+  <data name="RedactedAreaFillLabel" xml:space="preserve">
+    <value>צבע מילוי של אזור מודפס</value>
+  </data>
+  <data name="RedactionConfirmation" xml:space="preserve">
+    <value>האם אתה בטוח שאתה רוצה להמשיך?</value>
+  </data>
+  <data name="RedactionLabel" xml:space="preserve">
+    <value>עֲרִיכָה</value>
+  </data>
+  <data name="RedactionMarkAppearancelabel" xml:space="preserve">
+    <value>הופעת סימן חיתוך</value>
+  </data>
+  <data name="RedactionMessage" xml:space="preserve">
+    <value>לחץ כדי לבצע עריכה.</value>
+  </data>
+  <data name="RedactionPropertiesLabel" xml:space="preserve">
+    <value>מאפייני כלי חיתוך</value>
+  </data>
+  <data name="RedactionPropertiesMessage" xml:space="preserve">
+    <value>לחץ כדי להציג את מאפייני כלי העריכה.</value>
+  </data>
+  <data name="RedactionWarning" xml:space="preserve">
+    <value>אתה עומד להסיר לצמיתות את כל התוכן שסומן לעריכה. לאחר שמירת המסמך, לא ניתן לבטל פעולה זו</value>
+  </data>
+  <data name="ReducePageThumbnails" xml:space="preserve">
+    <value>הקטנת תמונות ממוזערות של עמודים</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>נִדחֶה</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>שנה שם</value>
+  </data>
+  <data name="RequestCorrectPassword" xml:space="preserve">
+    <value>אנא פתח את המסמך שוב והזן את הסיסמה הנכונה</value>
+  </data>
+  <data name="ReversedClose" xml:space="preserve">
+    <value>סגור (הפוך)</value>
+  </data>
+  <data name="ReversedOpen" xml:space="preserve">
+    <value>פתוח (הפוך)</value>
+  </data>
+  <data name="RotateClockwiseMessage" xml:space="preserve">
+    <value>סובב עם כיוון השעון</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>עִגוּל</value>
+  </data>
+  <data name="SaveAsDocument" xml:space="preserve">
+    <value>לחץ כדי לשמור את המסמך בדיסק המקומי</value>
+  </data>
+  <data name="SaveAsHeaderText" xml:space="preserve">
+    <value>שמור בשם</value>
+  </data>
+  <data name="SaveDocument" xml:space="preserve">
+    <value>לחץ כדי לשמור את המסמך בדיסק המקומי</value>
+  </data>
+  <data name="SaveHeaderText" xml:space="preserve">
+    <value>לְהַצִיל</value>
+  </data>
+  <data name="SearchIndicator" xml:space="preserve">
+    <value>מחפש</value>
+  </data>
+  <data name="SearchText" xml:space="preserve">
+    <value>לחץ לחיפוש טקסט</value>
+  </data>
+  <data name="SelectionTool" xml:space="preserve">
+    <value>כלי בחירה לטקסט</value>
+  </data>
+  <data name="SetStatus" xml:space="preserve">
+    <value>הגדר סטטוס</value>
+  </data>
+  <data name="Slash" xml:space="preserve">
+    <value>לַחתוֹך</value>
+  </data>
+  <data name="Square" xml:space="preserve">
+    <value>מְרוּבָּע</value>
+  </data>
+  <data name="Squiggly" xml:space="preserve">
+    <value>מתפתל</value>
+  </data>
+  <data name="SquigglyProperties" xml:space="preserve">
+    <value>נכסי סקוויגלי</value>
+  </data>
+  <data name="Stamp" xml:space="preserve">
+    <value>חוֹתֶמֶת</value>
+  </data>
+  <data name="StampPropertiesLabel" xml:space="preserve">
+    <value>מאפייני בול</value>
+  </data>
+  <data name="StandardLabel" xml:space="preserve">
+    <value>עסק סטנדרטי</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>הַתחָלָה</value>
+  </data>
+  <data name="StickyNote" xml:space="preserve">
+    <value>פתק דביק</value>
+  </data>
+  <data name="StickyNoteProperties" xml:space="preserve">
+    <value>מאפייני פתק דביק</value>
+  </data>
+  <data name="StrikeoutProperties" xml:space="preserve">
+    <value>מאפייני קו חוצה</value>
+  </data>
+  <data name="StrikeoutText" xml:space="preserve">
+    <value>טקסט חוצה</value>
+  </data>
+  <data name="Strikethrough" xml:space="preserve">
+    <value>חוצה</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>נוֹשֵׂא</value>
+  </data>
+  <data name="TextCalloutProperties" xml:space="preserve">
+    <value>מאפייני הסבר טקסט</value>
+  </data>
+  <data name="TextMarkupAnnotation" xml:space="preserve">
+    <value>הערת סימון טקסט</value>
+  </data>
+  <data name="TextProperties" xml:space="preserve">
+    <value>מאפייני טקסט</value>
+  </data>
+  <data name="Thickness" xml:space="preserve">
+    <value>עוֹבִי</value>
+  </data>
+  <data name="ThumbnailTitle" xml:space="preserve">
+    <value>תמונות ממוזערות של עמודים</value>
+  </data>
+  <data name="Underline" xml:space="preserve">
+    <value>לָשִׂים דָגֵשׁ</value>
+  </data>
+  <data name="UnderlineProperties" xml:space="preserve">
+    <value>קו תחתון מאפיינים</value>
+  </data>
+  <data name="UnderlineText" xml:space="preserve">
+    <value>טקסט בקו תחתון</value>
+  </data>
+  <data name="UseOverlayTextLabel" xml:space="preserve">
+    <value>השתמש בטקסט שכבת-על</value>
+  </data>
+  <data name="ValueExceedsLimit" xml:space="preserve">
+    <value>הערך חייב להיות בין {0} ל-{1}</value>
+  </data>
+  <data name="ViewBookmarks" xml:space="preserve">
+    <value>לחץ כדי להציג את הסימניות</value>
+  </data>
+  <data name="ViewLayers" xml:space="preserve">
+    <value>לחץ כדי להציג את השכבות</value>
+  </data>
+  <data name="ViewPageOrganizerMessage" xml:space="preserve">
+    <value>סובב, סידור מחדש או מחק דפים</value>
+  </data>
+  <data name="ViewThumbnails" xml:space="preserve">
+    <value>לחץ כדי להציג את התמונות הממוזערות</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>אַזהָרָה</value>
+  </data>
+  <data name="ZoomLevel" xml:space="preserve">
+    <value>רמת הזום הנוכחית</value>
+  </data>
+</root>

@@ -65,18 +65,18 @@
 //                ShowMessage(validationMessage);
 //                return;
 //            }
-//                using var library = DocLib.Instance;
-//                using var docReader = library.GetDocReader(pdfPath, new PageDimensions(1080, 1920));
-//                var pageCount = docReader.GetPageCount();
-//                var rangeList = ParseRanges(ranges, pageCount);
+//            using var library = DocLib.Instance;
+//            using var docReader = library.GetDocReader(pdfPath, new PageDimensions(1080, 1920));
+//            var pageCount = docReader.GetPageCount();
+//            var rangeList = ParseRanges(ranges, pageCount);
 
-//                var stringBuilder = new StringBuilder();
-//                foreach (var (start, end) in rangeList)
-//                    for (int i = start - 1; i < end; i++)
-//                        using (var pageReader = docReader.GetPageReader(i))
-//                            stringBuilder.AppendLine(pageReader.GetText() + "\n\n");
+//            var stringBuilder = new StringBuilder();
+//            foreach (var (start, end) in rangeList)
+//                for (int i = start - 1; i < end; i++)
+//                    using (var pageReader = docReader.GetPageReader(i))
+//                        stringBuilder.AppendLine(pageReader.GetText() + "\n\n");
 
-//                await TextSave.SaveAndShow(stringBuilder.ToString());
+//            await TextSave.SaveAndShow(stringBuilder.ToString());
 //        }
 //    }
 //}

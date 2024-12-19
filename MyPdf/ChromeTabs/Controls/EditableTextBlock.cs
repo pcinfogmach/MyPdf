@@ -37,19 +37,6 @@ namespace MyPdf.ChromeTabs.Controls
             set => SetValue(IsTextBoxProperty, value);
         }
 
-        //public static readonly DependencyProperty ForegroundProperty =
-        //    DependencyProperty.Register(
-        //        nameof(Foreground),
-        //        typeof(Brush),
-        //        typeof(EditableTextBlock),
-        //        new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        //public Brush Foreground
-        //{
-        //    get => (Brush)GetValue(ForegroundProperty);
-        //    set => SetValue(ForegroundProperty, value);
-        //}
-
         private static void OnIsTextBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is EditableTextBlock control)
@@ -63,6 +50,13 @@ namespace MyPdf.ChromeTabs.Controls
         {
             if (IsTextBox) ShowTextBox();
             else ShowTextBlock();
+
+            TouchDown += EditableTextBlock_TouchDown;
+        }
+
+        private void EditableTextBlock_TouchDown(object? sender, TouchEventArgs e)
+        {
+            if (this.Content is TextBlock textBlock && this.IsFocused) { IsTextBox = true; }
         }
 
         private void ShowTextBlock()

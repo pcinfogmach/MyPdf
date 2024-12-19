@@ -1,0 +1,22 @@
+{
+  "Tooltip.MinimizeButton": "Minimize",
+  "Tooltip.FullScreenButton": "Full Screen (F11 / Alt + Enter, Esc to Exit)",
+  "Tooltip.MaximizeRestoreButton": "Maximize / Restore",
+  "Tooltip.CloseButton": "Close",
+  "Tooltip.ScreenCaptureButton": "Screen Capture / OCR",
+  "Tooltip.ToggleSideBarButton": "Show / Hide Sidebar (F10)",
+  "Tooltip.OpenFilePanelButton": "Open File (Ctrl + O)",
+  "Tooltip.HistoryPanelButton": "Show / Hide History",
+  "Tooltip.TagsPanelButton": "Manage personal Bookmarks",
+  "Tooltip.SearchDataPanelButton": "Search Data",
+  "Tooltip.ScreenCapturePanelButton": "Screen Capture / OCR (Ctrl + Alt + S)",
+  "Tooltip.ExtractTextPanelButton": "Extract embedded Text",
+  "Tooltip.HelpPanelButton": "Instructions",
+  "Tooltip.WebSitePanelButton": "Help",
+  "Tooltip.AddUserTagButton": "Create new personal bookmark",
+  "Tooltip.EditUserTagButton": "Edit bookmark",
+  "Tooltip.AddUserTagGroupButton": "Create new folder",
+  "Tooltip.DeleteUserTagButton": "Delete",
+  "Message.InvalidPath": "{\"Key\":\"Error: Invalid Path\",\"Value\":\"File not found\"}",
+  "Message.useOcr": "{\"Key\":\"Error: No embedded text\",\"Value\":\"would you like to use ocr (optical charachter rcognition) to extract the text?\"}"
+}

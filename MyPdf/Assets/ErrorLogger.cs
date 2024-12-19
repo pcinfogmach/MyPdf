@@ -5,7 +5,7 @@ namespace MyPdf.Assets
 {
     internal static class ErrorLogger
     {
-        private static readonly string logFilePath = @".\logs\exceptions.txt";
+        private static readonly string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"logs\exceptions.txt");
 
         public static void Initialize()
         {

@@ -47,6 +47,14 @@ namespace MyPdf.Assets
             if (!File.Exists(filePath)) return string.Empty;
             return await File.ReadAllTextAsync(filePath);
         }
+
+        public static string GetAsset(string assetName)
+        {
+            string filePath = Path.Combine(AssetsDir, assetName);
+            if (!File.Exists(filePath)) return string.Empty;
+            return File.ReadAllText(filePath);
+        }
+
         /// <summary>
         /// Serializes the given object to JSON asynchronously and writes it to a file in the Assets directory.
         /// </summary>

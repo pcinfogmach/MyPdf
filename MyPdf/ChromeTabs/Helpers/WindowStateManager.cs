@@ -1,6 +1,5 @@
 ﻿using MyPdf.Assets;
 using System.Globalization;
-using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
@@ -17,30 +16,26 @@ namespace ChromeTabs.Helpers
             public double? WindowWidth { get; set; }
             public double? WindowHeight { get; set; }
             [JsonConverter(typeof(JsonStringEnumConverter))]
-            public WindowState WindowState { get; set; }
+            public WindowState? WindowState { get; set; }
         }
 
         static string windowStatePath = "chromeTabsWindowState.json";
 
         public async static void SaveState(Window window)
         {
-            var windowState = new WindowStateModel
-            {
-                WindowWidth = window.Width,
-                WindowHeight = window.Height,
-                WindowState = window.WindowState
-            };
+            string json = await AssetsManager.GetAssetAsync(windowStatePath);
+            WindowStateModel previousWindowState = new WindowStateModel();
+            if (!string.IsNullOrEmpty(json)) previousWindowState = JsonSerializer.Deserialize<WindowStateModel>(json);
+            WindowStateModel windowState = new WindowStateModel();
 
-            if (window.WindowState == WindowState.Normal)
-            {
-                windowState.WindowTop = window.Top; windowState.WindowLeft = window.Left;
-            }
+            windowState.WindowState = window.WindowState != WindowState.Minimized ? window.WindowState : WindowState.Normal;
+            windowState.WindowWidth = window.WindowState == WindowState.Normal ? window.Width : previousWindowState.WindowWidth;
+            windowState.WindowHeight = window.WindowState == WindowState.Normal ? windowState.WindowHeight = window.Height : previousWindowState.WindowHeight;
+            windowState.WindowTop = window.WindowState == WindowState.Normal ? windowState.WindowTop = window.Top : previousWindowState.WindowTop;
+            windowState.WindowLeft = window.WindowState == WindowState.Normal ? windowState.WindowLeft = window.Left : previousWindowState.WindowLeft;
 
-            await Task.Run(async () =>
-            {
-                string json = JsonSerializer.Serialize(windowState, new JsonSerializerOptions { WriteIndented = true });
-                await AssetsManager.WriteAssetAsync(windowStatePath, json);
-            });
+            json = JsonSerializer.Serialize(windowState, new JsonSerializerOptions { WriteIndented = true });
+            await AssetsManager.WriteAssetAsync(windowStatePath, json);
         }
 
         public async static void LoadState(Window window)
@@ -56,7 +51,7 @@ namespace ChromeTabs.Helpers
                     window.Left = windowState.WindowLeft ?? window.Left;
                     window.Width = windowState.WindowWidth ?? window.Width;
                     window.Height = windowState.WindowHeight ?? window.Height;
-                    window.WindowState = windowState.WindowState;
+                    window.WindowState = windowState.WindowState ?? window.WindowState;
                 }
             }
 

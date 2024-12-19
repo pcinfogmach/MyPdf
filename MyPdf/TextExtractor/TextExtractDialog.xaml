@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PdfToolsLib"
         mc:Ignorable="d"
         FontSize="14"
-        Height="120"
+        Height="150"
         Width="470"
         Title="Text Extracter"
         PreviewKeyDown="ThemedToolWindow_PreviewKeyDown">
@@ -66,8 +66,8 @@
             </Button>
         </Grid>
         
-        <CheckBox Visibility="Collapsed" x:Name="QualityCheckBox" Grid.Row="2" Margin="0,5,0,0"
-                  Content="Use (slower) high-quality extraction"/>
+        <CheckBox Name="OcrCheckBox"  Grid.Row="2" Margin="0,5,0,0"
+                  Content="Use Ocr (Optical charachter recognition)"/>
 
     </Grid>
 </tw:ThemedToolWindow>

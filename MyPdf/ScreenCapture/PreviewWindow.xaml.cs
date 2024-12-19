@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using MyPdf.Assets;
+using MyPdf.ScreenCapture;
 using ScreenCapture;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,9 +8,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Tesseract;
 using ThemedWindow.Controls;
 
 namespace ScreenCaptureLib
@@ -18,13 +17,9 @@ namespace ScreenCaptureLib
     {
         private readonly BitmapImage _bitmapImage;
         private readonly MemoryStream _imageStream;
-        string tessDataFolder;
-        string savedLangFile = "selectedTessLang.txt";
 
         public PreviewWindow(BitmapImage bitmapImage, MemoryStream imageStream)
         {
-            tessDataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "tessdata");
-
             InitializeComponent();
             SetButtonContentBasedOnLanguage();
             _bitmapImage = bitmapImage;
@@ -61,40 +56,13 @@ namespace ScreenCaptureLib
 
         private async void ExtractTextFromImage()
         {
-            ExtractedTextBox.Text = await Task.Run(async () =>
+            await Dispatcher.InvokeAsync(new Action( async() =>
             {
-                try
-                {
-                    string tessLang = await AssetsManager.GetAssetAsync(savedLangFile);
-                    if (string.IsNullOrEmpty(tessLang)) tessLang = "heb+eng";                   
-
-                    // Use the existing MemoryStream with Tesseract
-                    _imageStream.Seek(0, SeekOrigin.Begin); // Reset position
-                    using (var engine = new TesseractEngine(tessDataFolder, tessLang, EngineMode.Default))
-                    using (var img = Pix.LoadFromMemory(_imageStream.ToArray()))
-                    using (var page = engine.Process(img))
-                    {
-                        // Get the extracted text
-                        var text = page.GetText().Trim();
-
-                        // Replace single newlines with spaces and keep paragraph breaks
-                        text = Regex.Replace(text, @"(?<!\n)\n(?!\n)", " ");
-                        text = Regex.Replace(text, @"\n+", "\n");
-                        return text;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string message = $"[{DateTime.Now}] An error occurred:\n" +
-                                  $"Message: {ex.Message}\n" +
-                                  $"Source: {ex.Source}\n" +
-                                  $"Stack Trace: {ex.StackTrace}\n" +
-                                  $"Inner Exception: {ex.InnerException?.Message ?? "None"}\n" +
-                                  $"Target Site: {ex.TargetSite}\n";
-
-                    return $"Failed to extract text: {message}";
-                }
-            });
+                var result = await TesseractManager.ExtractTextFromImage(_imageStream);
+                var hebrewMatches = Regex.Matches(result, @"\p{IsHebrew}");
+                ExtractedTextBox.FlowDirection = hebrewMatches.Count() > (ExtractedTextBox.Text.Length / 2) ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+                ExtractedTextBox.Text = result;
+            }));
         }
 
 
@@ -201,26 +169,10 @@ namespace ScreenCaptureLib
             process.Start();
         }
 
-        private void ChooseOcrLanguageButton_Click(object sender, RoutedEventArgs e) =>  ChooseTessLang();
-
-        async void ChooseTessLang()
+        private async void ChooseOcrLanguageButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog
-            {
-                Multiselect = true,
-                Filter = "Tesseract Trained Data Files (*.traineddata)|*.traineddata",
-                InitialDirectory = tessDataFolder
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                List<string> selectedLanguages = dialog.FileNames
-                                                      .Select(file => Path.GetFileNameWithoutExtension(file))
-                                                      .ToList();
-
-                // Save the selected languages to disk (for future use)
-                await AssetsManager.WriteAssetAsync(savedLangFile, string.Join("+", selectedLanguages));
-            }
+            await TesseractManager.ChooseTessLang();
+            ExtractTextFromImage(); 
         }
     }
 }

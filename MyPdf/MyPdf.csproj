@@ -2,10 +2,11 @@
 
   <PropertyGroup Label="Globals">
     <WebView2EnableCsWinRTProjection>False</WebView2EnableCsWinRTProjection>
+    <WebView2LoaderPreference>Dynamic</WebView2LoaderPreference>
   </PropertyGroup>
 
   <PropertyGroup>
-	 <Version>1.0.0.2</Version>
+	 <Version>1.0.0.4</Version>
     <OutputType>WinExe</OutputType>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -17,9 +18,8 @@
 
   <ItemGroup>
     <None Remove="Assets\Instructions - MyPdf.pdf" />
+    <None Remove="Assets\Locale\sample.json" />
     <None Remove="Assets\הוראות - MyPdf.pdf" />
-    <None Remove="ChromeTabs\Locale\en.json" />
-    <None Remove="ChromeTabs\Locale\he.json" />
     <None Remove="Pdf.Js\PdfJs\build\pdf.mjs" />
     <None Remove="Pdf.Js\PdfJs\build\pdf.mjs.map" />
     <None Remove="Pdf.Js\PdfJs\build\pdf.sandbox.mjs" />
@@ -377,6 +377,8 @@
     <None Remove="Pdf.Js\PdfJs\web\locale\xh\viewer.ftl" />
     <None Remove="Pdf.Js\PdfJs\web\locale\zh-CN\viewer.ftl" />
     <None Remove="Pdf.Js\PdfJs\web\locale\zh-TW\viewer.ftl" />
+    <None Remove="Pdf.Js\PdfJs\PrintJs\print.min.css" />
+    <None Remove="Pdf.Js\PdfJs\PrintJs\print.min.js" />
     <None Remove="Pdf.Js\PdfJs\web\standard_fonts\FoxitDingbats.pfb" />
     <None Remove="Pdf.Js\PdfJs\web\standard_fonts\FoxitFixed.pfb" />
     <None Remove="Pdf.Js\PdfJs\web\standard_fonts\FoxitFixedBold.pfb" />
@@ -406,13 +408,16 @@
     <Content Include="Assets\Instructions - MyPdf.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Locale\sample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\הוראות - MyPdf.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ChromeTabs\Locale\en.json">
+    <Content Include="Assets\Locale\en.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ChromeTabs\Locale\he.json">
+    <Content Include="Assets\Locale\he.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="MyPdfIcon.ico" />
@@ -1487,6 +1492,12 @@
     <Content Include="Pdf.Js\PdfJs\web\locale\zh-TW\viewer.ftl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Pdf.Js\PdfJs\PrintJs\print.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Pdf.Js\PdfJs\PrintJs\print.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Pdf.Js\PdfJs\web\standard_fonts\FoxitDingbats.pfb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1559,9 +1570,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Docnet.Core" Version="2.6.0" />
     <PackageReference Include="gong-wpf-dragdrop" Version="3.2.1" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="PdfiumViewer.Native.x86_64.v8-xfa" Version="2018.4.8.256" />
     <PackageReference Include="PdfiumViewer.Updated" Version="2.14.4" />
     <PackageReference Include="Tesseract" Version="5.2.0" />
     <PackageReference Include="Tesseract.Drawing" Version="5.2.0" />

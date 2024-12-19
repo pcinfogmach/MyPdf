@@ -1,8 +1,6 @@
 ﻿using ChromeTabs.Helpers;
 using MyPdf.HistoryAndUserTags;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,23 +20,19 @@ namespace ChromeTabs
 
         public ChromeTabsWindow()
         {
+            WindowStateManager.LoadState(this);           
             InitializeComponent();
+            LoadSavedTabs();
 
-            localeViewModel.LoadState();
-            WindowStateManager.LoadState(this);
-            this.Closing += (s, e) => WindowStateManager.SaveState(this);
+            this.ContentRendered += (s, e) =>
+            {
+                this.SizeChanged += (s, e) => { WindowStateManager.SaveState(this); };
+                this.LocationChanged += (s, e) => {  WindowStateManager.SaveState(this); };
+                this.StateChanged += (s, e) => { WindowStateManager.SaveState(this); };
+            };
         }
 
-        private void TitleBarGrid_TouchDown(object sender, TouchEventArgs e) => DragMove();
-
-        private void TitleBarGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-                this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            else if (e.LeftButton == MouseButtonState.Pressed)  
-                DragMove();
-        }
-
+        public virtual void LoadSavedTabs() { }
 
         private void ScrollLeft_Click(object sender, RoutedEventArgs e)
         {
@@ -126,14 +120,6 @@ namespace ChromeTabs
             ToggleFullScreen();
         }       
 
-        private void ChromeTabStrip_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-                this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-            else if (e.LeftButton == MouseButtonState.Pressed)
-                DragMove();
-        }
-
         private void window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
@@ -207,8 +193,10 @@ namespace ChromeTabs
         {
             if (SidePanel.SelectedItem == OpenFile_PanelButton) OpenFile();
             else if (SidePanel.SelectedItem == ScreenCapture_PanelButton) CaptureScreen();
+            //else if (SidePanel.SelectedItem == PrintWithEdge_PanelButton) PrintWithEdge();
             else if (SidePanel.SelectedItem == Help_PanelButton) ShowHelp();
             else if (SidePanel.SelectedItem == WebSite_PanelButton) { Process.Start(new ProcessStartInfo { FileName = "https://mitmachim.top/post/869071", UseShellExecute = true });}
+            else if (SidePanel.SelectedItem == ExtractText_PanelButton) { ExtractText(); }
             else if (SidePanel.SelectedItem == ExtractText_PanelButton) { ExtractText(); }
             else { return; }
             SidePanel.SelectedIndex = -1;
@@ -217,7 +205,7 @@ namespace ChromeTabs
         private void AddUserTagButton_Click(object sender, RoutedEventArgs e) => CreateUserTag();
         private void EditUserTagButton_Click(object sender, RoutedEventArgs e) => EditUserTag();
         private void AddUserTagFolderButton_Click(object sender, RoutedEventArgs e) =>  UserTagManager.AddTag(new UserTagGroup { IsInitialView = true});
-        private void DeleteUserTagButtonToolTip_Click(object sender, RoutedEventArgs e) => DeleteUserTag();
+        private void DeleteUserTagButton_Click(object sender, RoutedEventArgs e) => DeleteUserTag();
 
         private void UserTagTreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e) => OpenSelectedUserTag();
         private void UserTagTreeView_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -230,6 +218,7 @@ namespace ChromeTabs
 
         #region methods
         public virtual void OpenFile() { }
+        public virtual void PrintWithEdge() { }
         public virtual void SaveFile() { }
         public virtual void SaveFileAS() { }
         public virtual void ShowHelp() { }

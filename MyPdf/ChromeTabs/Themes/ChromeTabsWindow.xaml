@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChromeTabs"
+        xmlns:locale="clr-namespace:MyPdf.Assets.Locale"
         xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         xmlns:history="clr-namespace:MyPdf.HistoryAndUserTags" 
         xmlns:dd="urn:gong-wpf-dragdrop"
@@ -15,11 +16,6 @@
         MinHeight="210"
         MinWidth="450"
         PreviewKeyDown="window_PreviewKeyDown">
-
-    <Window.DataContext>
-        <local:LocaleViewModel x:Name="localeViewModel"/>
-    </Window.DataContext>
-
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -37,7 +33,7 @@
              UseAeroCaptionButtons="False"
              CaptionHeight="{Binding ElementName=TitleBarGrid, Path=ActualHeight}"/>
     </WindowChrome.WindowChrome>
-    
+
     <Border Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}"
             BorderBrush="{StaticResource BorderColorBursh}" BorderThickness="1">
         <Grid x:Name="RootGrid" Style="{StaticResource RootGridChromeStyle}">
@@ -46,7 +42,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Height="35" x:Name="TitleBarGrid" MouseLeftButtonDown="TitleBarGrid_MouseLeftButtonDown" TouchDown="TitleBarGrid_TouchDown">
+            <Grid Grid.Row="0" Height="35" x:Name="TitleBarGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
@@ -62,7 +58,7 @@
                         <Button x:Name="MinimizeButton"
                         Click="MinimizeButton_Click"
                         Style="{StaticResource TitleBarButtonStyle}"
-                        ToolTip="{Binding MinimizeButtonTooltip}">
+                        ToolTip="{locale:LocalizedString Key='Tooltip.MinimizeButton'}">
                             <Path Data="M 13,15 H 23"/>
                         </Button>
                     </Grid>
@@ -71,24 +67,24 @@
                         <Button x:Name="FullScreenButton"
                         Click="FullScreenButton_Click"
                         Style="{StaticResource TitleBarButtonStyle}"
-                        ToolTip="{Binding FullScreenButtonTooltip}">
+                        ToolTip="{locale:LocalizedString Key=Tooltip.FullScreenButton}">
                             <TextBlock Text="⇱" FontSize="14" LineHeight="{Binding FontSize, RelativeSource={RelativeSource Mode=Self}}" LineStackingStrategy="BlockLineHeight"/>
                         </Button>
                     </Grid>
 
                     <Grid Background="{Binding Background, ElementName=MaximizeRestoreButton}">
                         <Button x:Name="MaximizeRestoreButton"  
-                Style="{StaticResource TitleBarMaximizeButtonStyle}"
-                Click="maximizeRestoreButton_Click"
-                ToolTip="{Binding MaximizeButtonTooltip}">
+                                Style="{StaticResource TitleBarMaximizeButtonStyle}"
+                                Click="maximizeRestoreButton_Click"
+                                ToolTip="{locale:LocalizedString Key=Tooltip.MaximizeRestoreButton}">
                             <Path x:Name="maximizeIcon"/>
                         </Button>
                     </Grid>
 
                     <Grid Background="{Binding Background, ElementName=CloseButton}">
                         <Button x:Name="CloseButton" Style="{StaticResource TitleBarXButtonStyle}"
-                Click="CloseButton_Click"
-                ToolTip="{Binding XButtonTooltip}">
+                                Click="CloseButton_Click"
+                                ToolTip="{locale:LocalizedString Key=Tooltip.CloseButton}">
                             <Path Data="M 13,11 22,20 M 13,20 22,11"/>
                         </Button>
                     </Grid>
@@ -111,7 +107,7 @@
 
                     <!--<Grid Background="{Binding Background, ElementName=ScreenCaptureButton}">
                 <Button x:Name="ScreenCaptureButton" Style="{StaticResource TitleBarButtonStyle}"
-                            ToolTip="{Binding ScreenCaptureButtonTooltip}"
+                            ToolTip="{Binding ScreenCaptureButton}"
                             Click="ScreenCaptureButton_Click">
                     <Path Data="M4,4 L8,4 M4,4 L4,8
                           M20,4 L16,4 M20,4 L20,8
@@ -122,45 +118,50 @@
 
                     <!-- Popup for TabListBox dropdown -->
                     <Popup x:Name="DropDown"
-PlacementTarget="{Binding ElementName=DropdownButton}" 
-IsOpen="{Binding IsChecked, ElementName=DropdownButton}"
-Opened="DropDown_Opened"
-StaysOpen="False"
-Placement="Bottom">
+                            PlacementTarget="{Binding ElementName=DropdownButton}" 
+                            IsOpen="{Binding IsChecked, ElementName=DropdownButton}"
+                            Opened="DropDown_Opened"
+                            StaysOpen="False"
+                            Placement="Bottom">
                         <ListBox x:Name="DropDownListBox" BorderThickness="0" 
-      Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}"
-      Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"
-SelectionChanged="DropDownListBox_SelectionChanged"/>
+                                  Background="{Binding Background, RelativeSource={RelativeSource AncestorType=Window}}"
+                                  Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"
+                                  SelectionChanged="DropDownListBox_SelectionChanged"/>
                     </Popup>
                 </StackPanel>
 
-                <local:ChromeTabStripListBox x:Name="ChromeTabStrip" Grid.Column="1"
+                <Grid  Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:ChromeTabStripListBox x:Name="ChromeTabStrip"
                                          Margin="-1,0,0,0"
                            Style="{StaticResource ChromeTabStripListBox}"
                            ItemsSource="{Binding ElementName=ChromeTabControl, Path=Items}"
                            SelectedItem="{Binding ElementName=ChromeTabControl, Path=SelectedItem}"
-                           MouseDown="ChromeTabStrip_MouseDown"
                            x:FieldModifier="public">
-                    <local:ChromeTabStripListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem" BasedOn="{StaticResource CostumeListBoxItemStyle}">
-                            <Setter Property="ToolTip" Value="{Binding Header}"/>
-                            <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Margin" Value="0,1,2,1"/>
-                            <Setter Property="AllowDrop" Value="True"/>
-                            <EventSetter Event="PreviewMouseMove" Handler="ListBoxItem_PreviewMouseMove"/>
-                            <EventSetter Event="Drop" Handler="ListBoxItem_Drop"/>
-                        </Style>
-                    </local:ChromeTabStripListBox.ItemContainerStyle>
-                </local:ChromeTabStripListBox>
+                        <local:ChromeTabStripListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem" BasedOn="{StaticResource CostumeListBoxItemStyle}">
+                                <Setter Property="ToolTip" Value="{Binding Header}"/>
+                                <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0,1,2,1"/>
+                                <Setter Property="AllowDrop" Value="True"/>
+                                <EventSetter Event="PreviewMouseMove" Handler="ListBoxItem_PreviewMouseMove"/>
+                                <EventSetter Event="Drop" Handler="ListBoxItem_Drop"/>
+                            </Style>
+                        </local:ChromeTabStripListBox.ItemContainerStyle>
+                    </local:ChromeTabStripListBox>
+                </Grid>
 
                 <Grid Grid.Column="0" Width="37">
                     <Border Background="{Binding Background, ElementName=ToggleSideBarButton}" 
                         Margin="1" CornerRadius="3"/>
                     <Button x:Name="ToggleSideBarButton" Style="{StaticResource TitleBarButtonStyle}"
                         HorizontalContentAlignment="Center"
-                        ToolTip="{Binding ToggleSideBarButtonTooltip}"
+                        ToolTip="{locale:LocalizedString Key='Tooltip.ToggleSideBarButton'}"
                         Click="ToggleSideBarButton_Click">
                         <Path Data="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"/>
                     </Button>
@@ -177,30 +178,40 @@ SelectionChanged="DropDownListBox_SelectionChanged"/>
                 <ListBox x:Name="SidePanel" Grid.Row="0"
                      Style="{StaticResource SidePanelListBox}" 
                      SelectionChanged="SidePanel_SelectionChanged">
-                    <ListBoxItem x:Name="OpenFile_PanelButton" ToolTip="{Binding OpenFilePanelButtonTooltip}">
+                    <ListBoxItem x:Name="OpenFile_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.OpenFilePanelButton'}">
                         <Path  Data="M20,18H4V8H20M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="History_PanelButton" ToolTip="{Binding HistoryPanelButtonTooltip}">
+                    <!--<ListBoxItem x:Name="PrintWithEdge_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.OpenFilePanelButton'}">
+                        <Grid>
+                            <Path Fill="Transparent" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}" StrokeThickness="1"
+                                  VerticalAlignment="Top" HorizontalAlignment="Left"
+                                  Height="20" Width="20"
+                                  Data="M 2.73675,10.8077C 3.8293,-1.36109 22.5157,-1.36109 21.1971,13.5579L 8.61392,13.5579C 8.61392,17.8527 14.4157,19.209 19.5394,16.3081L 19.5394,20.5276C 13.2478,23.8806 4.9972,21.4318 4.9972,14.0853C 4.9972,8.58476 9.97019,6.8142 9.97019,6.8142C 9.97019,6.8142 8.57624,8.58489 8.53857,10.0542L 15.6967,10.0542C 15.6967,2.93376 5.90137,5.57095 2.73675,10.8077 Z" Stretch="Fill"/>
+                            <Path VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,1,1"
+                                Height="12" Width="12" Data="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" Stretch="Fill"/>
+                        </Grid>
+                    </ListBoxItem>-->
+                    <ListBoxItem x:Name="History_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.HistoryPanelButton'}">
                         <Path  Data="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="Tags_PanelButton" ToolTip="{Binding TagsPanelButtonTooltip}">
+                    <ListBoxItem x:Name="Tags_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.TagsPanelButton'}">
                         <Path  Data="M21.41 11.58L12.41 2.58A2 2 0 0 0 11 2H4A2 2 0 0 0 2 4V11A2 2 0 0 0 2.59 12.42L11.59 21.42A2 2 0 0 0 13 22A2 2 0 0 0 14.41 21.41L21.41 14.41A2 2 0 0 0 22 13A2 2 0 0 0 21.41 11.58M13 20L4 11V4H11L20 13M6.5 5A1.5 1.5 0 1 1 5 6.5A1.5 1.5 0 0 1 6.5 5Z"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="SearchData_PanelButton" Visibility="Collapsed" ToolTip="{Binding SearchDataPanelButtonTooltip}">
+                    <ListBoxItem x:Name="SearchData_PanelButton" Visibility="Collapsed" ToolTip="{locale:LocalizedString Key='Tooltip.SearchDataPanelButton'}">
                         <Path  Data="M18.68,12.32C16.92,10.56 14.07,10.57 12.32,12.33C10.56,14.09 10.56,16.94 12.32,18.69C13.81,20.17 16.11,20.43 17.89,19.32L21,22.39L22.39,21L19.3,17.89C20.43,16.12 20.17,13.8 18.68,12.32M17.27,17.27C16.29,18.25 14.71,18.24 13.73,17.27C12.76,16.29 12.76,14.71 13.74,13.73C14.71,12.76 16.29,12.76 17.27,13.73C18.24,14.71 18.24,16.29 17.27,17.27M10.9,20.1C10.25,19.44 9.74,18.65 9.42,17.78C6.27,17.25 4,15.76 4,14V17C4,19.21 7.58,21 12,21V21C11.6,20.74 11.23,20.44 10.9,20.1M4,9V12C4,13.68 6.07,15.12 9,15.7C9,15.63 9,15.57 9,15.5C9,14.57 9.2,13.65 9.58,12.81C6.34,12.3 4,10.79 4,9M12,3C7.58,3 4,4.79 4,7C4,9 7,10.68 10.85,11H10.9C12.1,9.74 13.76,9 15.5,9C16.41,9 17.31,9.19 18.14,9.56C19.17,9.09 19.87,8.12 20,7C20,4.79 16.42,3 12,3Z"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="ScreenCapture_PanelButton" ToolTip="{Binding ScreenCapturePanelButtonTooltip}">
+                    <ListBoxItem x:Name="ScreenCapture_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.ScreenCapturePanelButton'}">
                         <Path  Data="M4,4 L8,4 M4,4 L4,8 M20,4 L16,4 M20,4 L20,8 M4,20 L4,16 M4,20 L8,20 M20,20 L16,20 M20,20 L20,16" 
                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Window}}"
                            StrokeThickness="2"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="ExtractText_PanelButton" ToolTip="{Binding ExtractTextPanelButtonTooltip}">
+                    <ListBoxItem x:Name="ExtractText_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.ExtractTextPanelButton'}">
                         <Path  Data="M23 19L20 16V18H16V20H20V22L23 19M13.8 22H6C4.9 22 4 21.1 4 20V4C4 2.9 4.9 2 6 2H14L20 8V13.1C19.7 13 19.3 13 19 13S18.3 13 18 13.1V9H13V4H6V20H13.1C13.2 20.7 13.5 21.4 13.8 22M8 12H16V13.8C15.9 13.9 15.8 13.9 15.7 14H8V12M8 16H13V18H8V16Z" />
                     </ListBoxItem>
-                    <ListBoxItem x:Name="Help_PanelButton" ToolTip="{Binding HelpPanelButtonTooltip}">
+                    <ListBoxItem x:Name="Help_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.HelpPanelButton'}">
                         <Path  Data="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"/>
                     </ListBoxItem>
-                    <ListBoxItem x:Name="WebSite_PanelButton" ToolTip="{Binding WebSitePanelButtonTooltip}">
+                    <ListBoxItem x:Name="WebSite_PanelButton" ToolTip="{locale:LocalizedString Key='Tooltip.WebSitePanelButton'}">
                         <Path  Data="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
                     </ListBoxItem>
                 </ListBox>
@@ -226,22 +237,24 @@ SelectionChanged="DropDownListBox_SelectionChanged"/>
 
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel.Resources>
-                                        <Style TargetType="Button" BasedOn="{StaticResource ThemedButton}"/>
+                                        <Style TargetType="Button" BasedOn="{StaticResource ThemedButton}">
+                                            <Setter Property="Padding" Value="5"/>
+                                        </Style>
                                     </StackPanel.Resources>
                                     <Button x:Name="AddUserTagButton" Click="AddUserTagButton_Click"
-                                            ToolTip="{Binding AddUserTagButtonToolTip}">
+                                            ToolTip="{locale:LocalizedString Key='Tooltip.AddUserTagButton'}">
                                         <Path Data="M6.5 5A1.5 1.5 0 1 0 8 6.5A1.5 1.5 0 0 0 6.5 5M6.5 5A1.5 1.5 0 1 0 8 6.5A1.5 1.5 0 0 0 6.5 5M21.41 11.58L12.41 2.58A2 2 0 0 0 11 2H4A2 2 0 0 0 2 4V11A2 2 0 0 0 2.59 12.42L3 12.82A5.62 5.62 0 0 1 5.08 12.08L4 11V4H11L20 13L13 20L11.92 18.92A5.57 5.57 0 0 1 11.18 21L11.59 21.41A2 2 0 0 0 13 22A2 2 0 0 0 14.41 21.41L21.41 14.41A2 2 0 0 0 22 13A2 2 0 0 0 21.41 11.58M6.5 5A1.5 1.5 0 1 0 8 6.5A1.5 1.5 0 0 0 6.5 5M10 19H7V22H5V19H2V17H5V14H7V17H10Z"/>
                                     </Button>
                                     <Button x:Name="EditUserTagButton" Click="EditUserTagButton_Click"
-                                                    ToolTip="{Binding EditUserTagButtonToolTip}">
+                                                    ToolTip="{locale:LocalizedString Key='Tooltip.EditUserTagButton'}">
                                         <Path FlowDirection="LeftToRight" Data="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z"/>
                                     </Button>
                                     <Button x:Name="AddUserTagFolderButton" Click="AddUserTagFolderButton_Click"
-                                            ToolTip="{Binding AddUserTagGroupButtonToolTip}">
+                                            ToolTip="{locale:LocalizedString Key='Tooltip.AddUserTagGroupButton'}">
                                         <Path Data="M13 19C13 19.34 13.04 19.67 13.09 20H4C2.9 20 2 19.11 2 18V6C2 4.89 2.89 4 4 4H10L12 6H20C21.1 6 22 6.89 22 8V13.81C21.39 13.46 20.72 13.22 20 13.09V8H4V18H13.09C13.04 18.33 13 18.66 13 19M20 18V15H18V18H15V20H18V23H20V20H23V18H20Z"/>
                                     </Button>
-                                    <Button x:Name="DeleteUserTagButtonToolTip" Click="DeleteUserTagButtonToolTip_Click"
-                                            ToolTip="{Binding DeleteUserTagButtonToolTip}">
+                                    <Button x:Name="DeleteUserTagButton" Click="DeleteUserTagButton_Click"
+                                            ToolTip="{locale:LocalizedString Key='Tooltip.DeleteUserTagButton'}">
                                         <Path Data="M14.12,10.47L12,12.59L9.87,10.47L8.46,11.88L10.59,14L8.47,16.12L9.88,17.53L12,15.41L14.12,17.53L15.53,16.12L13.41,14L15.53,11.88L14.12,10.47M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9Z"/>
                                     </Button>
                                 </StackPanel>

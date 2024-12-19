@@ -1,23 +1,23 @@
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 using Microsoft.Win32;
-using Pdf.Js;
+using MyPdf.Pdf.Js;
 using System.Diagnostics;
 using System.IO;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
+using ThemedWindow.Controls;
 
 namespace Pdf.Js
 {
-    public class PdfJsHost : WebView2
+    public class PdfJsHost : WebView2Host
     {
         public string _sourceFilePath;
         public string _pdfPath;
         string _fileName;
-        string _allowedUrl;
+        List<string> AllowedUrls = new List<string>(2);
         bool isSaveAs;
 
         public PdfJsHost(string filePath, int? pageNumber)
@@ -26,20 +26,20 @@ namespace Pdf.Js
             _fileName = Path.GetFileName(_sourceFilePath);
             _pdfPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pdf.Js", "PdfJs", "web", _fileName);
 
-            if (pageNumber != null) _allowedUrl = $"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}#page={pageNumber}";
-            else _allowedUrl = $"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}";
-
+            if (pageNumber != null) AllowedUrls.Add($"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}#page={pageNumber}");
+            else AllowedUrls.Add($"https://pdfjs/web/viewer.html?file={Uri.EscapeDataString(_fileName)}");
+            AllowedUrls.Add(_sourceFilePath);
 
             CopyFile();
             InitializeWebView();
             Application.Current.Exit += (s, e) => Release();
         }
 
-        async void CopyFile() => await Task.Run(() =>
+        void CopyFile()
         {
             try { File.Copy(_sourceFilePath, _pdfPath, true);   }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }); 
+            catch (Exception ex) { Debug.Print(ex.ToString()); }
+        } 
 
         void InitializeWebView()
         {
@@ -58,9 +58,21 @@ namespace Pdf.Js
             this.CoreWebView2.WebMessageReceived += Viewer_WebMessageReceived;
         }
 
+        public void Print()
+        {
+            this.ExecuteScriptAsync($@"printJS({{printable:'web/{_fileName}', type:'pdf', showModal:true}})");
+        }
+
         private void CoreWebView2_DOMContentLoaded(object? sender, CoreWebView2DOMContentLoadedEventArgs e)
         {
             this.ExecuteScriptAsync(Scripts.EditButtons());
+            string printJsScriptPath = "https://pdfjs/printjs/print.min.js";
+            this.ExecuteScriptAsync($@"
+                var script = document.createElement('script');
+                script.src = '{printJsScriptPath}';
+                script.type = 'text/javascript';
+                document.head.appendChild(script);"
+                );
         }
 
         void ApplySettings()
@@ -77,12 +89,12 @@ namespace Pdf.Js
                 string pdfjsFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Pdf.Js", "pdfjs");
                 this.CoreWebView2.SetVirtualHostNameToFolderMapping("pdfjs", pdfjsFolder,
                         CoreWebView2HostResourceAccessKind.DenyCors);
-                this.Source = new Uri(_allowedUrl);
+                this.Source = new Uri(AllowedUrls[0]);
         }
 
         private void CoreWebView2_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
         {
-            if (e.Uri != _allowedUrl)  e.Cancel = true;     
+            if (!AllowedUrls.Contains(e.Uri)) e.Cancel = true;
         }
 
         private void Viewer_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
@@ -102,12 +114,12 @@ namespace Pdf.Js
                 }
                 else
                 { 
-                    Console.WriteLine("No action defined!");
+                    Debug.Print("No action defined!");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.Print(ex.Message);
             }
         }
 
@@ -129,6 +141,13 @@ namespace Pdf.Js
                 e.Cancel = true;
                 return;
             }
+
+            var downloadOperation = e.DownloadOperation;
+            downloadOperation.StateChanged += (s, args) =>
+            {
+                if (downloadOperation.State == CoreWebView2DownloadState.Completed)
+                   File.Copy(_sourceFilePath, _pdfPath, true);
+            };
 
             try
             {

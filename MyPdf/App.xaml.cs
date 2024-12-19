@@ -38,15 +38,15 @@ namespace MyPdf
         private async void InitializeWindow(string[] args)
         {
             window = new MainWindow();
-            window.Show();
-            window.LoadSavedTabs();
 
             if (args.Length > 0)
             {
                 string filePath = args[0];
-                window.ChromeTabControl.Add(new PdfHostTabItem(filePath, null));
+                var pdfItem = new PdfHostTabItem(filePath, null);
+                window.ChromeTabControl.Add(pdfItem);
             }
 
+            window.Show();           
             await Task.Run(() => { UpdateChecker.CheckForUpdates(); });
         }
 

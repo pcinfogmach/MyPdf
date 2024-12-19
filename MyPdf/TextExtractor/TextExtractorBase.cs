@@ -51,6 +51,7 @@ namespace PdfToolsLib.TextExtractor
         public void ShowMessage(string message) =>
             MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
     }
+
 }
 
 

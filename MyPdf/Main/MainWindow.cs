@@ -3,7 +3,6 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using ChromeTabs;
-using Microsoft.Win32;
 using MyPdf.Assets;
 using MyPdf.Controls;
 using MyPdf.HistoryAndUserTags;
@@ -40,23 +39,29 @@ namespace MyPdf
             }
         }
 
-        public async void LoadSavedTabs()
+        public override async void LoadSavedTabs()
         {
             string jsonText = await AssetsManager.GetAssetAsync(savedTabsPath);
             if (string.IsNullOrEmpty(jsonText)) return;
 
             var saveData = JsonSerializer.Deserialize<SavedTabData>(jsonText);
+
             foreach (var filePath in saveData.Tabs)
             {
                 ChromeTabControl.Items.Add(new PdfHostTabItem(filePath, null));
             }
 
+            await Task.Delay(500); // Delay for 500 milliseconds
             if (saveData.SelectedIndex >= 0 && saveData.SelectedIndex < ChromeTabControl.Items.Count)
-            {
-                ChromeTabStrip.SelectedIndex = saveData.SelectedIndex;
+            {               
+                ChromeTabControl.SelectedIndex = saveData.SelectedIndex;
             }
-
+            else if (ChromeTabControl.Items.Count == 1) 
+            {
+                ChromeTabControl.SelectedIndex = 0; 
+            }
         }
+
 
         class SavedTabData
         {
@@ -103,6 +108,8 @@ namespace MyPdf
                 }
             }));
         }
+
+        public override void PrintWithEdge() { if (ChromeTabControl.SelectedContent is PdfJsHost pdfJsHost) pdfJsHost.Print(); }
 
         public async override void ExtractText()
         {

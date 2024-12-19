@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using MyPdf.TextExtractor;
+using System.Globalization;
 using System.Windows;
 
 namespace PdfToolsLib
@@ -20,7 +21,7 @@ namespace PdfToolsLib
             {
                 InstructionsTextBlock.Text = "עמוד מסויים: 1 || טווח עמודים: 1-2,25-16 || השאר ריק לחילוץ מכל המסמך";
                 ExtractButtonTextBlock.Text = "חלץ";
-                QualityCheckBox.Content = "חילוץ טקסט ברמה גבוהה (יותר איטי)";
+                OcrCheckBox.Content = "השתמש בזיהוי תווים (Ocr)";
             }
 
             PageEnumTextBox.Text = pageNumber.ToString();
@@ -37,25 +38,24 @@ namespace PdfToolsLib
 
         async void ExtractText()
         {
+            Close();
             try
             {
                 string pageEnum = PageEnumTextBox.Text.Trim();
-                //if (QualityCheckBox.IsChecked == true)
-                //{
+                if (OcrCheckBox.IsChecked == true)
+                {
+                    if (string.IsNullOrEmpty(pageEnum)) await new OcrExtractor().ExtractTextFromWholeDocument(_filePath);
+                    else if (pageEnum.Contains("-") || pageEnum.Contains(",")) await new OcrExtractor().ExtractTextFromPageRanges(_filePath, pageEnum);
+                    else if (int.TryParse(pageEnum, out int resultNumber)) await new OcrExtractor().ExtractTextFromSpecificPage(_filePath, resultNumber);
+                }
+                else
+                {
                     if (string.IsNullOrEmpty(pageEnum)) await new PdfiumViewerTextExtractor().ExtractTextFromWholeDocument(_filePath);
                     else if (pageEnum.Contains("-") || pageEnum.Contains(",")) await new PdfiumViewerTextExtractor().ExtractTextFromPageRanges(_filePath, pageEnum);
                     else if (int.TryParse(pageEnum, out int resultNumber)) await new PdfiumViewerTextExtractor().ExtractTextFromSpecificPage(_filePath, resultNumber);
-                //}
-                //else
-                //{
-                //    if (string.IsNullOrEmpty(pageEnum)) await new DocNetTextExtractor().ExtractTextFromWholeDocument(_filePath);
-                //    else if (pageEnum.Contains("-") || pageEnum.Contains(",")) await new DocNetTextExtractor().ExtractTextFromPageRanges(_filePath, pageEnum);
-                //    else if (int.TryParse(pageEnum, out int resultNumber)) await new DocNetTextExtractor().ExtractTextFromPage(_filePath, resultNumber);
-                //}
+                }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-
-            Close();
+            catch (Exception ex) { MessageBox.Show(ex.Message); }            
         }
 
         private void ThemedToolWindow_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
